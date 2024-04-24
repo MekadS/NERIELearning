@@ -1,0 +1,27 @@
+/**
+	nerie palette css file
+*/
+.nerie_green{
+	background-color:#01cb5c !important;       /* 	Dark Pastle green */
+}
+.nerie_dark_green{
+	background-color:#084C61 !important;       /* 	Midnight green */
+}
+.nerie_yellow{
+	background-color:#FFBE33 !important;       /*  Selective Yellow */
+}
+.nerie_indigo{
+	background-color:#7D83FF !important;       /*  Tropical Indigo */
+}
+.nerie_red{
+	background-color:#F02D3A !important;       /*  Imperial Red */
+}
+.nerie_white{
+	background-color:#FBFBF2 !important;       /* 	white: Floral White */
+}
+.nerie_black{
+	background-color:#000411 !important;       /* 	black: Rich Black */
+}
+.nerie_grey{
+	background-color:#596475 !important;       /* 	grey: Payne's Grey */
+}

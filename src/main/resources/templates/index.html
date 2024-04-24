@@ -9,26 +9,43 @@
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
 	<div th:insert="~{utils/navbar :: nav}"></div>
-<!-- 	<header th:insert="~{utils/navbar : header}"></header> -->
+	<!-- 	<header th:insert="~{utils/navbar : header}"></header> -->
 
 
 	<aside></aside>
 
 	<main>
-		<div class="container-fluid">
-			<div class="bg-primary-subtle">Welcome to NERIE Learning!</div>
+		<!-- ======= Hero Section ======= -->
+		<section id="hero"
+			class="div_below_navbar d-flex justify-content-center align-items-center">
+			<div class="container position-relative" data-aos="zoom-in"
+				data-aos-delay="100">
+				<h1>
+					Let's learn with NERIE<br>
+				</h1>
+				<h2>Enhancing education in Meghalaya</h2>
+				<a th:href="@{/structure}" class="btn-get-started">School
+					Education</a>
+			</div>
+		</section>
+		<!-- End Hero -->
 
-			<img th:src="@{/assets/img/mission/mission_1.jpg}" class="img-fluid" alt="" data-aos="fade-left" data-aos-delay="100">
+		<div class="container-fluid">
+
+			<img th:src="@{/assets/img/mission/mission_1.jpg}" class="img-fluid"
+				alt="" data-aos="fade-left" data-aos-delay="100">
+
 			<!-- ======= About Section ======= -->
-<!-- 			<section id="about" class="about"> -->
-<!-- 				<div class="container-fluid"> -->
+			<section id="about" class="about">
+				<div class="nerie_grey">
 					<!-- Mission 1 -->
 					<div class="row mission_row_1 align-items-center"
 						data-aos="fade-up">
 						<div
 							class="col-xs-12 col-sm-12 col-md-6 col-lg-6 order-2 order-md-2 order-lg-2"
 							data-aos="fade-left" data-aos-delay="100">
-							<img th:src="@{/assets/img/mission/mission_1.jpg}" class="img-fluid" alt="">
+							<img th:src="@{/assets/img/mission/mission_1.jpg}"
+								class="img-fluid" alt="">
 						</div>
 						<div
 							class="col-xs-12 col-sm-12 col-md-6 col-lg-6 order-1 order-md-1 order-lg-1 content">
@@ -133,8 +150,9 @@
 					</div>
 					<!-- End of Mission 6 -->
 				</div>
-<!-- 			</section> -->
-<!-- 			<!-- End About Section --> -->
+			</section>
+			<!-- 			<!-- End About Section -->
+		</div>
 	</main>
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>

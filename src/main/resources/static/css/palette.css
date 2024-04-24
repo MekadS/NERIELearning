@@ -1,0 +1,14 @@
+/**
+	palette css file
+*/
+.palette_set{
+	background-color:#01cb5c;
+	background-color:#084C61;       /* 	Midnight green */
+	background-color:#FFBE33;       /*  Selective Yellow */
+	background-color:#7D83FF;       /*  Tropical Indigo */
+	background-color:#F02D3A;       /*  Imperial Red */
+	
+	background-color:#FBFBF2;       /* 	white: Floral White */
+	background-color:#000411;       /* 	black: Rich Black */
+	background-color:#596475;       /* 	grey: Payne's Grey */
+}
