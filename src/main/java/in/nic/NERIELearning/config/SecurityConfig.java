@@ -29,13 +29,13 @@ public class SecurityConfig {
 		.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-		                        .requestMatchers("/").anonymous()
+//		                        .requestMatchers("/").anonymous()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/emp/**").hasRole("HEAD_TEACHER")
-                                .requestMatchers("/infra-officer/**").hasRole("TEACHER_EDUCATOR")
+                                .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
+                                .requestMatchers("/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()
                                 .requestMatchers("/resources/**", "/static/**","/assets/**",
-                                		 "/css/**", "/js/**","/", "/utils/**")
+                                		 "/css/**", "/js/**","/", "/utils/**","/public/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())

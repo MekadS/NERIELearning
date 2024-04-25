@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>NERIE Learning App</title>
+</head>
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+	
+	<!-- 	<div class="mt-5" style="height:1em"></div> -->
+	
+	<div align="center" class="mt-5">
+		<h3>Contact NERIE</h3>
+		<div class="card col-sm-10 mt-5">
+			<iframe 
+				src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5095.049509122975!2d91.91336547348111!3d25.67043308325584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375a821f137c1583%3A0xe67fb37f129ed8f2!2sNERIE%20NCERT%20Umiam%20Ribhoi%20District!5e1!3m2!1sen!2sin!4v1709742544413!5m2!1sen!2sin"
+				width="100%" height="550em" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			<!-- Non Satellite View -->
+			<!-- <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.966916936934!2d91.91069307525123!3d25.672391377408104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375a821f137c1583%3A0xe67fb37f129ed8f2!2sNERIE%20NCERT%20Umiam%20Ribhoi%20District!5e0!3m2!1sen!2sin!4v1709111834544!5m2!1sen!2sin" 
+			width="100%" height="450px" style="border:0;" allowfullscreen="" loading="lazy" 
+			referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+		</div>
+	</div>
+	<div class="mt-4 container text-center d-none d-md-block">
+       <div class="card mb-4">
+		  <div class="row p-3">
+		    <div class="col">
+		      <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>MWC7+X82, Shillong, Umiam, Meghalaya 793103</p>
+		    </div>
+		    <div class="col">
+		      <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>nerie.shillong@ncert.nic.in</p>
+		    </div>
+		    <div class="col">
+		      <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>03642570009</p>
+		    </div>
+		  </div>
+		  </div>
+		</div>
+		
+		<div class="mt-4 container text-center d-block d-sm-none">
+			<div class="card mb-4">
+		  		<div class="row p-3">
+		  			<i class="bi bi-geo-alt"></i>
+                	<h4>Location:</h4>
+                	<p>MWC7+X82, Shillong, Umiam, Meghalaya 793103</p>
+		  		</div>
+		  		
+		  		<div class="row p-3">
+		  			 <i class="bi bi-envelope"></i>
+                	<h4>Email:</h4>
+                	<p>nerie.shillong@ncert.nic.in</p>
+		    </div>
+		  		
+		  		<div class="row p-3">
+		  			 <i class="bi bi-phone"></i>
+                	<h4>Call:</h4>
+               		<p>03642570009</p>
+		    	</div>
+		  	</div>
+		</div>
+		<!-- </div> -->
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

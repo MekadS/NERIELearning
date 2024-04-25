@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary nerie_green">
+<nav class="navbar navbar-expand-lg bg-body-tertiary nerie_green pt-3 pb-3">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#">NERIE Learning</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -11,7 +11,7 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="#">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">School
+				<li class="nav-item"><a class="nav-link" th:href="@{/public/schoolEducation}">School
 						Education</a></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" role="button"
@@ -23,8 +23,8 @@
 						<li><a class="dropdown-item" href="#">Class 8</a></li>
 						<li><a class="dropdown-item" href="#">Class 10</a></li>
 					</ul></li>
-				<li class="nav-item"><a class="nav-link" href="#">NAS</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Contact
+				<li class="nav-item"><a class="nav-link" th:href="@{/public/NAS}">NAS</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/public/contact}">Contact
 						Us</a></li>
 			</ul>
 			<form class="d-flex" role="search">

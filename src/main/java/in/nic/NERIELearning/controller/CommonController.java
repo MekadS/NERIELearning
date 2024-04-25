@@ -9,4 +9,31 @@ public class CommonController{
 	public String index() {
 		return "index"; 
 	}
+	
+	@GetMapping("/admin")
+	public String adminIndex() {
+		return "admin/adminIndex"; 
+	}
+
+	@GetMapping("/testPage")
+	public String testPage() {
+		return "/testPage"; 
+	}
+	
+//	START: PUBLIC Mappings
+	@GetMapping("/public/schoolEducation")
+	public String schoolEducation() {
+		return "public/schoolEducation"; 
+	}
+
+	@GetMapping("/public/NAS")
+	public String NAS() {
+		return "public/NAS"; 
+	}
+
+	@GetMapping("/public/contact")
+	public String contact() {
+		return "public/contact"; 
+	}
+//	END: PUBLIC Mappings
 }

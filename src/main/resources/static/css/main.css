@@ -25,3 +25,18 @@
 .nerie_grey{
 	background-color:#596475 !important;       /* 	grey: Payne's Grey */
 }
+
+.nerie-link{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nerie-link-normal{
+  color: #777777;
+  text-decoration: none;
+}
+
+.nerie-link:hover{
+  color: #ffffff;
+  text-decoration: underline;
+}
