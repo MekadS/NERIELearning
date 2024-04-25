@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authorize) -> authorize
 //		                        .requestMatchers("/").anonymous()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/admin/**").permitAll()
+//                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
                                 .requestMatchers("/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row mt-3">
+			<div align="center">
+				<div class="card col-sm-12 col-md-12 col-lg-12">
+					<div class="card-title my-3">
+						<h3>Curriculum Goals</h3>
+					</div>
+					<div class="card-body">
+						<div class="d-flex justify justify-content-between">
+							<a th:href="@{/admin/dashboard}"><button class="btn btn-primary">CMS
+									Index</button></a> <a th:href="@{/admin/createStage}"><button
+									class="btn btn-outline-success">Add New</button></a>
+						</div>
+						<table
+							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+							<thead class="thead-dark">
+								<tr>
+									<!-- 										<th class="text-center">ID</th> -->
+									<th>Class</th>
+									<th>Subject</th>
+									<th>Code</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="MStage : ${listTCurriculumGoal}">
+									<!-- 										<td th:text="${TGoal.curriculumId}" class="text-center">Goal ID</td> -->
+									<td th:text="${TGoal.subjectId.classId.className}">Class</td>
+									<td th:text="${TGoal.subjectId.subjectId.subjectName}">Subject</td>
+									<td th:text="${TGoal.goalId.goalId}" class="text-center">Id</td>
+									<td th:text="${TGoal.curriculumName}">Goal Name</td>
+									<td th:text="${TGoal.curriculumDescription}">Goal
+										Description</td>
+									<td><a
+										th:href="@{'/cmslosa/goal/edit/' + ${TGoal.curriculumId}}"
+										class="text-info">Edit</a></td>
+									<td><a
+										th:href="@{'/cmslosa/goal/delete/' + ${TGoal.curriculumId}}"
+										class="text-danger">Delete</a></td>
+									<!-- 								Display full Goal Object -->
+									<!-- 								<td th:text="${TGoal}" class="text-center"></td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>
