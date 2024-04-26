@@ -3,6 +3,7 @@ package in.nic.NERIELearning.config;
 public class ConstantUtils {
     public static final String REGEXP_MOBILE_PATTERN = "[0-9]{10}";
     public static final String REGEXP_ALPHABET_ONLY_NOT_NULL = "^[a-zA-Z ]+$";
+    public static final String REGEXP_ALPHABET__NUMBER_ONLY_NOT_NULL = "^[a-zA-Z 0-9]+$";
     public static final String REGEXP_ALPHABET_ONLY_ALLOW_NULL = "^[A-Za-z]*$";
     public static final String REGEXP_NUMBERS_ONLY = "^[0-9]+$";
     public static final String REGEXP_ZERO_OR_ONE = "^[01]*$";

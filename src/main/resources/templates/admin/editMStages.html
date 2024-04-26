@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row my-5">
+			<div align="center">
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3">
+						<h3>School Stages</h3>
+					</div>
+					<div class="card-body">
+						<div class="d-flex justify justify-content-between">
+							<a th:href="@{/admin/dashboard}"><button
+									class="btn btn-primary">Admin Dashboard</button></a> 
+<!-- 							<a th:href="@{/admin/createMStage}"><button -->
+<!-- 									class="btn btn-outline-success">Add New</button></a> -->
+						</div>
+						<div>
+							<form action="#" th:action="@{/admin/saveMStage}"
+								th:object="${mStage}" method="post">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td><label class="form-label">Create New Stage</label></td>
+											<td class="w-90"><input type="hidden" th:field="*{mStageId}" /> <input
+												type="text" th:field="*{mStageName}" class="form-control"
+												placeholder="School Stage Name" /></td>
+											<td>
+												<button type="submit" class="btn btn-success">Save</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+						<table
+							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+							<thead class="thead-dark">
+								<tr>
+									<!-- 										<th class="text-center">ID</th> -->
+									<th>ID</th>
+									<th>Stage</th>
+									<th>Status</th>
+									<th>Rename</th>
+									<th>Enable/Disable</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="MStage : ${listMStages}">
+									<td th:text="${MStage.mStageId}">ID</td>
+									<td th:text="${MStage.mStageName}">Stage</td>
+									<td th:text="${MStage.isActive ? 'Active' : 'Inactive'}">Status</td>
+									<td><a
+										th:href="@{'/admin/mStage/edit/' + ${MStage.mStageId}}"
+										class="text-info">Rename</a></td>
+									<td><a
+										th:href="@{'/admin/mStage/toggleStatus/' + ${MStage.mStageId}}"
+										class="text-danger">Toggle</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

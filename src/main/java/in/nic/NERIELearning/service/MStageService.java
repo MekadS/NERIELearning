@@ -17,15 +17,16 @@ public class MStageService {
         return mStageRepo.findAll();
     }
      
-    public void save(MStage stage) {
-        mStageRepo.save(stage);
+    public void save(MStage mStage) {
+        mStageRepo.save(mStage);
     }
      
-    public MStage get(long id) {
-        return mStageRepo.findById(id).get();
+    public MStage get(Long m_stage_id) {
+        return mStageRepo.findById(m_stage_id).get();
     }
-     
-    public void delete(long id) {
-        mStageRepo.deleteById(id);
-    }
+
+//    public void disable(Long m_stage_id) {
+//    	MStage toggleThis = mStageRepo.findById(m_stage_id).get();
+//    	toggleThis.setIsActive(!(toggleThis.getIsActive()));
+//    }
 }
