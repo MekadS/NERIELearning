@@ -3,6 +3,7 @@ package in.nic.NERIELearning.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class AdminController{
 	public String adminDashboard() {
 		return "admin/dashboard";
 	}
-	
+
 	//	START: ADMIN MStage Methods
 	@GetMapping("/admin/editMStages")
 	public String adminEditStages(Model model) {
@@ -41,7 +42,6 @@ public class AdminController{
 		model.addAttribute("listMStages", listMStage);
 		model.addAttribute("mStage", new MStage());
 
-		System.out.println(model);
 		return "admin/editMStages";
 	}
 	@RequestMapping(value = "/admin/saveMStage", method = RequestMethod.POST)
@@ -76,63 +76,70 @@ public class AdminController{
 		return "redirect:/admin/editMStages";
 	}
 	//	END: ADMIN MStage Methods
-	
+
 	//	START: ADMIN MClass Methods
 	@GetMapping("/admin/editMClasses")
 	public String adminEditClasses(Model model) {
 		model.addAttribute("listMClasses", mClassService.findAll());
 		model.addAttribute("listMStages", mStageService.findAll());
 		model.addAttribute("mClass", new MClass());
-		
-		System.out.println("/admin/editMClasses" + model);
+
 		return "admin/editMClasses";
 	}
 	@RequestMapping(value = "/admin/saveMClass", method = RequestMethod.POST)
-	public String saveMClass(@ModelAttribute("MClass") MClass mClass) {
-		mClassService.save(mClass);
-		return "redirect:/admin/editMClasses";
+	public String saveMClass(@ModelAttribute("MClass") MClass mClass, Model model) {
+		try{
+			mClassService.save(mClass);
+//			model.addAttribute("message", "Success");
+			return "redirect:/admin/editMClasses";
+		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
+			// Set error message for the view
+//			model.addAttribute("message", "Error");
+//			System.out.println(model);
+			return "redirect:/admin/editMClasses";
+		}
 	}
-	
+
 	@GetMapping("/admin/createMClass")
 	public String addMClass(Model model) {
-		model.addAttribute("mClass", new MClass());
 		model.addAttribute("listMStages", mStageService.findAll());
-		
+
 		return "/admin/createMClass";
 	}
-	
+
 	@RequestMapping("/admin/mClass/edit/{m_class_id}")
 	public ModelAndView editMClass(@PathVariable(name = "m_class_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMClass");
+		
 		MClass mClass = mClassService.get(id);
 		List<MStage> listMStages = mStageService.findAll();
-    	
-		mav.addObject("mClassList", mClass);
-    	mav.addObject("listMStages", listMStages);
-		
-    	System.out.println("TEST: " + listMStages);
+
+		mav.addObject("mClass", mClass);
+		mav.addObject("listMStages", listMStages);
+
+		System.out.println("mClass: " + mClass);
+		System.out.println("mStagesList: " + listMStages);
 		return mav;
 	}
-	
+
 	@RequestMapping("/admin/mClass/toggleStatus/{m_stage_id}")
 	public String toggleMClassStatus(@PathVariable(name = "m_stage_id") Long id) {
 		MClass mClass = mClassService.get(id);
 		mClass.setIsActive(!(mClass.getIsActive()));
 		mClassService.save(mClass);
-		
+
 		return "redirect:/admin/editMClasses";
 	}
 	//	END: ADMIN MClass Methods
 	//	END: ADMIN Mappings
-	
+
 	//	START: ADMIN MSubject Methods
 	@GetMapping("/admin/editMSubjects")
 	public String adminEditMSubjects(Model model) {
 		List<MSubject> listMSubject = mSubjectService.findAll();
 		model.addAttribute("listMSubjects", listMSubject);
 		model.addAttribute("mSubject", new MSubject());
-		
-		System.out.println(model);
+
 		return "admin/editMSubjects";
 	}
 	@RequestMapping(value = "/admin/saveMSubject", method = RequestMethod.POST)
@@ -140,30 +147,30 @@ public class AdminController{
 		mSubjectService.save(mSubject);
 		return "redirect:/admin/editMSubjects";
 	}
-	
+
 	@GetMapping("/admin/createMSubject")
 	public String addMSubject(Model model) {
 		model.addAttribute("mSubject", new MSubject());
-		
+
 		return "/admin/createMSubject";
 	}
-	
+
 	@RequestMapping("/admin/mSubject/edit/{m_subject_id}")
 	public ModelAndView editMSubject(@PathVariable(name = "m_subject_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMSubject");
-		
+
 		MSubject mSubject = mSubjectService.get(id);
 		mav.addObject("mSubject", mSubject);
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/admin/mSubject/toggleStatus/{m_subject_id}")
 	public String toggleMSubjectStatus(@PathVariable(name = "m_subject_id") Long id) {
 		MSubject mSubject = mSubjectService.get(id);
 		mSubject.setIsActive(!(mSubject.getIsActive()));
 		mSubjectService.save(mSubject);
-		
+
 		return "redirect:/admin/editMSubjects";
 	}
 	//	END: ADMIN MSubject Methods

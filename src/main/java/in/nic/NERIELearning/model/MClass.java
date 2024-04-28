@@ -32,7 +32,13 @@ public class MClass{
 
 	@NotBlank
 	@NotEmpty
-	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET__NUMBER_ONLY_NOT_NULL, message = "Invalid Class Name")
+	@Pattern(regexp = ConstantUtils.REGEXP_NUMBERS_ONLY, message = "Invalid Serial Number")
+	@Column(name = "mClassSerialNo", nullable = false, unique = true)
+	private String mClassSerialNo;
+	
+	@NotBlank
+	@NotEmpty
+	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_DASH_ONLY_NOT_NULL, message = "Invalid Class Name")
 	@Column(name = "mStageName", length = 50, nullable = false, unique = true)
 	private String mClassName;
 

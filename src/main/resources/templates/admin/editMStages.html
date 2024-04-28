@@ -22,9 +22,9 @@
 					<div class="card-body">
 						<div class="d-flex justify justify-content-between">
 							<a th:href="@{/admin/dashboard}"><button
-									class="btn btn-primary">Admin Dashboard</button></a> 
-<!-- 							<a th:href="@{/admin/createMStage}"><button -->
-<!-- 									class="btn btn-outline-success">Add New</button></a> -->
+									class="btn btn-primary">Admin Dashboard</button></a>
+							<!-- 							<a th:href="@{/admin/createMStage}"><button -->
+							<!-- 									class="btn btn-outline-success">Add New</button></a> -->
 						</div>
 						<div>
 							<form action="#" th:action="@{/admin/saveMStage}"
@@ -33,9 +33,12 @@
 									<tbody>
 										<tr>
 											<td><label class="form-label">Create New Stage</label></td>
-											<td class="w-90"><input type="hidden" th:field="*{mStageId}" /> <input
-												type="text" th:field="*{mStageName}" class="form-control"
-												placeholder="School Stage Name" /></td>
+											<td class="w-90"><input type="hidden"
+												th:field="*{mStageId}" /> <input type="text"
+												th:field="*{mStageSerialNo}" class="form-control"
+												placeholder="School Stage Serial Number" /></td>
+											<td><input type="text" th:field="*{mStageName}"
+												class="form-control" placeholder="School Stage Name" /></td>
 											<td>
 												<button type="submit" class="btn btn-success">Save</button>
 											</td>
@@ -50,23 +53,26 @@
 								<tr>
 									<!-- 										<th class="text-center">ID</th> -->
 									<th>ID</th>
+									<th>Sl. No.</th>
 									<th>Stage</th>
 									<th>Status</th>
-									<th>Rename</th>
+									<th>Update</th>
 									<th>Enable/Disable</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="MStage : ${listMStages}">
 									<td th:text="${MStage.mStageId}">ID</td>
+									<td th:text="${MStage.mStageSerialNo}">Sl. No.</td>
 									<td th:text="${MStage.mStageName}">Stage</td>
 									<td th:text="${MStage.isActive ? 'Active' : 'Inactive'}">Status</td>
 									<td><a
 										th:href="@{'/admin/mStage/edit/' + ${MStage.mStageId}}"
-										class="text-info">Rename</a></td>
+										class="text-info">Update</a></td>
 									<td><a
 										th:href="@{'/admin/mStage/toggleStatus/' + ${MStage.mStageId}}"
-										class="text-danger">Toggle</a></td>
+										class="text-warning"
+										th:text="${MStage.isActive ? 'Disable' : 'Enable'}"></a></td>
 								</tr>
 							</tbody>
 						</table>

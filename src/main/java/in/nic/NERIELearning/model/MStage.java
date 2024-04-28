@@ -30,6 +30,12 @@ public class MStage{
 
 	@NotBlank
 	@NotEmpty
+	@Pattern(regexp = ConstantUtils.REGEXP_NUMBERS_ONLY, message = "Invalid Serial Number")
+	@Column(name = "mStageSerialNo", nullable = false, unique = true)
+	private String mStageSerialNo;
+
+	@NotBlank
+	@NotEmpty
 	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_ONLY_NOT_NULL, message = "Invalid Stage Name")
 	@Column(name = "mStageName", length = 50, nullable = false, unique = true)
 	private String mStageName;

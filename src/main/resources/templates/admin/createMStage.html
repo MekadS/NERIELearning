@@ -30,10 +30,15 @@
 								</thead>
 								<tbody>
 									<tr>
+										<td><label class="form-label">Stage Serial Number</label></td>
+										<td><input type="hidden" th:field="*{mStageId}" /><input
+											type="text" th:field="*{mStageSerialNo}" class="form-control"
+											placeholder="School Stage Serial Number" /></td>
+									</tr>
+									<tr>
 										<td><label class="form-label">Stage Name</label></td>
-										<td><input type="hidden" th:field="*{mStageId}" /> <input
-											type="text" th:field="*{mStageName}" class="form-control"
-											placeholder="School Stage Name" /></td>
+										<td><input type="text" th:field="*{mStageName}"
+											class="form-control" placeholder="School Stage Name" /></td>
 									</tr>
 								</tbody>
 								<tfoot>

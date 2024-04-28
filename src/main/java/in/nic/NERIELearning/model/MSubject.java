@@ -30,7 +30,7 @@ public class MSubject{
 
 	@NotBlank
 	@NotEmpty
-	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET__NUMBER_ONLY_NOT_NULL, message = "Invalid Subject Name")
+	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_ONLY_NOT_NULL, message = "Invalid Subject Name")
 	@Column(name = "mSubjectName", length = 50, nullable = false, unique = true)
 	private String mSubjectName;
 

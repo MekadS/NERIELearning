@@ -14,26 +14,50 @@
 
 	<main>
 		<!-- ======= Hero Section ======= -->
-		<section id="hero"
-			class="div_below_navbar d-flex justify-content-center align-items-center">
-			<div class="container position-relative" data-aos="zoom-in"
-				data-aos-delay="100">
-				<h1>
-					Admin<br>
-				</h1>
-				<h2>User and Roles are in your hand</h2>
-				<a th:href="@{/schoolEducation}" class="btn-get-started">School
-					Education</a>
-			</div>
-		</section>
-		<div class="card">
-			<div class="card-body nerie_grey">
-				<h1 class="card-title">Stages</h1>
-				<p><a th:href="@{/admin/editMStages}">Edit</a></p>
-				<h1 class="card-title">Classes</h1>
-				<p><a th:href="@{/admin/editMClasses}">Edit</a></p>
-				<h1 class="card-title">Subjects</h1>
-				<p><a th:href="@{/admin/editMSubjects}">Edit</a></p>
+		<!-- 		<section id="hero" -->
+		<!-- 			class="div_below_navbar d-flex justify-content-center align-items-center"> -->
+		<!-- 			<div class="container position-relative" data-aos="zoom-in" -->
+		<!-- 				data-aos-delay="100"> -->
+		<!-- 				<h1> -->
+		<!-- 					Admin<br> -->
+		<!-- 				</h1> -->
+		<!-- 				<h2>User and Roles are in your hand</h2> -->
+		<!-- 				<a th:href="@{/schoolEducation}" class="btn-get-started">School -->
+		<!-- 					Education</a> -->
+		<!-- 			</div> -->
+		<!-- 		</section> -->
+		<div class="row my-5">
+			<div align="center">
+				<div class="col col-sm-11 col-md-10">
+					<div class="card">
+						<div class="card-head h1 my-3">
+							Admin Dashboard
+						</div>
+						<div class="card-body nerie_grey">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th colspan="2">Entity Editor</th>
+									</tr>
+								</thead>
+								<tbody class="table-body">
+									<tr>
+										<td>Stages</td>
+										<td><a th:href="@{/admin/editMStages}" class="text-info">Edit</a></td>
+									</tr>
+									<tr>
+										<td>Classes</td>
+										<td><a th:href="@{/admin/editMClasses}" class="text-info">Edit</a></td>
+									</tr>
+									<tr>
+										<td>Subjects</td>
+										<td><a th:href="@{/admin/editMSubjects}" class="text-info">Edit</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- End Hero -->

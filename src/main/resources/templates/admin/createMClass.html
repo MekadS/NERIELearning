@@ -30,14 +30,18 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td><label class="form-label">Class Name</label></td>
-										<td><input type="hidden" th:field="*{mClassId}" /> <input
-											type="text" th:field="*{mClassName}" class="form-control"
-											placeholder="School Class Name" /></td>
+										<td><label class="form-label">Class Serial Number</label></td>
+										<td><input type="hidden" th:field="*{mClassId}" /><input
+											type="text" th:field="*{mClassSerialNo}" class="form-control"
+											placeholder="School Class Serial Number" /></td>
 									</tr>
 									<tr>
-										<!-- 											TODO -->
-										<td>Stage</td>
+										<td><label class="form-label">Class Name</label></td>
+										<td><input type="text" th:field="*{mClassName}"
+											class="form-control" placeholder="School Class Name" /></td>
+									</tr>
+									<tr>
+										<td><label class="form-label">Stage Name</label></td>
 										<td><select class="form-select" id="selectStage"
 											name="stage" th:field="*{mStageId}" required>
 												<option th:each="mStage : ${listMStages}"
