@@ -32,7 +32,8 @@ public class SecurityConfig {
 //		                        .requestMatchers("/").anonymous()
                                 .requestMatchers("/admin/**").permitAll()
 //                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
+                                .requestMatchers("/headTeacher/**").permitAll()
+//                                .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
                                 .requestMatchers("/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()
                                 .requestMatchers("/resources/**", "/static/**","/assets/**",

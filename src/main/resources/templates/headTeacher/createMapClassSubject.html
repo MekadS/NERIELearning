@@ -20,39 +20,37 @@
 						<h3>School Classes</h3>
 					</div>
 					<div class="card-body">
-						<form action="#" th:action="@{/admin/saveMClass}"
-							th:object="${mClass}" method="post">
+						<form action="#" th:action="@{/headTeacher/saveMapClassSubject}"
+							th:object="${mapClassSubject}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-dark">
 									<tr>
-										<th colspan="2" align="center">Create New Class</th>
+										<th colspan="2" align="center">Assign a new subject to a
+											class</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td><label class="form-label">Class Serial Number</label></td>
-										<td><input type="hidden" th:field="*{mClassId}" /><input
-											type="text" th:field="*{mClassSerialNo}" class="form-control"
-											placeholder="School Class Serial Number" /></td>
-									</tr>
-									<tr>
-										<td><label class="form-label">Class Name</label></td>
-										<td><input type="text" th:field="*{mClassName}"
-											class="form-control" placeholder="School Class Name" /></td>
-									</tr>
-									<tr>
-										<td><label class="form-label">Stage Name</label></td>
-										<td><select class="form-select" id="selectStage"
-											name="stage" th:field="*{mStageId}" required>
-												<option th:each="mStage : ${listMStages}"
-													th:value="${mStage.mStageId}"
-													th:text="${mStage.mStageName}"></option>
+										<td><label class="form-label">Assign a new
+												subject to a class</label></td>
+										<td><input type="hidden" th:field="*{mapClassSubjectId}" />
+											<select class="form-select" id="selectClass" name="stage"
+											th:field="*{mClassId}" required>
+												<option th:each="mClass : ${listMClasses}"
+													th:value="${mClass.mClassId}"
+													th:text="${mClass.mClassName}"></option>
+										</select></td>
+										<td><select class="form-select" id="selectSubject"
+											name="stage" th:field="*{mSubjectId}" required>
+												<option th:each="mSubject : ${listMSubjects}"
+													th:value="${mSubject.mSubjectId}"
+													th:text="${mSubject.mSubjectName}"></option>
 										</select></td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<td><a th:href="@{'/admin/editMClasss'}"
+										<td><a th:href="@{'/headTeacher/editMapClassSubjects'}"
 											class="btn btn-info">Back</a></td>
 										<td>
 											<button type="submit" class="btn btn-success">Save</button>

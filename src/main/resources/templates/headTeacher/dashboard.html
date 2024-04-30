@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row my-5">
+			<div align="center">
+				<div class="col col-sm-11 col-md-10">
+					<div class="card">
+						<div class="card-head h1 my-3">
+							Head Teacher Dashboard
+						</div>
+						<div class="card-body nerie_grey">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th colspan="2">Entity Editor</th>
+									</tr>
+								</thead>
+								<tbody class="table-body">
+									<tr>
+										<td>Classes & Subjects</td>
+										<td><a th:href="@{/headTeacher/editMapClassSubjects}" class="text-info">Edit</a></td>
+									</tr>
+									<tr>
+										<td>Link</td>
+										<td><a th:href="@{/headTeacher/#}" class="text-info">Edit</a></td>
+									</tr>
+									<tr>
+										<td>Link</td>
+										<td><a th:href="@{/headTeacher/#}" class="text-info">Edit</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Hero -->
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>
