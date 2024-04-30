@@ -1,36 +1,40 @@
-//package in.nic.NERIELearning.model;
-//
-//import org.hibernate.annotations.GenericGenerator;
-//
-//import jakarta.persistence.Column;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.Id;
-//import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.Table;
-//import jakarta.validation.constraints.NotNull;
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//
-//@Entity
-//@Data
-//@AllArgsConstructor
-//@Table (name = "map_class_subject")
-//public class MapClassSubject{
-//	@Id
-//	@GeneratedValue(generator = "uuid")
-//	@GenericGenerator(name = "uuid", strategy = "uuid2")
-//	@Column(name = "mapClassSubjectId", nullable = false, unique = true, length = 5)
-//	private String mapClassSubjectId;
-//
-//	@NotNull
-//	@ManyToOne
-//	@JoinColumn(name = "classId")
-//	private MClass classId;
-//	
-//	@NotNull
-//	@ManyToOne
-//	@JoinColumn(name = "subjectId")
-//	private MSubject subjectId;
-//}	
+package in.nic.NERIELearning.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table (name = "map_class_subject")
+public class MapClassSubject{
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "map_class_subject_id_seq")
+	@SequenceGenerator(name = "map_class_subject_id_seq", sequenceName = "M_CLASS_SEQ", allocationSize = 50, initialValue = 100)
+	private Long mapClassSubjectId;
+
+	@Builder.Default
+	@Column(length = 1, nullable = false)
+	private Boolean isActive = true;
+	
+	@ManyToOne
+	@JoinColumn(name = "mClassId")
+	private MClass mClassId;
+	
+	@ManyToOne
+	@JoinColumn(name = "mSubjectId")
+	private MSubject mSubjectId;
+}

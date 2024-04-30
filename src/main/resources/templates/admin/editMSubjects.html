@@ -52,7 +52,7 @@
 									<th>ID</th>
 									<th>Subject</th>
 									<th>Status</th>
-									<th>Rename</th>
+									<th>Update</th>
 									<th>Enable/Disable</th>
 								</tr>
 							</thead>
@@ -63,10 +63,11 @@
 									<td th:text="${MSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
 									<td><a
 										th:href="@{'/admin/mSubject/edit/' + ${MSubject.mSubjectId}}"
-										class="text-info">Rename</a></td>
+										class="text-info">Update</a></td>
 									<td><a
 										th:href="@{'/admin/mSubject/toggleStatus/' + ${MSubject.mSubjectId}}"
-										class="text-danger">Toggle</a></td>
+										class="text-warning"
+										th:text="${MSubject.isActive ? 'Disable' : 'Enable'}"></a></td>
 								</tr>
 							</tbody>
 						</table>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row my-5">
+			<div align="center">
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3">
+						<h3>School Subjects</h3>
+					</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/admin/saveMSubject}"
+							th:object="${mSubject}" method="post">
+							<table class="table table-striped">
+								<thead class="thead-dark">
+									<tr>
+										<th colspan="2" align="center">Create New Subject</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><label class="form-label">Subject Name</label></td>
+										<td><input type="hidden" th:field="*{mSubjectName}" /><input
+											type="text" th:field="*{mSubjectName}" class="form-control"
+											placeholder="School Subject Name" /></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td><a th:href="@{'/admin/editMSubjects'}"
+											class="btn btn-info">Back</a></td>
+										<td>
+											<button type="submit" class="btn btn-success">Save</button>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

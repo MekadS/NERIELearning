@@ -44,6 +44,7 @@ public class AdminController{
 
 		return "admin/editMStages";
 	}
+	
 	@RequestMapping(value = "/admin/saveMStage", method = RequestMethod.POST)
 	public String saveMStage(@ModelAttribute("MStage") MStage mStage) {
 		mStageService.save(mStage);
@@ -131,7 +132,6 @@ public class AdminController{
 		return "redirect:/admin/editMClasses";
 	}
 	//	END: ADMIN MClass Methods
-	//	END: ADMIN Mappings
 
 	//	START: ADMIN MSubject Methods
 	@GetMapping("/admin/editMSubjects")
@@ -142,6 +142,7 @@ public class AdminController{
 
 		return "admin/editMSubjects";
 	}
+
 	@RequestMapping(value = "/admin/saveMSubject", method = RequestMethod.POST)
 	public String saveMSubject(@ModelAttribute("MSubject") MSubject mSubject) {
 		mSubjectService.save(mSubject);
@@ -174,4 +175,5 @@ public class AdminController{
 		return "redirect:/admin/editMSubjects";
 	}
 	//	END: ADMIN MSubject Methods
+	//	END: ADMIN Mappings
 }

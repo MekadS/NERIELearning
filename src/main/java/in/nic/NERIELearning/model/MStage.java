@@ -36,7 +36,7 @@ public class MStage{
 
 	@NotBlank
 	@NotEmpty
-	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_ONLY_NOT_NULL, message = "Invalid Stage Name")
+	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_DASH_ONLY_NOT_NULL, message = "Invalid Stage Name")
 	@Column(name = "mStageName", length = 50, nullable = false, unique = true)
 	private String mStageName;
 
