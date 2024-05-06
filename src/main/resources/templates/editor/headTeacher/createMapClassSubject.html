@@ -20,7 +20,7 @@
 						<h3>School Classes</h3>
 					</div>
 					<div class="card-body">
-						<form action="#" th:action="@{/headTeacher/saveMapClassSubject}"
+						<form action="#" th:action="@{/editor/headTeacher/saveMapClassSubject}"
 							th:object="${mapClassSubject}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-dark">
@@ -50,7 +50,7 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<td><a th:href="@{'/headTeacher/editMapClassSubjects'}"
+										<td><a th:href="@{'/editor/dashboard'}"
 											class="btn btn-info">Back</a></td>
 										<td>
 											<button type="submit" class="btn btn-success">Save</button>

@@ -10,9 +10,9 @@ public class CommonController{
 		return "index"; 
 	}
 	
-	@GetMapping("/admin")
-	public String adminIndex() {
-		return "admin/adminIndex"; 
+	@GetMapping("/editor/dashboard")
+	public String editorDashboard() {
+		return "editor/dashboard"; 
 	}
 
 	@GetMapping("/testPage")

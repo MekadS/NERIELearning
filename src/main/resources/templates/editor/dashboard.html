@@ -18,7 +18,7 @@
 				<div class="col col-sm-11 col-md-10">
 					<div class="card">
 						<div class="card-head h1 my-3">
-							Head Teacher Dashboard
+							Editor Dashboard
 						</div>
 						<div class="card-body nerie_grey">
 							<table class="table table-striped">
@@ -30,15 +30,19 @@
 								<tbody class="table-body">
 									<tr>
 										<td>Classes & Subjects</td>
-										<td><a th:href="@{/headTeacher/editMapClassSubjects}" class="text-info">Edit</a></td>
+										<td><a th:href="@{/editor/headTeacher/editMapClassSubjects}" class="text-info">Edit</a></td>
 									</tr>
 									<tr>
-										<td>Link</td>
-										<td><a th:href="@{/headTeacher/#}" class="text-info">Edit</a></td>
+										<td>Curriculum Goals</td>
+										<td><a th:href="@{/editor/teacherEducator/curriculumGoals}" class="text-info">Edit</a></td>
 									</tr>
 									<tr>
-										<td>Link</td>
-										<td><a th:href="@{/headTeacher/#}" class="text-info">Edit</a></td>
+										<td>Competences</td>
+										<td><a th:href="@{/editor/teacherEducator/competencies}" class="text-info">Edit</a></td>
+									</tr>
+									<tr>
+										<td>Learning Outcomes & Suggestive Activities</td>
+										<td><a th:href="@{/editor/teacherEducator/losas}" class="text-info">Edit</a></td>
 									</tr>
 								</tbody>
 							</table>

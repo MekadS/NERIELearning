@@ -30,41 +30,41 @@ public class HeadTeacherController{
 	MSubjectService mSubjectService;
 
 	//	START: HEAD-TEACHER Mappings
-	@GetMapping("/headTeacher/dashboard")
+	@GetMapping("/editor/headTeacher/dashboard")
 	public String adminDashboard() {
-		return "headTeacher/dashboard";
+		return "editor/headTeacher/dashboard";
 	}
 
 	//	START: HEAD-TEACHER MapClassSubject Methods
-	@GetMapping("/headTeacher/editMapClassSubjects")
+	@GetMapping("/editor/headTeacher/editMapClassSubjects")
 	public String adminEditClasses(Model model) {
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("listMClasses", mClassService.findAll());
 		model.addAttribute("listMSubjects", mSubjectService.findAll());
 		model.addAttribute("mapClassSubject", new MapClassSubject());
 
-		return "headTeacher/editMapClassSubjects";
+		return "editor/headTeacher/editMapClassSubjects";
 	}
-	@RequestMapping(value = "/headTeacher/saveMapClassSubject", method = RequestMethod.POST)
+	@RequestMapping(value = "/editor/headTeacher/saveMapClassSubject", method = RequestMethod.POST)
 	public String saveMapClassSubject(@ModelAttribute("MapClassSubject") MapClassSubject mapClassSubject, Model model) {
 		try{
 			mapClassSubjectService.save(mapClassSubject);
-			return "redirect:/headTeacher/editMapClassSubjects";
+			return "redirect:/editor/headTeacher/editMapClassSubjects";
 		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
-			return "redirect:/headTeacher/editMapClassSubjects";
+			return "redirect:/editor/headTeacher/editMapClassSubjects";
 		}
 	}
 
-	@GetMapping("/headTeacher/createMapClassSubject")
+	@GetMapping("/editor/headTeacher/createMapClassSubject")
 	public String addMapClassSubject(Model model) {
 		model.addAttribute("listMSubjects", mSubjectService.findAll());
 
-		return "headTeacher/createMapClassSubject";
+		return "editor/headTeacher/createMapClassSubject";
 	}
 
-	@RequestMapping("/headTeacher/mapClassSubject/edit/{map_class_subject_id}")
+	@RequestMapping("/editor/headTeacher/mapClassSubject/edit/{map_class_subject_id}")
 	public ModelAndView editMapClassSubject(@PathVariable(name = "map_class_subject_id") Long id) {
-		ModelAndView mav = new ModelAndView("/headTeacher/createMapClassSubject");
+		ModelAndView mav = new ModelAndView("/editor/headTeacher/createMapClassSubject");
 		
 		MapClassSubject mapClassSubject = mapClassSubjectService.get(id);
 		List<MClass> listMClasses = mClassService.findAll();
@@ -80,13 +80,13 @@ public class HeadTeacherController{
 		return mav;
 	}
 
-	@RequestMapping("/headTeacher/mapClassSubject/toggleStatus/{m_stage_id}")
+	@RequestMapping("/editor/headTeacher/mapClassSubject/toggleStatus/{m_stage_id}")
 	public String toggleMapClassSubjectStatus(@PathVariable(name = "m_stage_id") Long id) {
 		MapClassSubject mapClassSubject = mapClassSubjectService.get(id);
 		mapClassSubject.setIsActive(!(mapClassSubject.getIsActive()));
 		mapClassSubjectService.save(mapClassSubject);
 
-		return "redirect:/headTeacher/editMapClassSubjects";
+		return "redirect:/editor/headTeacher/editMapClassSubjects";
 	}
 	//	END: HEAD-TEACHER MapClassSubject Methods
 	//	END: HEAD-TEACHER Mappings

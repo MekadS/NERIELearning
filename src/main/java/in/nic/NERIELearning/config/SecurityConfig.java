@@ -32,6 +32,7 @@ public class SecurityConfig {
 //		                        .requestMatchers("/").anonymous()
                                 .requestMatchers("/admin/**").permitAll()
 //                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/editor/**").permitAll()
                                 .requestMatchers("/headTeacher/**").permitAll()
 //                                .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
                                 .requestMatchers("/teacher-educator/**").hasRole("TEACHER_EDUCATOR")

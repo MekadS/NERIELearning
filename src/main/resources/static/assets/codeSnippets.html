@@ -49,3 +49,7 @@
 	</div>
 	<!-- 	END: CARD -->
 </body>
+
+<!-- START: ERROR VALIDATION -->
+	<p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
+<!-- END: ERROR VALIDATION -->

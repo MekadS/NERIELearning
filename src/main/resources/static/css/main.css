@@ -40,3 +40,10 @@
   color: #ffffff;
   text-decoration: underline;
 }
+
+.dropdown-item{
+  color: #01cb5c !important;
+}
+.dropdown-item:hover{
+  color: #7D83FF !important;
+}

@@ -21,11 +21,11 @@
 					</div>
 					<div class="card-body">
 						<div class="d-flex justify justify-content-between">
-							<a th:href="@{/headTeacher/dashboard}"><button
-									class="btn btn-primary">Head-Teacher Dashboard</button></a>
+							<a th:href="@{editor/dashboard}"><button
+									class="btn btn-primary">Editor Dashboard</button></a>
 						</div>
 						<div>
-							<form action="#" th:action="@{/headTeacher/saveMapClassSubject}"
+							<form action="#" th:action="@{editor/headTeacher/saveMapClassSubject}"
 								th:object="${mapClassSubject}" method="post">
 								<table class="table">
 									<tbody>
@@ -84,10 +84,10 @@
 									<td
 										th:text="${MapClassSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
 									<td><a
-										th:href="@{'/headTeacher/mapClassSubject/edit/' + ${MapClassSubject.mapClassSubjectId}}"
+										th:href="@{'/editor/headTeacher/mapClassSubject/edit/' + ${MapClassSubject.mapClassSubjectId}}"
 										class="text-info">Update</a></td>
 									<td><a
-										th:href="@{'/headTeacher/mapClassSubject/toggleStatus/' + ${MapClassSubject.mapClassSubjectId}}"
+										th:href="@{'/editor/headTeacher/mapClassSubject/toggleStatus/' + ${MapClassSubject.mapClassSubjectId}}"
 										class="text-warning"
 										th:text="${MapClassSubject.isActive ? 'Disable' : 'Enable'}">
 										</a></td>
