@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class TGoal{
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "t_goal_id_seq")
-	@SequenceGenerator(name = "t_goal_id_seq", sequenceName = "T_GOAL_SEQ", allocationSize = 200, initialValue = 100)
+	@SequenceGenerator(name = "t_goal_id_seq", sequenceName = "T_GOAL_SEQ", allocationSize = 5000, initialValue = 100)
 	private Long tGoalId;
 	
 //	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_DASH_ONLY_NOT_NULL, message = "Invalid Class Name")
@@ -38,6 +38,10 @@ public class TGoal{
 	@NotEmpty
 	@Column(name = "tGoalDescription", length = 1000, nullable = false, unique = true)
 	private String tGoalDescription;
+
+	@Builder.Default
+	@Column(length = 1, nullable = false)
+	private Boolean isActive = true;
 	
 	@ManyToOne
 	@JoinColumn(name = "mGoalId")

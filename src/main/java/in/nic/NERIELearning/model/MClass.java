@@ -39,7 +39,7 @@ public class MClass{
 	@NotBlank
 	@NotEmpty
 	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_DASH_ONLY_NOT_NULL, message = "Invalid Class Name")
-	@Column(name = "mStageName", length = 50, nullable = false, unique = true)
+	@Column(name = "mClassName", length = 50, nullable = false, unique = true)
 	private String mClassName;
 
 	@Builder.Default

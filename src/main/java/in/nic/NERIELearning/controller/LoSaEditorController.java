@@ -72,9 +72,6 @@ public class LoSaEditorController{
 		mav.addObject("listMClasses", listMClasses);
 		mav.addObject("listMSubjects", listMSubjects);
 
-		System.out.println("mapClassSubject: " + mapClassSubject);
-		System.out.println("mClassesList: " + listMClasses);
-		System.out.println("mSubjectsList: " + listMSubjects);
 		return mav;
 	}
 
@@ -92,12 +89,12 @@ public class LoSaEditorController{
 	@GetMapping("/editor/teacherEducator/editTGoals")
 	public String teacherEducatorEditClassSubjects(Model model) {
 		model.addAttribute("listTGoals", tGoalService.findAll());
-		model.addAttribute("listMClasses", mClassService.findAll());
-		model.addAttribute("listMSubjects", mSubjectService.findAll());
+		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("tGoal", new TGoal());
 		
 		return "editor/teacherEducator/editTGoals";
 	}
+	
 	@RequestMapping(value = "/editor/teacherEducator/saveTGoal", method = RequestMethod.POST)
 	public String saveTGoal(@ModelAttribute("TGoal") TGoal tGoal, Model model) {
 		try{
@@ -115,31 +112,26 @@ public class LoSaEditorController{
 		return "editor/teacherEducator/createTGoal";
 	}
 	
-	@RequestMapping("/editor/teacherEducator/tGoal/edit/{map_class_subject_id}")
-	public ModelAndView editTGoal(@PathVariable(name = "map_class_subject_id") Long id) {
+	@RequestMapping("/editor/teacherEducator/tGoal/edit/{t_goal_id}")
+	public ModelAndView editTGoal(@PathVariable(name = "t_goal_id") Long id) {
 		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTGoal");
 		
 		TGoal tGoal = tGoalService.get(id);
-		List<MClass> listMClasses = mClassService.findAll();
-		List<MSubject> listMSubjects = mSubjectService.findAll();
+		List<MapClassSubject> listMapClassSubjects = mapClassSubjectService.findAll();
 		
 		mav.addObject("tGoal", tGoal);
-		mav.addObject("listMClasses", listMClasses);
-		mav.addObject("listMSubjects", listMSubjects);
+		mav.addObject("listMapClassSubjects", listMapClassSubjects);
 		
-		System.out.println("tGoal: " + tGoal);
-		System.out.println("mClassesList: " + listMClasses);
-		System.out.println("mSubjectsList: " + listMSubjects);
 		return mav;
 	}
 	
-//	@RequestMapping("/editor/teacherEducator/tGoal/toggleStatus/{m_stage_id}")
-//	public String toggleTGoalStatus(@PathVariable(name = "m_stage_id") Long id) {
-//		TGoal tGoal = tGoalService.get(id);
-//		tGoal.setIsActive(!(tGoal.getIsActive()));
-//		tGoalService.save(tGoal);
-//		
-//		return "redirect:/editor/teacherEducator/editTGoals";
-//	}
+	@RequestMapping("/editor/teacherEducator/tGoal/toggleStatus/{m_stage_id}")
+	public String toggleTGoalStatus(@PathVariable(name = "m_stage_id") Long id) {
+		TGoal tGoal = tGoalService.get(id);
+		tGoal.setIsActive(!(tGoal.getIsActive()));
+		tGoalService.save(tGoal);
+		
+		return "redirect:/editor/teacherEducator/editTGoals";
+	}
 	//	END: TEACHER-EDUCATOR TGoal Methods
 }

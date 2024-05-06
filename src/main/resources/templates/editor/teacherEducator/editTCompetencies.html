@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row my-5">
+			<div align="center">
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3">
+						<h3>Curriculum Goals</h3>
+					</div>
+					<div class="card-body">
+						<div class="d-flex justify justify-content-between">
+							<a th:href="@{/editor/dashboard}"><button
+									class="btn btn-primary">Editor Dashboard</button></a>
+						</div>
+						<div>
+							<form action="#" th:action="@{/editor/teacherEducator/saveTCompetency}"
+								th:object="${tGoal}" method="post">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td><label class="form-label">Add a new
+													curriculum goal</label></td>
+											<td><input type="hidden" th:field="*{tGoalId}" /> <select
+												class="form-select" id="selectClass" name="mapClassSubject"
+												th:field="*{mapClassSubjectId}" required>
+													<option th:each="mapCS : ${listMapClassSubjects}"
+														th:value="${mapCS.mapClassSubjectId}"
+														th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+											</select></td>
+											<td><input type="text" th:field="*{tGoalName}"
+												class="form-control" placeholder="Goal Name" /></td>
+											<td><input type="text" th:field="*{tGoalDescription}"
+												class="form-control" placeholder="Goal Description" /></td>
+											<td>
+												<button type="submit" class="btn btn-success">Save</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+						<table
+							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+							<thead class="thead-dark">
+								<tr>
+									<!-- 										<th class="text-center">ID</th> -->
+									<th>ID</th>
+									<th>Class-Subject</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Update</th>
+									<th>Enable/Disable</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="TCompetency : ${listTCompetencies}">
+									<td th:text="${TCompetency.tGoalId}">ID</td>
+									<td th:text="${TCompetency.tCompetencyName}">Name</td>
+									<td th:text="${TCompetency.tCompetencyDescription}">Description</td>
+									<td th:text="${TCompetency.tGoalId.tGoalName}">Goal Name</td>
+									<td><a
+										th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TCompetency.tCompetencyId}}"
+										class="text-info">Update</a></td>
+									<td><a
+										th:href="@{'/editor/teacherEducator/tGoal/toggleStatus/' + ${TCompetency.tCompetencyId}}"
+										class="text-warning"
+										th:text="${TCompetency.isActive ? 'Disable' : 'Enable'}"> </a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

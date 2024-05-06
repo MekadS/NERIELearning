@@ -20,37 +20,34 @@
 						<h3>School Classes</h3>
 					</div>
 					<div class="card-body">
-						<form action="#" th:action="@{/editor/headTeacher/saveMapClassSubject}"
-							th:object="${mapClassSubject}" method="post">
+						<form action="#" th:action="@{/editor/teacherEducator/saveTGoal}"
+							th:object="${tGoal}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-dark">
 									<tr>
-										<th colspan="2" align="center">Assign a new subject to a
-											class</th>
+										<th colspan="2" align="center">Create a new competency</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td><label class="form-label">Assign a new
-												subject to a class</label></td>
-										<td><input type="hidden" th:field="*{mapClassSubjectId}" />
-											<select class="form-select" id="selectClass" name="stage"
-											th:field="*{mClassId}" required>
-												<option th:each="mClass : ${listMClasses}"
-													th:value="${mClass.mClassId}"
-													th:text="${mClass.mClassName}"></option>
-										</select></td>
-										<td><select class="form-select" id="selectSubject"
-											name="stage" th:field="*{mSubjectId}" required>
-												<option th:each="mSubject : ${listMSubjects}"
-													th:value="${mSubject.mSubjectId}"
-													th:text="${mSubject.mSubjectName}"></option>
-										</select></td>
+										<td><label class="form-label">Add a new
+													competency</label></td>
+											<td><input type="hidden" th:field="*{tCompetencyId}" /> <select
+												class="form-select" id="selectClass" name="mapClassSubject"
+												th:field="*{mapClassSubjectId}" required>
+													<option th:each="tGoal : ${listTGoals}"
+														th:value="${tGoal.tGoalId}"
+														th:text="${tGoal.tGoalName}"></option>
+											</select></td>
+											<td><input type="text" th:field="*{tCompetencyName}"
+												class="form-control" placeholder="Competency Name" /></td>
+											<td><input type="text" th:field="*{tCompetencyDescription}"
+												class="form-control" placeholder="Competency Description" /></td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<td><a th:href="@{'/editor/dashboard'}"
+										<td><a th:href="@{'/editor/teacherEducator/editTCompetencies'}"
 											class="btn btn-info">Back</a></td>
 										<td>
 											<button type="submit" class="btn btn-success">Save</button>

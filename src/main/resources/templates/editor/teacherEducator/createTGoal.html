@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<div class="row my-5">
+			<div align="center">
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3">
+						<h3>School Classes</h3>
+					</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/editor/teacherEducator/saveTGoal}"
+							th:object="${tGoal}" method="post">
+							<table class="table table-striped">
+								<thead class="thead-dark">
+									<tr>
+										<th colspan="2" align="center">Create a new curriculum goal</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><label class="form-label">Add a new
+													curriculum goal</label></td>
+											<td><input type="hidden" th:field="*{tGoalId}" /> <select
+												class="form-select" id="selectClass" name="mapClassSubject"
+												th:field="*{mapClassSubjectId}" required>
+													<option th:each="mapCS : ${listMapClassSubjects}"
+														th:value="${mapCS.mapClassSubjectId}"
+														th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+											</select></td>
+											<td><input type="text" th:field="*{tGoalName}"
+												class="form-control" placeholder="Goal Name" /></td>
+											<td><input type="text" th:field="*{tGoalDescription}"
+												class="form-control" placeholder="Goal Description" /></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td><a th:href="@{'/editor/teacherEducator/editTGoals'}"
+											class="btn btn-info">Back</a></td>
+										<td>
+											<button type="submit" class="btn btn-success">Save</button>
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>
+<!-- 									<tr> -->
+<!-- 										<td>Class</td> -->
+<!-- 										<td><select class="form-select" id="selectClass" -->
+<!-- 											name="class" th:field="*{classId}" required> -->
+<!-- 												<option th:each="cl : ${classList}" th:value="${cl.classId}" -->
+<!-- 													th:text="${cl.className}"></option> -->
+<!-- 										</select></td> -->
+<!-- 									</tr> -->
