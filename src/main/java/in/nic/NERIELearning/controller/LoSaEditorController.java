@@ -16,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MSubject;
 import in.nic.NERIELearning.model.MapClassSubject;
+import in.nic.NERIELearning.model.TCompetency;
 import in.nic.NERIELearning.model.TGoal;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
+import in.nic.NERIELearning.service.TCompetencyService;
 import in.nic.NERIELearning.service.TGoalService;
 
 @Controller
@@ -28,6 +30,8 @@ public class LoSaEditorController{
 	MapClassSubjectService mapClassSubjectService;
 	@Autowired
 	TGoalService tGoalService;
+	@Autowired
+	TCompetencyService tCompetencyService;
 	@Autowired
 	MClassService mClassService;
 	@Autowired
@@ -125,8 +129,8 @@ public class LoSaEditorController{
 		return mav;
 	}
 	
-	@RequestMapping("/editor/teacherEducator/tGoal/toggleStatus/{m_stage_id}")
-	public String toggleTGoalStatus(@PathVariable(name = "m_stage_id") Long id) {
+	@RequestMapping("/editor/teacherEducator/tGoal/toggleStatus/{t_goal_id}")
+	public String toggleTGoalStatus(@PathVariable(name = "t_goal_id") Long id) {
 		TGoal tGoal = tGoalService.get(id);
 		tGoal.setIsActive(!(tGoal.getIsActive()));
 		tGoalService.save(tGoal);
@@ -134,4 +138,54 @@ public class LoSaEditorController{
 		return "redirect:/editor/teacherEducator/editTGoals";
 	}
 	//	END: TEACHER-EDUCATOR TGoal Methods
+	
+	//	START: TEACHER-EDUCATOR TCompetency Methods
+	@GetMapping("/editor/teacherEducator/editTCompetencies")
+	public String teacherEducatorEditCompetencies(Model model) {
+		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
+		model.addAttribute("listTGoals", tGoalService.findAll());
+		model.addAttribute("tCompetency", new TCompetency());
+		
+		return "editor/teacherEducator/editTCompetencies";
+	}
+	
+	@RequestMapping(value = "/editor/teacherEducator/saveTCompetency", method = RequestMethod.POST)
+	public String saveTCompetency(@ModelAttribute("TCompetency") TCompetency tCompetency, Model model) {
+		try{
+			tCompetencyService.save(tCompetency);
+			return "redirect:/editor/teacherEducator/editTCompetencies";
+		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
+			return "redirect:/editor/teacherEducator/editTCompetencies";
+		}
+	}
+	
+	@GetMapping("/editor/teacherEducator/createTCompetency")
+	public String addTCompetency(Model model) {
+		model.addAttribute("listMSubjects", mSubjectService.findAll());
+		
+		return "editor/teacherEducator/createTCompetency";
+	}
+	
+	@RequestMapping("/editor/teacherEducator/tCompetency/edit/{t_competency_id}")
+	public ModelAndView editTCompetency(@PathVariable(name = "t_competency_id") Long id) {
+		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTCompetency");
+		
+		TCompetency tCompetency = tCompetencyService.get(id);
+		List<TGoal> listTGoals = tGoalService.findAll();
+		
+		mav.addObject("tCompetency", tCompetency);
+		mav.addObject("listTGoals", listTGoals);
+		
+		return mav;
+	}
+	
+	@RequestMapping("/editor/teacherEducator/tCompetency/toggleStatus/{t_competency_id}")
+	public String toggleTCompetencyStatus(@PathVariable(name = "t_competency_id") Long id) {
+		TCompetency tCompetency = tCompetencyService.get(id);
+		tCompetency.setIsActive(!(tCompetency.getIsActive()));
+		tCompetencyService.save(tCompetency);
+		
+		return "redirect:/editor/teacherEducator/editTCompetencies";
+	}
+	//	END: TEACHER-EDUCATOR TCompetency Methods
 }
