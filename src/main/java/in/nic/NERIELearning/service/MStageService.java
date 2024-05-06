@@ -24,9 +24,4 @@ public class MStageService {
     public MStage get(Long m_stage_id) {
         return mStageRepo.findById(m_stage_id).get();
     }
-
-//    public void disable(Long m_stage_id) {
-//    	MStage toggleThis = mStageRepo.findById(m_stage_id).get();
-//    	toggleThis.setIsActive(!(toggleThis.getIsActive()));
-//    }
 }
