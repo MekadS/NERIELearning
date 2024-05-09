@@ -16,13 +16,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-//        String captcha = request.getParameter("captcha");
-//        String hiddenCaptcha = request.getParameter("hiddenCaptcha");
+        String captcha = request.getParameter("captcha");
+        String hiddenCaptcha = request.getParameter("hiddenCaptcha");
 
-//        if(captcha.equals(hiddenCaptcha)) {
+        if(captcha.equals(hiddenCaptcha)) {
             response.sendRedirect("/");
-//        }else {
-//            response.sendRedirect("/?invalidCaptcha");
-//        }
+        }else {
+            response.sendRedirect("/?invalidCaptcha");
+        }
     }
 }

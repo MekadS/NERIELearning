@@ -33,8 +33,31 @@
 									th:field="*{password}"></td>
 							</tr>
 						</table>
-						<input type="submit" class="btn btn-primary mt-3"
-									value="Login" />
+						<div class="row">
+							<div class="col">
+								<div class="mb-3">
+									<img alt="Captcha" id="realCaptcha"
+										th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+								</div>
+							</div>
+							<div class="col p-4">
+								<a href="#" class="text-decoration-none"
+									onclick="reloadCaptcha()"> <i
+									class="fa-solid fa-arrow-rotate-right fa-2xl"></i>
+								</a>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col mb-4">
+								<label class="mb-2" for="captcha">Enter Captcha</label> <input
+									id="hiddenCaptcha" th:field="*{hiddenCaptcha}" type="hidden" />
+								<input class="form-control" id="captcha"
+									onchange="checkCaptcha()" placeholder="Enter Captcha" required
+									th:field="*{captcha}" type="text" />
+							</div>
+						</div>
+						<input type="submit" class="btn btn-primary mt-3" value="Login" />
 					</form>
 				</div>
 			</div>
