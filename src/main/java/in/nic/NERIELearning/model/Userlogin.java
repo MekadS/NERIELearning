@@ -23,7 +23,6 @@ import lombok.Data;
 
 @Entity
 @Data
-//@AllArgsConstructor
 @Table(name = "t_userlogin")
 public class Userlogin {
 

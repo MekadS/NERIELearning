@@ -1,12 +1,27 @@
 package in.nic.NERIELearning.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import in.nic.NERIELearning.model.Userlogin;
 
 @Controller
 public class CommonController{
+	
+	@GetMapping("/home")
+	public String home() {
+		return "home"; 
+	}
+
+	@GetMapping("/accessDenied")
+	public String accessDenied() {
+		return "accessDenied"; 
+	}
+
 	@GetMapping("/")
-	public String index() {
+	public String loginIndex(Model model) {
+		model.addAttribute("userLogin",new Userlogin());
 		return "index"; 
 	}
 	

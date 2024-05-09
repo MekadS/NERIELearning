@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import in.nic.NERIELearning.model.UserLoginUserDetails;
+import in.nic.NERIELearning.mapper.UserLoginUserDetails;
 import in.nic.NERIELearning.model.Userlogin;
 import in.nic.NERIELearning.repo.UserLoginRepo;
 

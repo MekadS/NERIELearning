@@ -30,15 +30,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         (authorize) -> authorize
 //		                        .requestMatchers("/").anonymous()
-                                .requestMatchers("/admin/**").permitAll()
-//                                .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/editor/**").permitAll()
-                                .requestMatchers("/headTeacher/**").permitAll()
-//                                .requestMatchers("/head-teacher/**").hasRole("HEAD_TEACHER")
-                                .requestMatchers("/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
+//                                .requestMatchers("/admin/**").permitAll()
+                                .requestMatchers("/home").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                                .requestMatchers("/editor/**").permitAll()
+//                                .requestMatchers("/headTeacher/**").permitAll()
+                                .requestMatchers("/editor/head-teacher/**").hasRole("HEAD_TEACHER")
+                                .requestMatchers("/editor/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()
                                 .requestMatchers("/resources/**", "/static/**","/assets/**",
-                                		 "/css/**", "/js/**","/", "/utils/**","/public/**")
+                                		 "/css/**", "/js/**","/", "/utils/**","/public/**","/")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
@@ -46,7 +47,6 @@ public class SecurityConfig {
                         (login) -> login
                                 .loginPage("/")
                                 .loginProcessingUrl("/login")
-                            //    .defaultSuccessUrl("/home", true)
                                 .successHandler(authenticationSuccessHandler())
                                 .failureUrl("/?error=Authentication Error")
                                 .permitAll())
@@ -67,7 +67,7 @@ public class SecurityConfig {
                                 .maximumSessions(1)
                                 .maxSessionsPreventsLogin(true))
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .accessDeniedPage("/accessDenied");
 
         return httpSecurity.build();
     }

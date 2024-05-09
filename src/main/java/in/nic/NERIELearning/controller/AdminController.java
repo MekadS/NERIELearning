@@ -21,6 +21,7 @@ import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController{
 	@Autowired
 	MStageService mStageService;
@@ -30,13 +31,14 @@ public class AdminController{
 	MSubjectService mSubjectService;
 
 	//	START: ADMIN Mappings
-	@GetMapping("/admin/dashboard")
+	@GetMapping("dashboard")
 	public String adminDashboard() {
+		System.out.println("ININININ");
 		return "admin/dashboard";
 	}
 
 	//	START: ADMIN MStage Methods
-	@GetMapping("/admin/editMStages")
+	@GetMapping("editMStages")
 	public String adminEditStages(Model model) {
 		List<MStage> listMStage = mStageService.findAll();
 		model.addAttribute("listMStages", listMStage);
@@ -45,20 +47,20 @@ public class AdminController{
 		return "admin/editMStages";
 	}
 	
-	@RequestMapping(value = "/admin/saveMStage", method = RequestMethod.POST)
+	@RequestMapping(value = "saveMStage", method = RequestMethod.POST)
 	public String saveMStage(@ModelAttribute("MStage") MStage mStage) {
 		mStageService.save(mStage);
 		return "redirect:/admin/editMStages";
 	}
 
-	@GetMapping("/admin/createMStage")
+	@GetMapping("createMStage")
 	public String addMStage(Model model) {
 		model.addAttribute("mStage", new MStage());
 
 		return "/admin/createMStage";
 	}
 
-	@RequestMapping("/admin/mStage/edit/{m_stage_id}")
+	@RequestMapping("mStage/edit/{m_stage_id}")
 	public ModelAndView editMStage(@PathVariable(name = "m_stage_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMStage");
 
@@ -68,7 +70,7 @@ public class AdminController{
 		return mav;
 	}
 
-	@RequestMapping("/admin/mStage/toggleStatus/{m_stage_id}")
+	@RequestMapping("mStage/toggleStatus/{m_stage_id}")
 	public String toggleMStageStatus(@PathVariable(name = "m_stage_id") Long id) {
 		MStage mStage = mStageService.get(id);
 		mStage.setIsActive(!(mStage.getIsActive()));
@@ -79,7 +81,7 @@ public class AdminController{
 	//	END: ADMIN MStage Methods
 
 	//	START: ADMIN MClass Methods
-	@GetMapping("/admin/editMClasses")
+	@GetMapping("editMClasses")
 	public String adminEditClasses(Model model) {
 		model.addAttribute("listMClasses", mClassService.findAll());
 		model.addAttribute("listMStages", mStageService.findAll());
@@ -87,7 +89,7 @@ public class AdminController{
 
 		return "admin/editMClasses";
 	}
-	@RequestMapping(value = "/admin/saveMClass", method = RequestMethod.POST)
+	@RequestMapping(value = "saveMClass", method = RequestMethod.POST)
 	public String saveMClass(@ModelAttribute("MClass") MClass mClass, Model model) {
 		try{
 			mClassService.save(mClass);
@@ -101,14 +103,14 @@ public class AdminController{
 		}
 	}
 
-	@GetMapping("/admin/createMClass")
+	@GetMapping("createMClass")
 	public String addMClass(Model model) {
 		model.addAttribute("listMStages", mStageService.findAll());
 
 		return "/admin/createMClass";
 	}
 
-	@RequestMapping("/admin/mClass/edit/{m_class_id}")
+	@RequestMapping("mClass/edit/{m_class_id}")
 	public ModelAndView editMClass(@PathVariable(name = "m_class_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMClass");
 		
@@ -123,7 +125,7 @@ public class AdminController{
 		return mav;
 	}
 
-	@RequestMapping("/admin/mClass/toggleStatus/{m_stage_id}")
+	@RequestMapping("mClass/toggleStatus/{m_stage_id}")
 	public String toggleMClassStatus(@PathVariable(name = "m_stage_id") Long id) {
 		MClass mClass = mClassService.get(id);
 		mClass.setIsActive(!(mClass.getIsActive()));
@@ -134,7 +136,7 @@ public class AdminController{
 	//	END: ADMIN MClass Methods
 
 	//	START: ADMIN MSubject Methods
-	@GetMapping("/admin/editMSubjects")
+	@GetMapping("editMSubjects")
 	public String adminEditMSubjects(Model model) {
 		List<MSubject> listMSubject = mSubjectService.findAll();
 		model.addAttribute("listMSubjects", listMSubject);
@@ -143,7 +145,7 @@ public class AdminController{
 		return "admin/editMSubjects";
 	}
 
-	@RequestMapping(value = "/admin/saveMSubject", method = RequestMethod.POST)
+	@RequestMapping(value = "saveMSubject", method = RequestMethod.POST)
 	public String saveMSubject(@ModelAttribute("MSubject") MSubject mSubject) {
 		mSubjectService.save(mSubject);
 		return "redirect:/admin/editMSubjects";
@@ -156,7 +158,7 @@ public class AdminController{
 		return "/admin/createMSubject";
 	}
 
-	@RequestMapping("/admin/mSubject/edit/{m_subject_id}")
+	@RequestMapping("mSubject/edit/{m_subject_id}")
 	public ModelAndView editMSubject(@PathVariable(name = "m_subject_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMSubject");
 
@@ -166,7 +168,7 @@ public class AdminController{
 		return mav;
 	}
 
-	@RequestMapping("/admin/mSubject/toggleStatus/{m_subject_id}")
+	@RequestMapping("mSubject/toggleStatus/{m_subject_id}")
 	public String toggleMSubjectStatus(@PathVariable(name = "m_subject_id") Long id) {
 		MSubject mSubject = mSubjectService.get(id);
 		mSubject.setIsActive(!(mSubject.getIsActive()));

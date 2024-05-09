@@ -1,4 +1,4 @@
-package in.nic.NERIELearning.model;
+package in.nic.NERIELearning.mapper;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import in.nic.NERIELearning.model.Userlogin;
 
 public class UserLoginUserDetails implements UserDetails{
 	/**

@@ -10,11 +10,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "m_role")
 public class MRole {
 	@Id
@@ -24,7 +26,7 @@ public class MRole {
 	@NotBlank
 	@NotEmpty
 	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_ONLY_WITH_SPACE_AND_UNDERSCORE, message = "Invalid Role Name")
-	@Column(length = 20, nullable = false)
+	@Column(length = 30, nullable = false)
 	private String roleName;
 
 	@NotBlank
