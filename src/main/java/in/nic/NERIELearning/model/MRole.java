@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class MRole {
 	@Id
 	@Column(length = 20, nullable = false)
-	private String roleCode;
+	private String roleId;
 
 	@NotBlank
 	@NotEmpty

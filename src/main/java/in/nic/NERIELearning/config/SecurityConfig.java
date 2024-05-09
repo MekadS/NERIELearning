@@ -29,14 +29,11 @@ public class SecurityConfig {
 		.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-//		                        .requestMatchers("/").anonymous()
-//                                .requestMatchers("/admin/**").permitAll()
                                 .requestMatchers("/home").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-//                                .requestMatchers("/editor/**").permitAll()
-//                                .requestMatchers("/headTeacher/**").permitAll()
-                                .requestMatchers("/editor/head-teacher/**").hasRole("HEAD_TEACHER")
-                                .requestMatchers("/editor/teacher-educator/**").hasRole("TEACHER_EDUCATOR")
+                                .requestMatchers("/editor/dashboard").hasAnyRole("HEAD_TEACHER", "TEACHER_EDUCATOR")
+                                .requestMatchers("/editor/headTeacher/**").hasRole("HEAD_TEACHER")
+                                .requestMatchers("/editor/teacherEducator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()
                                 .requestMatchers("/resources/**", "/static/**","/assets/**",
                                 		 "/css/**", "/js/**","/", "/utils/**","/public/**","/")
@@ -45,7 +42,7 @@ public class SecurityConfig {
                                 .authenticated())
                 .formLogin(
                         (login) -> login
-                                .loginPage("/")
+                                .loginPage("/index")
                                 .loginProcessingUrl("/login")
                                 .successHandler(authenticationSuccessHandler())
                                 .failureUrl("/?error=Authentication Error")

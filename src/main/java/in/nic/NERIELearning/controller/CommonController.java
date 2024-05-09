@@ -9,17 +9,17 @@ import in.nic.NERIELearning.model.Userlogin;
 @Controller
 public class CommonController{
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String home() {
 		return "home"; 
 	}
-
+	
 	@GetMapping("/accessDenied")
 	public String accessDenied() {
 		return "accessDenied"; 
 	}
 
-	@GetMapping("/")
+	@GetMapping("/index")
 	public String loginIndex(Model model) {
 		model.addAttribute("userLogin",new Userlogin());
 		return "index"; 

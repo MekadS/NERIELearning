@@ -20,7 +20,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //        String hiddenCaptcha = request.getParameter("hiddenCaptcha");
 
 //        if(captcha.equals(hiddenCaptcha)) {
-            response.sendRedirect("/home");
+            response.sendRedirect("/");
 //        }else {
 //            response.sendRedirect("/?invalidCaptcha");
 //        }

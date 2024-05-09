@@ -14,29 +14,27 @@
 
 	<main>
 		<div align="center">
-			<div class="card">
-				<div class="card-title">LOGIN</div>
+			<div class="card my-5 mx-5">
+				<div class="card-title h2 my-3">LOGIN</div>
 				<div class="card-body">
 					<form action="#" th:action="@{/login}" method="post"
 						th:object="${userLogin}">
 						<table>
-							<tr>
+							<tr class="my-5">
 								<td><label class="form-label" for="email"> Username
 								</label></td>
-								<td><input class="form-control" type="text"
+								<td><input class="form-control ms-3" type="text"
 									th:field="*{username}"></td>
 							</tr>
-							<tr>
+							<tr class="my-5">
 								<td><label class="form-label" for="password">
 										Password </label></td>
-								<td><input class="form-control" type="password"
+								<td><input class="form-control ms-3" type="password"
 									th:field="*{password}"></td>
 							</tr>
-							<tr>
-								<td><input type="submit" class="btn btn-primary"
-									value="Login" /></td>
-							</tr>
 						</table>
+						<input type="submit" class="btn btn-primary mt-3"
+									value="Login" />
 					</form>
 				</div>
 			</div>

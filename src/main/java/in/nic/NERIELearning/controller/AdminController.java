@@ -33,7 +33,6 @@ public class AdminController{
 	//	START: ADMIN Mappings
 	@GetMapping("dashboard")
 	public String adminDashboard() {
-		System.out.println("ININININ");
 		return "admin/dashboard";
 	}
 
@@ -57,7 +56,7 @@ public class AdminController{
 	public String addMStage(Model model) {
 		model.addAttribute("mStage", new MStage());
 
-		return "/admin/createMStage";
+		return "admin/createMStage";
 	}
 
 	@RequestMapping("mStage/edit/{m_stage_id}")
@@ -107,7 +106,7 @@ public class AdminController{
 	public String addMClass(Model model) {
 		model.addAttribute("listMStages", mStageService.findAll());
 
-		return "/admin/createMClass";
+		return "admin/createMClass";
 	}
 
 	@RequestMapping("mClass/edit/{m_class_id}")
@@ -155,7 +154,7 @@ public class AdminController{
 	public String addMSubject(Model model) {
 		model.addAttribute("mSubject", new MSubject());
 
-		return "/admin/createMSubject";
+		return "admin/createMSubject";
 	}
 
 	@RequestMapping("mSubject/edit/{m_subject_id}")
