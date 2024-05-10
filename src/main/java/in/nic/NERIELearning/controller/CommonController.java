@@ -4,11 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import in.nic.NERIELearning.helper.AuthenticationHelper;
+import in.nic.NERIELearning.helper.CaptchaHelper;
 import in.nic.NERIELearning.model.Userlogin;
 
 @Controller
 public class CommonController{
-	
 	@GetMapping("/")
 	public String home() {
 		return "home"; 
@@ -21,9 +22,33 @@ public class CommonController{
 
 	@GetMapping("/index")
 	public String loginIndex(Model model) {
-		model.addAttribute("userLogin",new Userlogin());
-		return "index"; 
+		try {
+			if (AuthenticationHelper.authenticated()) {
+				return "redirect:/home";
+			}
+			Userlogin userLogin = new Userlogin();
+			model.addAttribute("loginObj", userLogin);
+			CaptchaHelper.getCaptcha(userLogin);
+			return "index";
+		} catch (Exception e) {
+			return "redirect:/?error=" + e.getMessage();
+		}
 	}
+	
+//	@GetMapping("/home")
+//	public String getHome(Model model) {
+//		try {
+//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			String username = auth.getName();
+//
+//			Userlogin userlogin = employeeService.getUserByUsername(username);
+//			model.addAttribute("username", username);
+//			
+//			return "redirect:"+userlogin.role.getLandingPage();
+//		} catch (Exception e) {
+//			return "redirect:/?exc=Something";
+//		}
+//	}
 	
 	@GetMapping("/editor/dashboard")
 	public String editorDashboard() {

@@ -3,6 +3,15 @@
 
 <head>
 <meta charset="UTF-8" />
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+<script>
+	$(document).ready(function(){
+		function reloadingTest() {
+			alert("INSIDE");
+		}
+	});
+</script>
+
 <title>NERIE Learning</title>
 </head>
 
@@ -13,52 +22,47 @@
 	<aside></aside>
 
 	<main>
-		<div align="center">
-			<div class="card my-5 mx-5">
-				<div class="card-title h2 my-3">LOGIN</div>
-				<div class="card-body">
-					<form action="#" th:action="@{/login}" method="post"
-						th:object="${userLogin}">
-						<table>
-							<tr class="my-5">
-								<td><label class="form-label" for="email"> Username
-								</label></td>
-								<td><input class="form-control ms-3" type="text"
-									th:field="*{username}"></td>
-							</tr>
-							<tr class="my-5">
-								<td><label class="form-label" for="password">
-										Password </label></td>
-								<td><input class="form-control ms-3" type="password"
-									th:field="*{password}"></td>
-							</tr>
-						</table>
-						<div class="row">
-							<div class="col">
-								<div class="mb-3">
-									<img alt="Captcha" id="realCaptcha"
-										th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+		<div class="row">
+			<div align="center">
+				<div class="card my-5 mx-5 col-md-5">
+					<div class="card-title h2 my-3">LOGIN</div>
+					<div class="card-body">
+						<form action="#" th:action="@{/login}" method="post"
+							th:object="${loginObj}">
+							<input class="form-control mb-3" type="text" placeholder="Username"
+								th:field="*{username}"> <input class="form-control"
+								type="password" placeholder="Password" th:field="*{password}">
+
+							<div class="row">
+								<div class="col my-3">
+									<div class="">
+										<img alt="Captcha" id="realCaptcha"
+											th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+									</div>
+								</div>
+								<div class="col py-4">
+									<a href="#" class="text-decoration-none text-info"
+										onclick="reloadCaptcha()"> <i
+										class="fa-solid fa-arrow-rotate-right fa-2x"></i>
+									</a>
+									<a href="#" class="text-decoration-none text-danger"
+										onclick="reloadingTest()"> <i
+										class="fa-solid fa-confirm fa-2x"></i>
+									</a>
 								</div>
 							</div>
-							<div class="col p-4">
-								<a href="#" class="text-decoration-none"
-									onclick="reloadCaptcha()"> <i
-									class="fa-solid fa-arrow-rotate-right fa-2xl"></i>
-								</a>
-							</div>
-						</div>
 
-						<div class="row">
-							<div class="col mb-4">
-								<label class="mb-2" for="captcha">Enter Captcha</label> <input
-									id="hiddenCaptcha" th:field="*{hiddenCaptcha}" type="hidden" />
-								<input class="form-control" id="captcha"
-									onchange="checkCaptcha()" placeholder="Enter Captcha" required
-									th:field="*{captcha}" type="text" />
+							<div class="row">
+								<div class="col mb-3">
+									<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}"
+										type="hidden" /> <input class="form-control" id="captcha"
+										onchange="checkCaptcha()" placeholder="Enter Captcha" required
+										th:field="*{captcha}" type="text" />
+								</div>
 							</div>
-						</div>
-						<input type="submit" class="btn btn-primary mt-3" value="Login" />
-					</form>
+							<input type="submit" class="btn btn-primary mt-3" value="Login" />
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
