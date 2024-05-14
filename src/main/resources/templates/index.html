@@ -3,16 +3,9 @@
 
 <head>
 <meta charset="UTF-8" />
-<script type="text/javascript" th:src="@{/js/index.js}"></script>
-<script>
-	$(document).ready(function(){
-		function reloadingTest() {
-			alert("INSIDE");
-		}
-	});
-</script>
-
 <title>NERIE Learning</title>
+
+<!-- <script type="text/javascript" th:src="@{/js/index.js}"></script> -->
 </head>
 
 <body>
@@ -45,10 +38,10 @@
 										onclick="reloadCaptcha()"> <i
 										class="fa-solid fa-arrow-rotate-right fa-2x"></i>
 									</a>
-									<a href="#" class="text-decoration-none text-danger"
-										onclick="reloadingTest()"> <i
-										class="fa-solid fa-confirm fa-2x"></i>
-									</a>
+<!-- 									<a href="#" class="text-decoration-none text-danger" -->
+<!-- 										onclick="reloadingTest()"> <i -->
+<!-- 										class="fa-solid fa-confirm fa-2x"></i> -->
+<!-- 									</a> -->
 								</div>
 							</div>
 
@@ -70,4 +63,12 @@
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+
+<script>
+	$(document).ready(function(){
+		function reloadingTest() {
+			alert("INSIDE");
+		}
+	});
+</script>
 </html>

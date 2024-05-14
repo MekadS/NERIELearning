@@ -215,12 +215,12 @@ body {
 }
 
 a {
-  color: #ffffff;
+  color: #000000;
   text-decoration: none;
 }
 
 a:hover {
-  color: #000;
+  color: #0000ff;
   text-decoration: none;
 }
 

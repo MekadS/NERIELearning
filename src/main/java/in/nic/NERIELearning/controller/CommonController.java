@@ -41,7 +41,7 @@ public class CommonController{
 //			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 //			String username = auth.getName();
 //
-//			Userlogin userlogin = employeeService.getUserByUsername(username);
+//			Userlogin userlogin = UserLoginDetailsService.getUserByUsername(username);
 //			model.addAttribute("username", username);
 //			
 //			return "redirect:"+userlogin.role.getLandingPage();
@@ -69,6 +69,11 @@ public class CommonController{
 	@GetMapping("/public/NAS")
 	public String NAS() {
 		return "public/NAS"; 
+	}
+	
+	@GetMapping("/public/learningOutcomes")
+	public String learningOutcomes() {
+		return "public/learningOutcomes"; 
 	}
 
 	@GetMapping("/public/contact")

@@ -25,10 +25,39 @@
 .nerie_grey{
 	background-color:#596475 !important;       /* 	grey: Payne's Grey */
 }
+.nerie_light_grey{
+	background-color:#eeeeee !important;       /* 	grey: Payne's Grey */
+}
+
+.nerie-nav-logo{
+  color: #ffffff !important;
+  font-size: 30px !important;
+
+}
 
 .nerie-link{
   color: #ffffff;
   text-decoration: none;
+}
+
+.nerie-link-light{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.nerie-link-light:hover{
+  color: #0000ff;
+  text-decoration: none;
+}
+
+.nerie-link-blue{
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+.nerie-link-light:hover{
+  color: #0000ff;
+  text-decoration: underline;
 }
 
 .nerie-link-normal{
@@ -36,8 +65,13 @@
   text-decoration: none;
 }
 
+.nerie-link-dark{
+  color: #444444;
+  text-decoration: none;
+}
+
 .nerie-link:hover{
-  color: #ffffff;
+  color: #0000ff;
   text-decoration: underline;
 }
 

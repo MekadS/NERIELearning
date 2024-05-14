@@ -31,7 +31,7 @@ public class SecurityConfig {
                         (authorize) -> authorize
                                 .requestMatchers("/home").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/editor/dashboard").hasAnyRole("HEAD_TEACHER", "TEACHER_EDUCATOR")
+                                .requestMatchers("/editor/dashboard").hasAnyRole("ADMIN","HEAD_TEACHER", "TEACHER_EDUCATOR")
                                 .requestMatchers("/editor/headTeacher/**").hasRole("HEAD_TEACHER")
                                 .requestMatchers("/editor/teacherEducator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()

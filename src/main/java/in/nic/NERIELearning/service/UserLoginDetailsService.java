@@ -23,6 +23,9 @@ public class UserLoginDetailsService implements UserDetailsService {
 
 		return userLogin.map(UserLoginUserDetails::new)
 				.orElseThrow(() -> new UsernameNotFoundException("Username Not Found"));
-
+		
+//		public Userlogin getUserByUsername(String username) {
+//			return userLoginRepo.findByUsername(username).get();
+//		}
 	}
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: header}"></div>
+	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
+
+	<aside></aside>
+
+	<main>
+		<div class="card nerie_light_grey my-5 mx-3 text-center">
+			<div class="card-title mt-4 h1">Learning Outcomes</div>
+			<div class="card-body row mb-4 justify-content-around">
+				<div class="card col-6 my-5 py-5 by-5">
+					<p>
+						<span class="fw-semibold">Learning outcomes</span> describe the
+						measurable skills, abilities, knowledge or values that students
+						should be able to demonstrate as a result of a completing a
+						course.<br> They are <span class="fw-semibold">student-centered</span>
+						rather than teacher-centered, in that they describe what the
+						students will do, not what the instructor will teach.
+					</p>
+				</div>
+				<div class="card d-flex align-items-center col-4 my-5 py-5 by-5">
+				<p>Learning Outcomes &amp; Suggestive Activities</p>
+					<p class="d-inline-flex gap-1 align-middle text-center justify-content-around">
+						<a th:href="@{/editor/dashboard}" class="mx-auto btn btn-info">View</a>
+						<a th:href="@{/editor/dashboard}"
+							class="mx-auto btn btn-outline-info">Manage</a>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>
