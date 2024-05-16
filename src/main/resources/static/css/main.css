@@ -2,30 +2,58 @@
 	nerie palette css file
 */
 .nerie_green{
-	background-color:#01cb5c !important;       /* 	Dark Pastle green */
+	color:#01cb5c !important;       /* 	Dark Pastle green */
 }
 .nerie_dark_green{
-	background-color:#084C61 !important;       /* 	Midnight green */
+	color:#084C61 !important;       /* 	Midnight green */
 }
 .nerie_yellow{
-	background-color:#FFBE33 !important;       /*  Selective Yellow */
+	color:#FFBE33 !important;       /*  Selective Yellow */
 }
 .nerie_indigo{
-	background-color:#7D83FF !important;       /*  Tropical Indigo */
+	color:#7D83FF !important;       /*  Tropical Indigo */
 }
 .nerie_red{
-	background-color:#F02D3A !important;       /*  Imperial Red */
+	color:#F02D3A !important;       /*  Imperial Red */
 }
 .nerie_white{
-	background-color:#FBFBF2 !important;       /* 	white: Floral White */
+	color:#FBFBF2 !important;       /* 	white: Floral White */
 }
 .nerie_black{
-	background-color:#000411 !important;       /* 	black: Rich Black */
+	color:#000411 !important;       /* 	black: Rich Black */
 }
 .nerie_grey{
-	background-color:#596475 !important;       /* 	grey: Payne's Grey */
+	color:#596475 !important;       /* 	grey: Payne's Grey */
 }
 .nerie_light_grey{
+	color:#eeeeee !important;       /* 	grey: Payne's Grey */
+}
+
+.nerie_bg_green{
+	background-color:#01cb5c !important;       /* 	Dark Pastle green */
+}
+.nerie_bg_dark_green{
+	background-color:#084C61 !important;       /* 	Midnight green */
+}
+.nerie_bg_yellow{
+	background-color:#FFBE33 !important;       /*  Selective Yellow */
+}
+.nerie_bg_indigo{
+	background-color:#7D83FF !important;       /*  Tropical Indigo */
+}
+.nerie_bg_red{
+	background-color:#F02D3A !important;       /*  Imperial Red */
+}
+.nerie_bg_white{
+	background-color:#FBFBF2 !important;       /* 	white: Floral White */
+}
+.nerie_bg_black{
+	background-color:#000411 !important;       /* 	black: Rich Black */
+}
+.nerie_bg_grey{
+	background-color:#596475 !important;       /* 	grey: Payne's Grey */
+}
+.nerie_bg_light_grey{
 	background-color:#eeeeee !important;       /* 	grey: Payne's Grey */
 }
 
@@ -80,4 +108,16 @@
 }
 .dropdown-item:hover{
   color: #7D83FF !important;
+}
+
+.offcanvas-title{
+	font-family: "Poppins" !important;
+}
+
+.offcanvas-body{
+	font-family: "Poppins" !important;
+}
+
+ul{
+	list-style-type: none !important;
 }
