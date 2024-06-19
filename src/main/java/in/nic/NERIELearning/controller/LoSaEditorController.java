@@ -38,6 +38,12 @@ public class LoSaEditorController{
 	MSubjectService mSubjectService;
 
 	//	START: HEAD-TEACHER MapClassSubject Methods
+	@GetMapping("/public/viewLearningOutcomes")
+	public String viewLearningOutcomes(Model model) {
+		return "public/viewLearningOutcomes";
+	}
+	
+	//	START: HEAD-TEACHER MapClassSubject Methods
 	@GetMapping("/editor/headTeacher/editMapClassSubjects")
 	public String headTeacherEditClassSubjects(Model model) {
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());

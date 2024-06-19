@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+<script>
+$(document).ready(function() {
+    $('#learningOutcomes').DataTable();
+  });
+</script>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: header}"></div>
+	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
+
+	<aside></aside>
+
+	<main>
+		<div class="card my-5 mx-3 text-center">
+			<div class="card-title mt-4 h1">Learning Outcomes</div>
+			<div class="card-body row mb-4 justify-content-around">
+				<table id="learningOutcomes" class="display">
+					<thead>
+						<tr><td>Fruits</td></tr>
+					</thead>
+					<tr>
+						<td>1</td>
+						<td>Apple</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Banana</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Cherry</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>D</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>E</td>
+					</tr>
+					<tfoot></tfoot>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

@@ -2,3 +2,41 @@ TODO:
 1. Add Error/Exception Handling to create and edit pages,controllers.,etc
 2. Sort tables appropriately.
 3. LoginSuccessHandler.java
+
+15 June 2024
+1. Finish Captcha
+2. Create Backend + Frontend for Content (NAS: Tutorials, Question Banks)
+3. Finish Sidebar
+4. Try Dynamic Sidebar
+	@RestController
+@RequestMapping("/api")
+public class SidebarController {
+
+    @Autowired
+    private UserService userService; // Service to access user information
+
+    @GetMapping("/sidebar-data")
+    public ResponseEntity<Map<String, Object>> getSidebarData() {
+        User user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String role = user.getRole(); // Assuming a "role" field in the User model
+
+        Map<String, Object> data = new HashMap<>();
+
+        if (role.equals("ROLE_WEB_ADMIN")) {
+            // Fetch all subjects and classes for Web Admin
+            List<Subject> subjects = subjectService.getAllSubjects();
+            List<Class> classes = classService.getAllClasses();
+            data.put("subjects", subjects);
+            data.put("classes", classes);
+        } else if (role.equals("ROLE_HEAD_TEACHER")) {
+            // Fetch data relevant to Head Teacher role (e.g., assigned subjects/classes)
+        } else if (role.equals("ROLE_TEACHER")) {
+            // Fetch data relevant to Teacher role (e.g., assigned classes)
+        }
+
+        return ResponseEntity.ok(data);
+    }
+}
+
+TEST
+4. END: Try Dynamic Sidebar
