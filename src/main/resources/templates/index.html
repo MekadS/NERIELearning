@@ -10,21 +10,26 @@
 
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
-	<div th:insert="~{utils/navbar :: nav}"></div>
+	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
 
 	<aside></aside>
 
 	<main>
-		<div class="row">
+		<div class="row my-5">
 			<div align="center">
-				<div class="card my-5 mx-5 col-md-5">
+				<div class="mt-5 p-3 col-md-4 bg-success rounded-4">
+					<p class="h2 text-light">NERIE</p>
+					<p class="h2 text-light">Learning</p>
+				</div>
+				<div class="card mt-1 mb-5 mx-5 col-md-4 border border-3 border-success-subtle rounded-4">
 					<div class="card-title h2 my-3">LOGIN</div>
 					<div class="card-body">
 						<form action="#" th:action="@{/login}" method="post"
 							th:object="${loginObj}">
-							<input class="form-control mb-3" type="text" placeholder="Username"
-								th:field="*{username}"> <input class="form-control"
-								type="password" placeholder="Password" th:field="*{password}">
+							<input class="form-control mb-3" type="text"
+								placeholder="Username" th:field="*{username}"> <input
+								class="form-control" type="password" placeholder="Password"
+								th:field="*{password}">
 
 							<div class="row">
 								<div class="col my-3">
@@ -38,10 +43,10 @@
 										onclick="reloadCaptcha()"> <i
 										class="fa-solid fa-arrow-rotate-right fa-2x"></i>
 									</a>
-<!-- 									<a href="#" class="text-decoration-none text-danger" -->
-<!-- 										onclick="reloadingTest()"> <i -->
-<!-- 										class="fa-solid fa-confirm fa-2x"></i> -->
-<!-- 									</a> -->
+									<!-- 									<a href="#" class="text-decoration-none text-danger" -->
+									<!-- 										onclick="reloadingTest()"> <i -->
+									<!-- 										class="fa-solid fa-confirm fa-2x"></i> -->
+									<!-- 									</a> -->
 								</div>
 							</div>
 
@@ -61,11 +66,11 @@
 		</div>
 	</main>
 
-	<footer th:insert="~{utils/footer :: footer}"></footer>
+	<!-- 	<footer th:insert="~{utils/footer :: footer}"></footer> -->
 </body>
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		function reloadingTest() {
 			alert("INSIDE");
 		}

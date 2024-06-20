@@ -4,11 +4,6 @@
 <head>
 <meta charset="UTF-8" />
 <title>NERIE Learning</title>
-<script>
-$(document).ready(function() {
-    $('#learningOutcomes').DataTable();
-  });
-</script>
 </head>
 
 <body>
@@ -22,30 +17,30 @@ $(document).ready(function() {
 		<div class="card my-5 mx-3 text-center">
 			<div class="card-title mt-4 h1">Learning Outcomes</div>
 			<div class="card-body row mb-4 justify-content-around">
-				<table id="learningOutcomes" class="display">
-					<thead>
-						<tr><td>Fruits</td></tr>
+				<table id="learningOutcomes"
+					class="display table table-striped lg-10 table-bordered">
+					<thead class="bg-grey">
+						<tr>
+							<th>Stage</th>
+							<th>Class</th>
+							<th>Subject</th>
+							<th>Goal</th>
+							<th>Competency</th>
+<!-- 							<th>Learning Outcome</th> -->
+<!-- 							<th>Suggestive Activity</th> -->
+						</tr>
 					</thead>
-					<tr>
-						<td>1</td>
-						<td>Apple</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Banana</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Cherry</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>D</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>E</td>
-					</tr>
+					<tbody>
+						<tr th:each="Competency : ${listCompetency}">
+							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}">Stage</td>
+							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mClassName}">Class</td>
+							<td th:text="${Competency.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}">Subject</td>
+							<td th:text="${Competency.tGoalId.tGoalName}">Goal</td>
+							<td th:text="${Competency.tCompetencyName}">Competency</td>
+<!-- 							<td th:text="${Competency.Class.mStageId.mStageName}">Stage</td> -->
+<!-- 							<td th:text="${Class.mClassName}" class="text-center">Stage Name</td> -->
+						</tr>
+					</tbody>
 					<tfoot></tfoot>
 				</table>
 			</div>
@@ -54,4 +49,16 @@ $(document).ready(function() {
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#learningOutcomes', {
+			responsive: true,
+			layout : {
+				top1End : {
+					buttons : ['pdf', 'print'],
+				}
+			},
+		});
+	});
+</script>
 </html>
