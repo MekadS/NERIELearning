@@ -1,6 +1,8 @@
 package in.nic.NERIELearning.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -12,13 +14,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import in.nic.NERIELearning.model.MClass;
+import in.nic.NERIELearning.model.MContent;
 import in.nic.NERIELearning.model.MStage;
 import in.nic.NERIELearning.model.MSubject;
 import in.nic.NERIELearning.service.MClassService;
+import in.nic.NERIELearning.service.MContentService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
+import in.nic.NERIELearning.service.MapClassSubjectService;
+import in.nic.NERIELearning.storage.FileSystemStorageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,6 +36,12 @@ public class AdminController{
 	MClassService mClassService;
 	@Autowired
 	MSubjectService mSubjectService;
+	@Autowired
+	MContentService mContentService;
+	@Autowired
+	MapClassSubjectService mapClassSubjectService;
+	@Autowired
+	FileSystemStorageService storageService;
 
 	//	START: ADMIN Mappings
 	@GetMapping("dashboard")
@@ -176,5 +189,58 @@ public class AdminController{
 		return "redirect:/admin/editMSubjects";
 	}
 	//	END: ADMIN MSubject Methods
+
+	//	START: ADMIN MContent Methods
+	@GetMapping("editMContent")
+	public String adminEditMContent(Model model) throws IOException{
+		List<MContent> listMContent = mContentService.findAll();
+		model.addAttribute("listMContent", listMContent);
+		model.addAttribute("mContent", new MContent());
+		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
+		model.addAttribute("files", storageService.loadAll().map(
+				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+						"serveFile", path.getFileName().toString()).build().toUri().toString())
+				.collect(Collectors.toList()));
+		
+		return "admin/editMContent";
+	}
+	
+	@RequestMapping(value = "saveMContent", method = RequestMethod.POST)
+	public String saveMContent(@ModelAttribute("MContent") MContent mContent) {
+//		String fileName = path.getFileName().toString();
+//	    String fileUri = MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
+//	        "serveFile", fileName).build().toUri().toString();
+//	    mContent.setMContentPath(fileUri);
+		
+	    mContentService.save(mContent);
+		return "redirect:/admin/editMContent";
+	}
+	
+	@GetMapping("/admin/createMContent")
+	public String addMContent(Model model) {
+		model.addAttribute("mContent", new MContent());
+		
+		return "admin/createMContent";
+	}
+	
+	@RequestMapping("mContent/edit/{m_content_id}")
+	public ModelAndView editMContent(@PathVariable(name = "m_content_id") Long id) {
+		ModelAndView mav = new ModelAndView("/admin/createMContent");
+		
+		MContent mContent = mContentService.get(id);
+		mav.addObject("mContent", mContent);
+		
+		return mav;
+	}
+	
+	@RequestMapping("mContent/toggleStatus/{m_content_id}")
+	public String toggleMContentStatus(@PathVariable(name = "m_content_id") Long id) {
+		MContent mContent = mContentService.get(id);
+		mContent.setIsActive(!(mContent.getIsActive()));
+		mContentService.save(mContent);
+		
+		return "redirect:/admin/editMContent";
+	}
+	//	END: ADMIN MContent Methods
 	//	END: ADMIN Mappings
 }
