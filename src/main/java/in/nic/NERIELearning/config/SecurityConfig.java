@@ -46,7 +46,7 @@ public class SecurityConfig {
                                 .loginPage("/index")
                                 .loginProcessingUrl("/login")
                                 .successHandler(authenticationSuccessHandler())
-                                .failureUrl("/?error=Authentication Error")
+                                .failureUrl("/index?error=Authentication Error")
                                 .permitAll())
                 .logout(
                         (logout) -> logout
@@ -54,7 +54,7 @@ public class SecurityConfig {
                                 .deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(true)
                                 .clearAuthentication(true)
-                                .logoutSuccessUrl("/?logout")
+                                .logoutSuccessUrl("/index?logout")
                                 .permitAll())
                 .sessionManagement(
                         (session) -> session

@@ -21,11 +21,17 @@
 					<p class="h2 text-light">NERIE</p>
 					<p class="h2 text-light">Learning</p>
 				</div>
-				<div class="card mt-1 mb-5 mx-5 col-md-4 border border-3 border-success-subtle rounded-4">
+				<div
+					class="card mt-1 mb-5 mx-5 col-md-4 border border-3 border-success-subtle rounded-4">
 					<div class="card-title h2 my-3">LOGIN</div>
 					<div class="card-body">
-						<form action="#" th:action="@{/login}" method="post"
-							th:object="${loginObj}">
+
+
+						<form action="#" th:action="@{/login}" method="post" th:object="${loginObj}">
+
+							<div th:if="${param.error}" class="alert alert-danger">Incorrect username or password</div>
+							<div th:if="${param.logout}" class="alert alert-warning">You have successfully logged out</div>
+
 							<input class="form-control mb-3" type="text"
 								placeholder="Username" th:field="*{username}"> <input
 								class="form-control" type="password" placeholder="Password"
@@ -43,10 +49,6 @@
 										onclick="reloadCaptcha()"> <i
 										class="fa-solid fa-arrow-rotate-right fa-2x"></i>
 									</a>
-									<!-- 									<a href="#" class="text-decoration-none text-danger" -->
-									<!-- 										onclick="reloadingTest()"> <i -->
-									<!-- 										class="fa-solid fa-confirm fa-2x"></i> -->
-									<!-- 									</a> -->
 								</div>
 							</div>
 
@@ -70,10 +72,10 @@
 </body>
 
 <script>
-	$(document).ready(function() {
-		function reloadingTest() {
-			alert("INSIDE");
-		}
-	});
+// 	$(document).ready(function() {
+// 		function reloadingTest() {
+// 			alert("INSIDE");
+// 		}
+// 	});
 </script>
 </html>
