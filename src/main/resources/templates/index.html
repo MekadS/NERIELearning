@@ -15,53 +15,78 @@
 	<aside></aside>
 
 	<main>
-		<div class="row my-5">
-			<div align="center">
-				<div class="mt-5 p-3 col-md-4 bg-success rounded-4">
-					<p class="h2 text-light">NERIE</p>
-					<p class="h2 text-light">Learning</p>
+		<div class="container text-center">
+			<div
+				class="row my-5 mx-auto justify-content-around align-items-center">
+				<div class="col-md-5 p-4">
+					<div class="my-2 p-3 border border-3 border-success-subtle rounded-4">
+						<span> <a href="https://ncert.nic.in/"
+							onclick="return confirm('You are being redirected to an external website. Please note that East Khasi Hills cannot be held responsible for external websites content &amp; privacy policies.');"
+							aria-label="https://ncert.nic.in/ - External site that opens in a new window"
+							title="https://ncert.nic.in/ - External site that opens in a new window"
+							target="_blank" rel="noopener noreferrer"> <img width="200em"
+								style="background-color: white" class="py-2 px-2"
+								src="/assets/img/NERIE/NCERT_Logo_dark.png"
+								alt="National Informatics Centre opens a new window"></a></span><br>
+						<span class="h6 text-dark">भारत सरकार शिक्षा मंत्रालय</span>
+						<br> <span class="h6 text-dark">Government of
+							India Ministry of Education</span> <br> <span
+							class="h6 text-dark fw-bold">NATIONAL COUNCIL OF
+							EDUCATIONAL RESEARCH &amp; TRAINING</span> <br> <span
+							class="h6 text-dark fw-bold">राष्ट्रीय शैक्षिक
+							अनुसंधान और प्रशिक्षण परिषद</span>
+					</div>
 				</div>
-				<div
-					class="card mt-1 mb-5 mx-5 col-md-4 border border-3 border-success-subtle rounded-4">
-					<div class="card-title h2 my-3">LOGIN</div>
-					<div class="card-body">
+				<div class="col-md-5">
+					<div class="mt-3 p-3 bg-success rounded-4">
+						<p class="h2 text-light">NERIE</p>
+						<p class="h2 text-light">Learning</p>
+					</div>
+					<div
+						class="card mt-1 mb-1 p-3 border border-3 border-success-subtle rounded-4">
+						<div class="card-title h2 my-3">LOGIN</div>
+						<div class="card-body">
 
 
-						<form action="#" th:action="@{/login}" method="post" th:object="${loginObj}">
+							<form action="#" th:action="@{/login}" method="post"
+								th:object="${loginObj}">
 
-							<div th:if="${param.error}" class="alert alert-danger">Incorrect username or password</div>
-							<div th:if="${param.logout}" class="alert alert-warning">You have successfully logged out</div>
+								<div th:if="${param.error}" class="alert alert-danger">Incorrect
+									username or password</div>
+								<div th:if="${param.logout}" class="alert alert-warning">You
+									have successfully logged out</div>
 
-							<input class="form-control mb-3" type="text"
-								placeholder="Username" th:field="*{username}"> <input
-								class="form-control" type="password" placeholder="Password"
-								th:field="*{password}">
+								<input class="form-control mb-3" type="text"
+									placeholder="Username" th:field="*{username}"> <input
+									class="form-control" type="password" placeholder="Password"
+									th:field="*{password}">
 
-							<div class="row">
-								<div class="col my-3">
-									<div class="">
-										<img alt="Captcha" id="realCaptcha"
-											th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+								<div class="row">
+									<div class="col my-3">
+										<div class="">
+											<img alt="Captcha" id="realCaptcha"
+												th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+										</div>
+									</div>
+									<div class="col py-4">
+										<a href="#" class="text-decoration-none text-info"
+											onclick="reloadCaptcha()"> <i
+											class="fa-solid fa-arrow-rotate-right fa-2x"></i>
+										</a>
 									</div>
 								</div>
-								<div class="col py-4">
-									<a href="#" class="text-decoration-none text-info"
-										onclick="reloadCaptcha()"> <i
-										class="fa-solid fa-arrow-rotate-right fa-2x"></i>
-									</a>
-								</div>
-							</div>
 
-							<div class="row">
-								<div class="col mb-3">
-									<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}"
-										type="hidden" /> <input class="form-control" id="captcha"
-										onchange="checkCaptcha()" placeholder="Enter Captcha" required
-										th:field="*{captcha}" type="text" />
+								<div class="row">
+									<div class="col mb-3">
+										<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}"
+											type="hidden" /> <input class="form-control" id="captcha"
+											onchange="checkCaptcha()" placeholder="Enter Captcha"
+											required th:field="*{captcha}" type="text" />
+									</div>
 								</div>
-							</div>
-							<input type="submit" class="btn btn-primary mt-3" value="Login" />
-						</form>
+								<input type="submit" class="btn btn-primary mt-3" value="Login" />
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -72,10 +97,10 @@
 </body>
 
 <script>
-// 	$(document).ready(function() {
-// 		function reloadingTest() {
-// 			alert("INSIDE");
-// 		}
-// 	});
+	// 	$(document).ready(function() {
+	// 		function reloadingTest() {
+	// 			alert("INSIDE");
+	// 		}
+	// 	});
 </script>
 </html>
