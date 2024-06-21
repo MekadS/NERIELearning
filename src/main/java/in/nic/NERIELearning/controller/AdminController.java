@@ -21,6 +21,7 @@ import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MContent;
 import in.nic.NERIELearning.model.MStage;
 import in.nic.NERIELearning.model.MSubject;
+import in.nic.NERIELearning.model.MapClassSubject;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
@@ -198,7 +199,7 @@ public class AdminController{
 		model.addAttribute("listMContent", listMContent);
 		model.addAttribute("mContent", new MContent());
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
-		
+		System.out.println(listMContent);
 		return "admin/editMContent";
 	}
 	
@@ -230,10 +231,12 @@ public class AdminController{
 	@RequestMapping("mContent/edit/{m_content_id}")
 	public ModelAndView editMContent(@PathVariable(name = "m_content_id") Long id) {
 		ModelAndView mav = new ModelAndView("/admin/createMContent");
+		List<MapClassSubject> listMapClassSubjects = mapClassSubjectService.findAll();
 		
 		MContent mContent = mContentService.get(id);
 		mav.addObject("mContent", mContent);
-		
+		mav.addObject("listMapClassSubjects", listMapClassSubjects);
+
 		return mav;
 	}
 	

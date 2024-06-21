@@ -35,11 +35,6 @@ public class MContent {
 	@SequenceGenerator(name = "m_content_id_seq", sequenceName = "M_CONTENT_SEQ", allocationSize = 50000, initialValue = 100)
 	private Long mContentId;
 
-//	@NotBlank(message = "Content type cannot be blank")
-//	@NotEmpty(message = "Content type cannot be blank")
-//	@Nu
-	private String mContentType;
-
 	@NotBlank(message = "Content name cannot be blank")
 	@NotEmpty(message = "Content type cannot be blank")
 	private String mContentName;

@@ -13,39 +13,61 @@
 	<aside></aside>
 
 	<main>
-		<div class="row my-5">
+		<div class="row my-5 px-md-3">
 			<div align="center">
-				<div class="card col-sm-12 col-md-12 col-lg-10">
+				<div class="card col-sm-12 col-md-12 col-md-10">
 					<div class="card-title my-3">
-						<h3>School Subjects</h3>
+						<h3>NERIE Content</h3>
 					</div>
-					<div class="card-body">
+					<div class="card-body text-start">
 						<form action="#" th:action="@{/admin/saveMContent}"
-							th:object="${mContent}" method="post">
-							<table class="table table-striped">
-								<thead class="thead-dark">
-									<tr>
-										<th colspan="2" align="center">Create New Subject</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><label class="form-label">Subject Name</label></td>
-										<td><input type="hidden" th:field="*{mContentId}" /><input
-											type="text" th:field="*{mContentName}" class="form-control"
-											placeholder="School Subject Name" /></td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td><a th:href="@{'/admin/editMContent'}"
-											class="btn btn-info">Back</a></td>
-										<td>
-											<button type="submit" class="btn btn-success">Save</button>
-										</td>
-									</tr>
-								</tfoot>
-							</table>
+							th:object="${mContent}" method="post"
+							enctype="multipart/form-data">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-4">
+										<label class="form-label">Class and Subject</label>
+									</div>
+									<div class="col-sm-12 col-md-8">
+										<input type="hidden" th:field="*{mContentId}" /> <select
+											class="form-select" id="selectClassSubject"
+											name="mapClassSubject" th:field="*{mapClassSubjectId}"
+											required>
+											<option th:each="mapCS : ${listMapClassSubjects}"
+												th:value="${mapCS.mapClassSubjectId}"
+												th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+										</select>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-4">
+										<label class="form-label">Content Name</label>
+									</div>
+									<div class="col-sm-12 col-md-8">
+										<input type="text" th:field="*{mContentName}"
+											class="form-control" placeholder="School Subject Name" />
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-4">
+										<label class="form-label">File to Upload</label>
+									</div>
+									<div class="col-sm-12 col-md-8">
+										<input type="file" name="file" />
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-4">
+										<a th:href="@{'/admin/editMContent'}" class="btn btn-info">Back</a>
+									</div>
+									<div class="col-sm-12 col-md-8">
+										<button type="submit" class="btn btn-success">Save</button>
+									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>
