@@ -36,8 +36,7 @@ public class SecurityConfig {
                                 .requestMatchers("/editor/headTeacher/**").hasRole("HEAD_TEACHER")
                                 .requestMatchers("/editor/teacherEducator/**").hasRole("TEACHER_EDUCATOR")
                                 .requestMatchers("/refresh-captcha").anonymous()
-                                .requestMatchers("/resources/**", "/static/**","/assets/**",
-                                		 "/css/**", "/js/**","/", "/utils/**","/public/**")
+                                .requestMatchers("/", "/resources/**", "/static/**", "/assets/**", "/css/**", "/js/**", "/utils/**","/public/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())

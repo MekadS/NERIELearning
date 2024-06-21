@@ -30,15 +30,6 @@ public class PublicController{
 	@Autowired
 	TCompetencyService tCompetencyService;
 
-	//	START: ViewFullLoSas
-//	@GetMapping("/public/viewLearningOutcomes")
-//	public String viewLearningOutcomes(Model mStage) {
-//		List<MStage> listStage = mStageService.findAll();
-//		mStage.addAttribute("listStage", listStage);
-//		System.out.println("••• Getting Stages List •••");    
-//		System.out.println(listStage);    
-//		return "public/viewLearningOutcomes";
-//	}
 	@GetMapping("/public/viewLearningOutcomes")
 	public String viewLearningOutcomes(Model mClass) {
 		List<TCompetency> listCompetency = tCompetencyService.findAll();
@@ -48,13 +39,5 @@ public class PublicController{
 		return "public/viewLearningOutcomes";
 	}
 	//	END: ViewFullLoSas
-
-//	@GetMapping("/doctor/list")
-//	public String viewHomePage(Model doctor) {
-//	    List<MStage> listDoctor = doctorService.listAll();
-//	    doctor.addAttribute("listDoctor", listDoctor);
-//	    System.out.println("••• Getting Doctors List •••");    
-//	    return "/doctor/list";
-//	}
 	//	END: HEAD-TEACHER MapClassSubject Methods
 }
