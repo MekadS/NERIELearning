@@ -26,9 +26,14 @@
 							<!-- 							<a th:href="@{/admin/createMContent}"><button -->
 							<!-- 									class="btn btn-outline-success">Add New</button></a> -->
 						</div>
+					</div>
+				</div>
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-body">
 						<div>
 							<form action="#" th:action="@{/admin/saveMContent}"
-								th:object="${mContent}" method="post" enctype="multipart/form-data" >
+								th:object="${mContent}" method="post"
+								enctype="multipart/form-data">
 								<table class="table">
 									<tbody>
 										<tr>
@@ -43,22 +48,24 @@
 											</select></td>
 											<td><input type="text" th:field="*{mContentName}"
 												class="form-control" placeholder="Content Name" /></td>
+										</tr>
+										<tr>
 											<td>File to upload:</td>
 											<td><input type="file" name="file" /></td>
 
-											<td><input type="text" th:field="*{mContentPath}"
-												class="form-control" placeholder="Content Path" /></td>
-											<td><input type="text" th:field="*{mContentType}"
-												class="form-control" placeholder="Content Type" /></td>
-											<!-- 											<td> -->
-											<!-- 											<select class="form-select" id="selectContentType" -->
-											<!-- 												name="mContent" th:field="*{mContentId}" -->
-											<!-- 												required> -->
-											<!-- 													<option th:value="${mContentType}" th:text="PDF"></option> -->
-											<!-- 													<option th:value="${mContentType}" th:text="PDF"></option> -->
-											<!-- 													<option th:value="${mContentType}" th:text="JPG"></option> -->
-											<!-- 													<option th:value="${mContentType}" th:text="PNG"></option> -->
-											<!-- 											</select></td> -->
+<!-- 											<td><input type="text" th:field="*{mContentPath}" -->
+<!-- 												class="form-control" placeholder="Content Path" /></td> -->
+<!-- 											<td><input type="text" th:field="*{mContentType}" -->
+<!-- 												class="form-control" placeholder="Content Type" /></td> -->
+<!-- 												<td> -->
+<!-- 												<select class="form-select" id="selectContentType" -->
+<!-- 													name="mContent" th:field="*{mContentId}" -->
+<!-- 													required> -->
+<!-- 														<option th:value="${mContentType}" th:text="PDF"></option> -->
+<!-- 														<option th:value="${mContentType}" th:text="PDF"></option> -->
+<!-- 														<option th:value="${mContentType}" th:text="JPG"></option> -->
+<!-- 														<option th:value="${mContentType}" th:text="PNG"></option> -->
+<!-- 												</select></td> -->
 											<td>
 												<button type="submit" class="btn btn-success">Save</button>
 											</td>
@@ -67,6 +74,10 @@
 								</table>
 							</form>
 						</div>
+					</div>
+				</div>
+				<div class="card col-sm-12 col-md-12 col-lg-10">
+					<div class="card-body">
 						<table
 							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 							<thead class="thead-dark">
@@ -75,6 +86,7 @@
 									<th>ID</th>
 									<th>Subject</th>
 									<th>Status</th>
+									<th>File</th>
 									<th>Update</th>
 									<th>Enable/Disable</th>
 								</tr>
@@ -84,6 +96,9 @@
 									<td th:text="${MContent.mContentId}">ID</td>
 									<td th:text="${MContent.mContentName}">Subject</td>
 									<td th:text="${MContent.isActive ? 'Active' : 'Inactive'}">Status</td>
+									<td>
+										<a th:href="@{'/admin/mContent/getDocument/' + ${MContent.mContentId}}" target="_blank" class="btn btn-info">View Attachment</a>
+									</td>
 									<td><a
 										th:href="@{'/admin/mContent/edit/' + ${MContent.mContentId}}"
 										class="text-info">Update</a></td>

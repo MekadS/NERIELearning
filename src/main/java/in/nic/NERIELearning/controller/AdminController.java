@@ -2,30 +2,33 @@ package in.nic.NERIELearning.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MContent;
 import in.nic.NERIELearning.model.MStage;
 import in.nic.NERIELearning.model.MSubject;
+import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
-import in.nic.NERIELearning.storage.FileSystemStorageService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,8 +43,6 @@ public class AdminController{
 	MContentService mContentService;
 	@Autowired
 	MapClassSubjectService mapClassSubjectService;
-	@Autowired
-	FileSystemStorageService storageService;
 
 	//	START: ADMIN Mappings
 	@GetMapping("dashboard")
@@ -197,21 +198,24 @@ public class AdminController{
 		model.addAttribute("listMContent", listMContent);
 		model.addAttribute("mContent", new MContent());
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
-		model.addAttribute("files", storageService.loadAll().map(
-				path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-						"serveFile", path.getFileName().toString()).build().toUri().toString())
-				.collect(Collectors.toList()));
 		
 		return "admin/editMContent";
 	}
 	
 	@RequestMapping(value = "saveMContent", method = RequestMethod.POST)
-	public String saveMContent(@ModelAttribute("MContent") MContent mContent) {
-//		String fileName = path.getFileName().toString();
-//	    String fileUri = MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-//	        "serveFile", fileName).build().toUri().toString();
-//	    mContent.setMContentPath(fileUri);
+	public String saveMContent(@ModelAttribute("MContent") @Valid MContent mContent,@RequestParam(name = "file", required = true) MultipartFile file, BindingResult result, Model model) throws IOException {
+		System.out.println(mContent.toString() + "\n\n" + file.getSize());
 		
+		if(result.hasErrors()) {
+			List<MContent> listMContent = mContentService.findAll();
+			model.addAttribute("listMContent", listMContent);
+			model.addAttribute("mContent", mContent);
+			model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
+			return "redirect:/admin/editMContent";
+		}
+		if(file.getSize() > 3) {
+			mContent.setMContentFile(file.getBytes());
+		}
 	    mContentService.save(mContent);
 		return "redirect:/admin/editMContent";
 	}
@@ -231,6 +235,20 @@ public class AdminController{
 		mav.addObject("mContent", mContent);
 		
 		return mav;
+	}
+	
+	@RequestMapping("mContent/getDocument/{m_content_id}")
+	public void getDocument(HttpServletResponse response, @PathVariable(name = "m_content_id") Long id) throws IOException {
+		MContent mContent = mContentService.get(id);
+		byte[] file = mContent.getMContentFile();
+		if(file != null) {
+			response.reset();
+			response.setContentType(CommonService.detectMimeType(file));
+			response.setContentLength(file.length);
+			response.getOutputStream().write(file);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		}
 	}
 	
 	@RequestMapping("mContent/toggleStatus/{m_content_id}")
