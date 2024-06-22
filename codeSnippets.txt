@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+
+	<aside></aside>
+
+	<main>
+		<!-- ======= Hero Section ======= -->
+		<section id="hero"
+			class="div_below_navbar d-flex justify-content-center align-items-center">
+			<div class="container position-relative" data-aos="zoom-in"
+				data-aos-delay="100">
+				<h1>
+					Let's learn with NERIE<br>
+				</h1>
+				<h2>Enhancing education in Meghalaya</h2>
+				<a th:href="@{/structure}" class="btn-get-started">School
+					Education</a>
+			</div>
+		</section>
+		<!-- End Hero -->
+
+		<!-- ======= About Section ======= -->
+		<div id="about" class="about">
+			<div class="nerie_bg_grey text-center">
+				<!-- Mission 1 -->
+				<div class="row mission_row_1 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_1.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-1 order-lg-1 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}"> Empower Each Child LEARN.</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 1 -->
+
+				<!-- Mission 2 -->
+				<div class="row mission_row_2 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6 order-2 order-md-1 order-lg-1"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_2.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-2 order-lg-2 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}">Connect each stakeholder
+								with children’s Learning Outcomes.</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 2 -->
+
+				<!-- Mission 3 -->
+				<div class="row mission_row_3 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_3.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-1 order-lg-1 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}">Familiarizing the
+								stakeholders with Learning Outcomes</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 3 -->
+
+				<!-- Mission 4 -->
+				<div class="row mission_row_1 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6  order-2 order-md-1 order-lg-1"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_4.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-2 order-lg-2 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}">Enable each stake holder
+								deliver towards enhancing the quality of education.</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 4 -->
+
+				<!-- Mission 5 -->
+				<div class="row mission_row_2 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_5.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-1 order-lg-1 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}">Ensure each Teacher Perform</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 5 -->
+
+				<!-- Mission 6 -->
+				<div class="row mission_row_3 align-items-center" data-aos="fade-up">
+					<div
+						class="col-sm-12 col-md-6  order-2 order-md-1 order-lg-1"
+						data-aos="fade-left" data-aos-delay="100">
+						<img th:src="@{/assets/img/mission/mission_6.jpg}"
+							class="img-fluid" alt="">
+					</div>
+					<div
+						class="col-sm-12 col-md-6 order-1 order-md-2 order-lg-2 content">
+						<h3>
+							<a class="nerie-link" th:href="@{/}">Performance Appraisal</a>
+						</h3>
+					</div>
+				</div>
+				<!-- End of Mission 6 -->
+			</div>
+		</div>
+		<!-- 			<!-- End About Section -->
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>
