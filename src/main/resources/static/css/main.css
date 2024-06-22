@@ -51,6 +51,9 @@
 	background-color:#000411 !important;       /* 	black: Rich Black */
 }
 .nerie_bg_grey{
+	background-color:#aaaaaa !important;       /* 	grey: Payne's Grey */
+}
+.nerie_bg_dark_grey{
 	background-color:#596475 !important;       /* 	grey: Payne's Grey */
 }
 .nerie_bg_light_grey{

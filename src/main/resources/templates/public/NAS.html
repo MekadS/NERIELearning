@@ -11,19 +11,43 @@
 
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
-	<div th:insert="~{utils/navbar :: nav}"></div>
+	<div th:insert="~{utils/navbar :: header}"></div>
 
 	<aside></aside>
 
 	<main>
 		<div align="center">
 			<div class="container">
-				<div
-					class="row justify-content-center text-align-center align-items-center">
-					<div class="card bg-info-subtle my-5 mx-3">
-						<div>
-							
+				<div class="row justify-content-center text-align-center align-items-center">
+					<div class="card border-info-subtle my-5 mx-3">
+<!-- 						NAV-TAB MENU -->
+						<div class="card-title">
+							<ul class="nav nav-tabs">
+								<li class="nav-item">
+									<button class="nav-link active" aria-selected="true"
+										aria-controls="nas-yt-tab-pane" type="button" role="tab"
+										id="" data-bs-toggle="tab" data-bs-target="#nas-yt-tab">
+										NAS on Youtube</button></li>
+								<li class="nav-item">
+									<button class="nav-link" aria-selected="false"
+										aria-controls="nas-ws-tab-pane" type="button" role="tab"
+										id="" data-bs-toggle="tab" data-bs-target="#nas-ws-tab">
+										NAS Worksheet</button></li>
+								<li class="nav-item">
+									<a class="nav-link disabled"
+									aria-disabled="true">To be added</a></li>
+							</ul>
 						</div>
+						
+<!-- 						CONTENT -->
+						<div class="card-body">
+							<div class="tab-content" id="tab-content">
+							    <div class="tab-pane fade" id="nas-yt-tab" role="tabpanel" aria-labelledby="nas-yt-tab" tabindex="0">
+									NAS YT</div>
+							    <div class="tab-pane fade" id="nas-ws-tab" role="tabpanel" aria-labelledby="nas-ws-tab" tabindex="0">
+							    	NAS Worksheets</div>
+						    </div>
+					    </div>
 					</div>
 				</div>
 			</div>
