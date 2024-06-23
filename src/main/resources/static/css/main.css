@@ -63,12 +63,27 @@
 .nerie-nav-logo{
   color: #ffffff !important;
   font-size: 30px !important;
+}
 
+.nerie-nav-link{
+  color: #ffffff !important;
+  font-size: 20px !important;
+}
+
+.nerie-nav-link:hover{
+  color: #ffffff !important;
+  font-size: 20px !important;
+  text-decoration: underline !important;
 }
 
 .nerie-link{
   color: #ffffff;
   text-decoration: none;
+}
+
+.nerie-link:hover{
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .nerie-link-light{
@@ -98,11 +113,6 @@
 
 .nerie-link-dark{
   color: #444444;
-  text-decoration: none;
-}
-
-.nerie-link:hover{
-  color: #0000ff;
   text-decoration: none;
 }
 
