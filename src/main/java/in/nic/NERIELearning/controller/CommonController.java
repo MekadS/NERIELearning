@@ -23,18 +23,16 @@ public class CommonController{
 	@GetMapping("/index")
 	public String loginIndex(Model model) {
 		try {
-			System.out.println("LAH TRY MEH");
 			if (AuthenticationHelper.authenticated()) {
-				System.out.println("AUTHENTICATED MEH");
+				System.out.println("AUTHENTICATED");
 				return "redirect:/home";
 			}
-			System.out.println("NOT AUTHENTICATED MEH");
+			System.out.println("NOT AUTHENTICATED");
 			Userlogin userLogin = new Userlogin();
 			model.addAttribute("loginObj", userLogin);
 			CaptchaHelper.getCaptcha(userLogin);
 			return "index";
 		} catch (Exception e) {
-			System.out.println("LAH CATCH MEH");
 			return "redirect:/?error=" + e.getMessage();
 		}
 	}

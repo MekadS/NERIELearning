@@ -44,30 +44,28 @@
 								</table>
 							</form>
 						</div>
-						<table
-							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+						<table id="subjects" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 							<thead class="thead-dark">
 								<tr>
-									<!-- 										<th class="text-center">ID</th> -->
-									<th>ID</th>
+<!-- 									<th>ID</th> -->
 									<th>Subject</th>
 									<th>Status</th>
-									<th>Update</th>
-									<th>Enable/Disable</th>
+									<th class="text-center">Update</th>
+									<th class="text-center">Enable/Disable</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="MSubject : ${listMSubjects}">
-									<td th:text="${MSubject.mSubjectId}">ID</td>
+<!-- 									<td th:text="${MSubject.mSubjectId}">ID</td> -->
 									<td th:text="${MSubject.mSubjectName}">Subject</td>
 									<td th:text="${MSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td><a
-										th:href="@{'/admin/mSubject/edit/' + ${MSubject.mSubjectId}}"
-										class="text-info">Update</a></td>
-									<td><a
-										th:href="@{'/admin/mSubject/toggleStatus/' + ${MSubject.mSubjectId}}"
-										class="text-warning"
-										th:text="${MSubject.isActive ? 'Disable' : 'Enable'}"></a></td>
+									<td class="text-center">
+										<a th:href="@{'/admin/mSubject/edit/' + ${MSubject.mSubjectId}}">
+										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+										</a></td>
+									<td class="text-center"><a th:href="@{'/admin/mSubject/toggleStatus/' + ${MSubject.mSubjectId}}">
+										<i th:class="${MSubject.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+										</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -79,4 +77,13 @@
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#subjects', {
+			responsive: true,
+			ordering: true,
+			paging: false
+		});
+	});
+</script>
 </html>

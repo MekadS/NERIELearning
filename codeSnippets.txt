@@ -1,3 +1,4 @@
+*******		HOME	*******
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -143,3 +144,14 @@
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
 </html>
+*******		HOME: END	*******
+
+*******		UPDATE AND STATUS ICONS		*******
+<td class="text-center"><a th:href="@{'/admin/mContent/edit/' + ${MContent.mContentId}}">
+	<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+	</a></td>
+									
+<td class="text-center"><a th:href="@{'/admin/mContent/toggleStatus/' + ${MContent.mContentId}}">
+	<i th:class="${MContent.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+	</a></td>
+*******		UPDATE AND STATUS ICONS: END		*******

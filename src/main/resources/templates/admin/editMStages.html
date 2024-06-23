@@ -47,32 +47,29 @@
 								</table>
 							</form>
 						</div>
-						<table
-							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+						<table id="stages" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 							<thead class="thead-dark">
 								<tr>
-									<!-- 										<th class="text-center">ID</th> -->
-									<th>ID</th>
+<!-- 									<th>ID</th> -->
 									<th>Sl. No.</th>
 									<th>Stage</th>
 									<th>Status</th>
-									<th>Update</th>
-									<th>Enable/Disable</th>
+									<th class="text-center">Update</th>
+									<th class="text-center">Enable/Disable</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="MStage : ${listMStages}">
-									<td th:text="${MStage.mStageId}">ID</td>
+<!-- 									<td th:text="${MStage.mStageId}">ID</td> -->
 									<td th:text="${MStage.mStageSerialNo}">Sl. No.</td>
 									<td th:text="${MStage.mStageName}">Stage</td>
 									<td th:text="${MStage.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td><a
-										th:href="@{'/admin/mStage/edit/' + ${MStage.mStageId}}"
-										class="text-info">Update</a></td>
-									<td><a
-										th:href="@{'/admin/mStage/toggleStatus/' + ${MStage.mStageId}}"
-										class="text-warning"
-										th:text="${MStage.isActive ? 'Disable' : 'Enable'}"></a></td>
+									<td class="text-center"><a th:href="@{'/admin/mStage/edit/' + ${MStage.mStageId}}">
+										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+										</a></td>
+									<td class="text-center"><a th:href="@{'/admin/mStage/toggleStatus/' + ${MStage.mStageId}}">
+										<i th:class="${MStage.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+										</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -84,4 +81,13 @@
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#stages', {
+			responsive: true,
+			ordering: true,
+			paging: false
+		});
+	});
+</script>
 </html>

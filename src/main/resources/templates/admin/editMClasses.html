@@ -61,37 +61,32 @@
 							<span th:text="The Class ${mClassName} had been created/updated."
 								class="text-success">Message not set</span>
 						</div>
-						<table
-							class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+						<table id="classes" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 							<thead class="thead-dark">
 								<tr>
-									<!-- 										<th class="text-center">ID</th> -->
-									<th>ID</th>
+<!-- 									<th>ID</th> -->
 									<th>Sl. No.</th>
 									<th>Class</th>
 									<th>Stage</th>
 									<th>Status</th>
-									<th>Update</th>
-									<th>Enable/Disable</th>
+									<th class="text-center">Update</th>
+									<th class="text-center">Enable/Disable</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="MClass : ${listMClasses}">
-									<!-- 										<td th:text="${MClass.curriculumId}" class="text-center">Goal ID</td> -->
-									<td th:text="${MClass.mClassId}">ID</td>
+<!-- 									<td th:text="${MClass.mClassId}">ID</td> -->
 									<td th:text="${MClass.mClassSerialNo}">Sl. No.</td>
 									<td th:text="${MClass.mClassName}">Class</td>
 									<td th:text="${MClass.mStageId.mStageName}">Stage</td>
 									<td th:text="${MClass.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td><a
-										th:href="@{'/admin/mClass/edit/' + ${MClass.mClassId}}"
-										class="text-info">Update</a></td>
-									<td><a
-										th:href="@{'/admin/mClass/toggleStatus/' + ${MClass.mClassId}}"
-										class="text-warning"
-										th:text="${MClass.isActive ? 'Disable' : 'Enable'}"></a></td>
-									<!-- 								Display full Goal Object -->
-									<!-- 								<td th:text="${MClass}" class="text-center"></td> -->
+									<td class="text-center">
+										<a th:href="@{'/admin/mClass/edit/' + ${MClass.mClassId}}">
+										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+										</a></td>
+									<td class="text-center"><a th:href="@{'/admin/mClass/toggleStatus/' + ${MClass.mClassId}}">
+										<i th:class="${MClass.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+										</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -103,4 +98,13 @@
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#classes', {
+			responsive: true,
+			ordering: true,
+			paging: false
+		});
+	});
+</script>
 </html>
