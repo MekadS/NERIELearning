@@ -37,8 +37,7 @@
 												placeholder="School Class Serial Number" /></td>
 											<td><input type="text" th:field="*{mClassName}"
 												class="form-control" placeholder="School Class Name" /></td>
-											<td><select class="form-select" id="selectStage"
-												name="stage" th:field="*{mStageId}" required>
+											<td><select class="form-select" id="selectStage" name="stage" th:field="*{mStageId}" required>
 													<option th:each="mStage : ${listMStages}"
 														th:value="${mStage.mStageId}"
 														th:text="${mStage.mStageName}"></option>

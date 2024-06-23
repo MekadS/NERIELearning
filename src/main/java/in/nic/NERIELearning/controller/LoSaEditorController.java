@@ -196,10 +196,10 @@ public class LoSaEditorController{
 	//	START: TEACHER-EDUCATOR TLoSa Methods
 	@GetMapping("/editor/teacherEducator/editTLoSas")
 	public String teacherEducatorEditLoSas(Model model) {
-		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("listTGoals", tGoalService.findAll());
+		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
+		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("tLoSa", new TLoSa());
-		
 		return "editor/teacherEducator/editTLoSas";
 	}
 	

@@ -25,24 +25,36 @@
 									class="btn btn-primary">Editor Dashboard</button></a>
 						</div>
 						<div>
-							<form action="#" th:action="@{/editor/teacherEducator/saveTCompetency}"
+							<form action="#" th:action="@{/editor/teacherEducator/saveTLoSa}"
 								th:object="${tLoSa}" method="post">
 								<table class="table">
 									<tbody>
 										<tr>
-											<td><label class="form-label">Add a new
-													competency</label></td>
-											<td><input type="hidden" th:field="*{tCompetencyId}" /> <select
-												class="form-select" id="selectClass" name="tGoal"
-												th:field="*{tGoalId}" required>
-													<option th:each="tGoal : ${listTGoals}"
-														th:value="${tGoal.tGoalId}"
-														th:text="${tGoal.tGoalName}"></option>
-											</select></td>
-											<td><input type="text" th:field="*{tCompetencyName}"
-												class="form-control" placeholder="Competency Name" /></td>
-											<td><input type="text" th:field="*{tCompetencyDescription}"
-												class="form-control" placeholder="Competency Description" /></td>
+											<td><label class="form-label">Add a new Learning outcome and suggestive activity</label></td>
+											<td><input type="hidden" th:field="*{tLoSaId}" /> 
+<!-- 												<select class="form-select" id="selectGoal" name="tGoal"  -->
+<!-- 													th:field="*{tGoalId}" required> -->
+<!-- 													<option th:each="tGoal : ${listTGoals}" -->
+<!-- 															th:value="${tGoal.tGoalId}" -->
+<!-- 															th:text="${tGoal.tGoalName}"></option> -->
+<!-- 												</select> -->
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<select class="form-select" id="selectCompetency" name="tCompetency"
+													th:field="*{tCompetencyId}" required>
+													<option th:each="tCompetency : ${listTCompetencies}"
+															th:value="${tCompetency.tCompetencyId}"
+															th:text="${tCompetency.tCompetencyName}"></option>
+												</select>
+												</td>
+										</tr>
+										<tr>
+											<td><input type="text" th:field="*{learningOutcome}"
+												class="form-control" placeholder="Learning Outcome" /></td>
+											<td><input type="text" th:field="*{suggestiveActivity}"
+												class="form-control" placeholder="Suggestive Activity" /></td>
 											<td>
 												<button type="submit" class="btn btn-success">Save</button>
 											</td>
@@ -51,7 +63,7 @@
 								</table>
 							</form>
 						</div>
-						<table id="competencies" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+						<table id="losas" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 							<thead class="thead-dark">
 								<tr>
 									<!-- 										<th class="text-center">ID</th> -->
@@ -64,16 +76,16 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="TCompetency : ${listTCompetencies}">
-									<td th:text="${TCompetency.tCompetencyId}">ID</td>
-									<td th:text="${TCompetency.tGoalId.tGoalName}">Goal Name</td>
-									<td th:text="${TCompetency.tCompetencyName}">Name</td>
-									<td th:text="${TCompetency.tCompetencyDescription}">Description</td>
-									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TCompetency.tCompetencyId}}">
+								<tr th:each="TLoSa : ${listTLoSas}">
+									<td th:text="${TLoSa.tLoSaId}">ID</td>
+									<td th:text="${TLoSa.tGoalId.tGoalName}">Goal Name</td>
+									<td th:text="${TLoSa.tCompetencyName}">Name</td>
+									<td th:text="${TLoSa.tCompetencyDescription}">Description</td>
+									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TLoSa.tLoSaId}}">
 										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
 										</a></td>
-									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/toggleStatus/' + ${TCompetency.tCompetencyId}}">
-										<i th:class="${TCompetency.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/toggleStatus/' + ${TLoSa.tLoSaId}}">
+										<i th:class="${TLoSa.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
 										</a></td>
 								</tr>
 							</tbody>
@@ -88,7 +100,7 @@
 </body>
 <script>
 	$(document).ready(function() {
-		let table = new DataTable('#competencies', {
+		let table = new DataTable('#losas', {
 			responsive: true,
 			ordering: true,
 			order: [
