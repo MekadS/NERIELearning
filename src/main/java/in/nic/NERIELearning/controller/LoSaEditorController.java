@@ -18,11 +18,13 @@ import in.nic.NERIELearning.model.MSubject;
 import in.nic.NERIELearning.model.MapClassSubject;
 import in.nic.NERIELearning.model.TCompetency;
 import in.nic.NERIELearning.model.TGoal;
+import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
 import in.nic.NERIELearning.service.TCompetencyService;
 import in.nic.NERIELearning.service.TGoalService;
+import in.nic.NERIELearning.service.TLoSaService;
 
 @Controller
 public class LoSaEditorController{
@@ -32,6 +34,8 @@ public class LoSaEditorController{
 	TGoalService tGoalService;
 	@Autowired
 	TCompetencyService tCompetencyService;
+	@Autowired
+	TLoSaService tLoSaService;
 	@Autowired
 	MClassService mClassService;
 	@Autowired
@@ -188,4 +192,54 @@ public class LoSaEditorController{
 		return "redirect:/editor/teacherEducator/editTCompetencies";
 	}
 	//	END: TEACHER-EDUCATOR TCompetency Methods
+	
+	//	START: TEACHER-EDUCATOR TLoSa Methods
+	@GetMapping("/editor/teacherEducator/editTLoSas")
+	public String teacherEducatorEditLoSas(Model model) {
+		model.addAttribute("listTLoSas", tLoSaService.findAll());
+		model.addAttribute("listTGoals", tGoalService.findAll());
+		model.addAttribute("tLoSa", new TLoSa());
+		
+		return "editor/teacherEducator/editTLoSas";
+	}
+	
+	@RequestMapping(value = "/editor/teacherEducator/saveTLoSa", method = RequestMethod.POST)
+	public String saveTLoSa(@ModelAttribute("TLoSa") TLoSa tLoSa, Model model) {
+		try{
+			tLoSaService.save(tLoSa);
+			return "redirect:/editor/teacherEducator/editTLoSas";
+		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
+			return "redirect:/editor/teacherEducator/editTLoSas";
+		}
+	}
+	
+	@GetMapping("/editor/teacherEducator/createTLoSa")
+	public String addTLoSa(Model model) {
+		model.addAttribute("listMSubjects", mSubjectService.findAll());
+		
+		return "editor/teacherEducator/createTLoSa";
+	}
+	
+	@RequestMapping("/editor/teacherEducator/tLoSa/edit/{t_lo_sa_id}")
+	public ModelAndView editTLoSa(@PathVariable(name = "t_lo_sa_id") Long id) {
+		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTLoSa");
+		
+		TLoSa tLoSa = tLoSaService.get(id);
+		List<TGoal> listTGoals = tGoalService.findAll();
+		
+		mav.addObject("tLoSa", tLoSa);
+		mav.addObject("listTGoals", listTGoals);
+		 
+		return mav;
+	}
+	
+	@RequestMapping("/editor/teacherEducator/tLoSa/toggleStatus/{t_lo_sa_id}")
+	public String toggleTLoSaStatus(@PathVariable(name = "t_lo_sa_id") Long id) {
+		TLoSa tLoSa = tLoSaService.get(id);
+		tLoSa.setIsActive(!(tLoSa.getIsActive()));
+		tLoSaService.save(tLoSa);
+		
+		return "redirect:/editor/teacherEducator/editTLoSas";
+	}
+	//	END: TEACHER-EDUCATOR TLoSa Methods
 }
