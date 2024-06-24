@@ -32,12 +32,12 @@
 										<tr>
 											<td><label class="form-label">Add a new Learning outcome and suggestive activity</label></td>
 											<td><input type="hidden" th:field="*{tLoSaId}" /> 
-<!-- 												<select class="form-select" id="selectGoal" name="tGoal"  -->
-<!-- 													th:field="*{tGoalId}" required> -->
-<!-- 													<option th:each="tGoal : ${listTGoals}" -->
-<!-- 															th:value="${tGoal.tGoalId}" -->
-<!-- 															th:text="${tGoal.tGoalName}"></option> -->
-<!-- 												</select> -->
+												<select class="form-select" id="selectGoal" name="tGoal" 
+													th:field="*{TGoalId}" required>
+													<option th:each="tGoal : ${listTGoals}"
+															th:value="${tGoal.TGoalId}"
+															th:text="${tGoal.tGoalName}"></option>
+												</select>
 											</td>
 										</tr>
 										<tr>

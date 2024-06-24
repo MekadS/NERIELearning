@@ -146,6 +146,7 @@ public class LoSaEditorController{
 	//	START: TEACHER-EDUCATOR TCompetency Methods
 	@GetMapping("/editor/teacherEducator/editTCompetencies")
 	public String teacherEducatorEditCompetencies(Model model) {
+		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
 		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("tCompetency", new TCompetency());
@@ -200,6 +201,9 @@ public class LoSaEditorController{
 		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
 		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("tLoSa", new TLoSa());
+		
+		List<TGoal> listTGoals = tGoalService.findAll();
+		System.out.println("TGoals: " + listTGoals);
 		return "editor/teacherEducator/editTLoSas";
 	}
 	

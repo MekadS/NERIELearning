@@ -1,3 +1,43 @@
+****
+<table class="table">
+									<tbody>
+										<tr>
+											<td><label class="form-label">Add a new competency</label></td>
+											<td>
+											<input type="hidden" th:field="*{tCompetencyId}" /> 
+												<select class="form-select" id="selectClassSubject" name="mapClassSubject">
+<!-- 													th:field="*{mapClassSubjectId}" required -->
+<!-- 													Competency does not have a mapCS directly => DO NOT SAVE mapCS -->
+												<option th:each="mapCS : ${listMapClassSubjects}"
+													th:value="${mapCS.mapClassSubjectId}"
+													th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+											</select>
+											</td>
+											<td>
+											<select class="form-select" id="selectTGoal" name="tGoal"
+												th:field="*{tGoalId}" required>
+												<option th:each="tGoal : ${listTGoals}"
+													th:value="${tGoal.tGoalId}"
+													th:text="${tGoal.tGoalName}"></option>
+											</select>
+											</td>
+											<td>
+												<input type="text" th:field="*{tCompetencyName}"
+												class="form-control" placeholder="Competency Name" />
+											</td>
+											<td>
+												<input type="text" th:field="*{tCompetencyDescription}"
+												class="form-control" placeholder="Competency Description" />
+											</td>
+											<td>
+												<button type="submit" class="btn btn-success">Save</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+****
+
 *******		HOME	*******
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">

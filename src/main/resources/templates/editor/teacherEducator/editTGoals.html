@@ -32,8 +32,8 @@
 										<tr>
 											<td><label class="form-label">Add a new
 													curriculum goal</label></td>
-											<td><input type="hidden" th:field="*{tGoalId}" /> <select
-												class="form-select" id="selectClass" name="mapClassSubject"
+											<td><input type="hidden" th:field="*{tGoalId}" /> 
+											<select class="form-select" id="selectClassSubject" name="mapClassSubject"
 												th:field="*{mapClassSubjectId}" required>
 													<option th:each="mapCS : ${listMapClassSubjects}"
 														th:value="${mapCS.mapClassSubjectId}"
