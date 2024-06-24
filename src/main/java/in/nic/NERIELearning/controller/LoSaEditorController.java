@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -152,6 +153,18 @@ public class LoSaEditorController{
 		model.addAttribute("tCompetency", new TCompetency());
 		
 		return "editor/teacherEducator/editTCompetencies";
+	}
+	
+	@GetMapping("/goalsList/{mapClassSubjectId}")
+	public ResponseEntity<List<TGoal>> getDistrictList(@PathVariable("mapClassSubjectId") Long mapClassSubjectId) {
+		try {
+			List<TGoal> goalList = tGoalService.getGoalsByMapCS(mapClassSubjectId);
+			System.out.println(goalList);
+			return ResponseEntity.ok(goalList);
+		} catch (Exception e) {
+			System.err.println("Error fetching classes by mapClassSubjectId: " + e.getMessage());
+			return ResponseEntity.internalServerError().build();
+		}
 	}
 	
 	@RequestMapping(value = "/editor/teacherEducator/saveTCompetency", method = RequestMethod.POST)

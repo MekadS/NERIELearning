@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.nic.NERIELearning.model.MGoal;
 import in.nic.NERIELearning.model.TGoal;
 import in.nic.NERIELearning.repo.TGoalRepo;
 
@@ -23,5 +24,9 @@ public class TGoalService {
 	
 	public TGoal get(Long t_goal_id) {
 		return tGoalRepo.findById(t_goal_id).get();
+	}
+
+	public List<TGoal> getGoalsByMapCS(Long mapCScode) {
+		return tGoalRepo.findBymapClassSubjectId_mapClassSubjectId(mapCScode);		
 	}
 }

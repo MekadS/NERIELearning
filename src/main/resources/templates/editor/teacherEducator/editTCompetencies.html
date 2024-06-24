@@ -150,9 +150,10 @@
 	
 	function loadTGoalOptions(selectedMapCSId) {
 	  	$.ajax({
-	    	url: '/get-tgoal-options', // Replace with your endpoint to get TGoal options
+	    	url: `/goalsList/${selectedMapCSId}`,
+	    	type: "GET",
 		    dataType: 'json',
-		    data: { selectedMapCSId: selectedMapCSId }, // Send selected subject ID as data
+// 		    data: { selectedMapCSId: selectedMapCSId },
 		    success: function(data) {
 		      	const $dropdown = $('#tgoal_dropdown');
 		      		$dropdown.empty(); // Clear existing options
@@ -161,8 +162,13 @@
 		      	} else {
 			        $dropdown.prop('disabled', true); // Disable dropdown if no options
     			}
-		      	$.each(data, function(index, item) {
-		        	$dropdown.append($('<option></option>').val(item.id).text(item.name));
+		      	$.each(data, function(index, tGoal) {
+					alert(tGoal + " " + tGoal.isActive + " " + tGoal.tGoalName);
+// 					alert(tGoal.tGoalId);
+// 					alert(tGoal.isActive);
+// 					alert(tGoal.tGoalName);
+// 					alert(tGoal.mGoalId);
+		        	$dropdown.append($('<option></option>').val(tGoal.tGoalId).text(tgoal.tgoalname));
 		      	});
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {
