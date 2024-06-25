@@ -34,7 +34,6 @@ public class PublicController{
 	public String viewLearningOutcomes(Model mClass) {
 		List<TCompetency> listCompetency = tCompetencyService.findAll();
 		mClass.addAttribute("listCompetency", listCompetency);
-		System.out.println("••• Getting Stages List •••");    
 		System.out.println(listCompetency);    
 		return "public/viewLearningOutcomes";
 	}
