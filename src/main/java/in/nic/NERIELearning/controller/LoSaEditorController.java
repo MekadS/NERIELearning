@@ -24,6 +24,7 @@ import in.nic.NERIELearning.model.TCompetency;
 import in.nic.NERIELearning.model.TGoal;
 import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.MClassService;
+import in.nic.NERIELearning.service.MCompetencyService;
 import in.nic.NERIELearning.service.MGoalService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
@@ -39,6 +40,8 @@ public class LoSaEditorController{
 	MGoalService mGoalService;
 	@Autowired
 	TGoalService tGoalService;
+	@Autowired
+	MCompetencyService mCompetencyService;
 	@Autowired
 	TCompetencyService tCompetencyService;
 	@Autowired
@@ -155,6 +158,7 @@ public class LoSaEditorController{
 	public String teacherEducatorEditCompetencies(Model model) {
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
+		model.addAttribute("listMCompetencies", mCompetencyService.findAll());
 		model.addAttribute("listMGoals", mGoalService.findAll());
 		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("tCompetency", new TCompetency());
@@ -215,7 +219,6 @@ public class LoSaEditorController{
 		TCompetency tCompetency = tCompetencyService.get(id);
 		tCompetency.setIsActive(!(tCompetency.getIsActive()));
 		tCompetencyService.save(tCompetency);
-		
 		return "redirect:/editor/teacherEducator/editTCompetencies";
 	}
 	//	END: TEACHER-EDUCATOR TCompetency Methods
