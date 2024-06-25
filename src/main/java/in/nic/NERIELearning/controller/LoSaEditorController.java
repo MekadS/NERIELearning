@@ -106,8 +106,9 @@ public class LoSaEditorController{
 	//	START: TEACHER-EDUCATOR TGoal Methods
 	@GetMapping("/editor/teacherEducator/editTGoals")
 	public String teacherEducatorEditClassSubjects(Model model) {
-		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
+		model.addAttribute("listMGoals", mGoalService.findAll());
+		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("tGoal", new TGoal());
 		
 		return "editor/teacherEducator/editTGoals";
@@ -163,8 +164,6 @@ public class LoSaEditorController{
 		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("tCompetency", new TCompetency());
 		
-		System.out.println(tCompetencyService.findAll());
-		
 		return "editor/teacherEducator/editTCompetencies";
 	}
 	
@@ -175,11 +174,9 @@ public class LoSaEditorController{
 			System.out.println("subjectId: " + mapClassSubjectId);
 			List<TGoal> goalList = tGoalService.getGoalsByMapCS(mapClassSubjectId);
 			System.out.println("DD-Goals " + goalList);
-//			return ResponseEntity.ok(goalList);
 			return new ResponseEntity<>(goalList, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println("Error fetching classes by mapClassSubjectId: " + e.getMessage());
-//			return ResponseEntity.internalServerError().build();
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

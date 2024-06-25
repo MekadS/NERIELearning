@@ -16,67 +16,121 @@
 		<div class="row my-5">
 			<div align="center">
 				<div class="card col-sm-12 col-md-12 col-lg-10">
-					<div class="card-title my-3">
-						<h3>Curriculum Goals</h3>
+					<div class="card-title my-3 text-center h2">
+						Curriculum Goals
 					</div>
 					<div class="card-body">
-						<div class="d-flex justify justify-content-between">
-							<a th:href="@{/editor/dashboard}"><button
-									class="btn btn-primary">Editor Dashboard</button></a>
+						<div class="row mb-3">
+							<div class="text-start col-sm-12 col-md-12">
+								<a th:href="@{/editor/dashboard}">
+									<button class="btn btn-primary">Editor Dashboard</button>
+								</a>											
+							</div>
 						</div>
-						<div>
-							<form action="#" th:action="@{/editor/teacherEducator/saveTGoal}"
-								th:object="${tGoal}" method="post">
-								<table class="table">
-									<tbody>
+						<div class="accordion" id="createNewCompetency">
+							<div class="accordion-item">
+							  	<h2 class="accordion-header">
+      								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							      		Create a new Curriculum Goal
+							    	</button>
+							  	</h2>
+    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewCompetency">
+							    	<div class="accordion-body">
+										<form action="#" th:action="@{/editor/teacherEducator/saveTGoal}"
+											th:object="${tGoal}" method="post">
+											<div class="card">
+												<div class="card-body">
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="selectClassSubject">Select the class and subject</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<input type="hidden" th:field="*{tGoalId}" /> 
+															<select class="form-select" id="selectClassSubject" name="mapClassSubject"
+																th:field="*{mapClassSubjectId}" required>
+																	<option th:each="mapCS : ${listMapClassSubjects}"
+																		th:value="${mapCS.mapClassSubjectId}"
+																		th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="TGoalCode">Select the Curriculum Goal Code</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<select class="form-select" id="m_goal_dropdown" name="mGoalCode"
+																th:field="*{mGoalId}" required>
+																<option th:each="mGoal : ${listMGoals}"
+																	th:value="${mGoal.mGoalId}"
+																	th:text="${mGoal.mGoalCode}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="ClassSubject">Enter the Curriculum Goal name</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<input type="text" th:field="*{tGoalName}" class="form-control" placeholder="Goal Name" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="ClassSubject">Enter the Curriculum Goal Description</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<input type="text" th:field="*{tGoalDescription}" class="form-control" placeholder="Goal Description" />
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-sm-12 col-md-12">
+															<button type="submit" class="btn btn-success">Save</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card mt-3">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-12 h4 text-start">
+										List of Competencies
+									</div>
+								</div>
+								<table id="cgoals" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+									<thead class="thead-dark">
 										<tr>
-											<td><label class="form-label">Add a new
-													curriculum goal</label></td>
-											<td><input type="hidden" th:field="*{tGoalId}" /> 
-											<select class="form-select" id="selectClassSubject" name="mapClassSubject"
-												th:field="*{mapClassSubjectId}" required>
-													<option th:each="mapCS : ${listMapClassSubjects}"
-														th:value="${mapCS.mapClassSubjectId}"
-														th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
-											</select></td>
-											<td><input type="text" th:field="*{tGoalName}"
-												class="form-control" placeholder="Goal Name" /></td>
-											<td><input type="text" th:field="*{tGoalDescription}"
-												class="form-control" placeholder="Goal Description" /></td>
-											<td>
-												<button type="submit" class="btn btn-success">Save</button>
-											</td>
+		<!-- 									<th>ID</th> -->
+											<th>Class-Subject</th>
+											<th>Name</th>
+											<th>Description</th>
+											<th class="text-center">Update</th>
+											<th class="text-center">Enable/Disable</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="TGoal : ${listTGoals}">
+		<!-- 									<td th:text="${TGoal.tGoalId}">ID</td> -->
+											<td th:text="${TGoal.mapClassSubjectId.mClassId.mClassName} + ' ' + ${TGoal.mapClassSubjectId.mSubjectId.mSubjectName}">Name</td>
+											<td th:text="${TGoal.tGoalName}">Name</td>
+											<td th:text="${TGoal.tGoalDescription}">Description</td>
+											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TGoal.tGoalId}}">
+												<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+												</a></td>
+											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/toggleStatus/' + ${TGoal.tGoalId}}">
+												<i th:class="${TGoal.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+												</a></td>
 										</tr>
 									</tbody>
 								</table>
-							</form>
+							</div>
 						</div>
-						<table id="cgoals" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
-							<thead class="thead-dark">
-								<tr>
-<!-- 									<th>ID</th> -->
-									<th>Class-Subject</th>
-									<th>Name</th>
-									<th>Description</th>
-									<th class="text-center">Update</th>
-									<th class="text-center">Enable/Disable</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="TGoal : ${listTGoals}">
-<!-- 									<td th:text="${TGoal.tGoalId}">ID</td> -->
-									<td th:text="${TGoal.mapClassSubjectId.mClassId.mClassName} + ' ' + ${TGoal.mapClassSubjectId.mSubjectId.mSubjectName}">Name</td>
-									<td th:text="${TGoal.tGoalName}">Name</td>
-									<td th:text="${TGoal.tGoalDescription}">Description</td>
-									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TGoal.tGoalId}}">
-										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
-										</a></td>
-									<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/toggleStatus/' + ${TGoal.tGoalId}}">
-										<i th:class="${TGoal.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
-										</a></td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</div>
