@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nic.NERIELearning.model.MClass;
@@ -21,6 +24,7 @@ import in.nic.NERIELearning.model.TCompetency;
 import in.nic.NERIELearning.model.TGoal;
 import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.MClassService;
+import in.nic.NERIELearning.service.MGoalService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
 import in.nic.NERIELearning.service.TCompetencyService;
@@ -31,6 +35,8 @@ import in.nic.NERIELearning.service.TLoSaService;
 public class LoSaEditorController{
 	@Autowired
 	MapClassSubjectService mapClassSubjectService;
+	@Autowired
+	MGoalService mGoalService;
 	@Autowired
 	TGoalService tGoalService;
 	@Autowired
@@ -149,21 +155,28 @@ public class LoSaEditorController{
 	public String teacherEducatorEditCompetencies(Model model) {
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
+		model.addAttribute("listMGoals", mGoalService.findAll());
 		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("tCompetency", new TCompetency());
+		
+		System.out.println(tCompetencyService.findAll());
 		
 		return "editor/teacherEducator/editTCompetencies";
 	}
 	
-	@GetMapping("/goalsList/{mapClassSubjectId}")
-	public ResponseEntity<List<TGoal>> getDistrictList(@PathVariable("mapClassSubjectId") Long mapClassSubjectId) {
+	@GetMapping("/goalsList")
+	@ResponseBody
+	public ResponseEntity<List<TGoal>> getGoalList(@RequestParam("subjectId") Long mapClassSubjectId) {
 		try {
+			System.out.println("subjectId: " + mapClassSubjectId);
 			List<TGoal> goalList = tGoalService.getGoalsByMapCS(mapClassSubjectId);
-			System.out.println(goalList);
-			return ResponseEntity.ok(goalList);
+			System.out.println("DD-Goals " + goalList);
+//			return ResponseEntity.ok(goalList);
+			return new ResponseEntity<>(goalList, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println("Error fetching classes by mapClassSubjectId: " + e.getMessage());
-			return ResponseEntity.internalServerError().build();
+//			return ResponseEntity.internalServerError().build();
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

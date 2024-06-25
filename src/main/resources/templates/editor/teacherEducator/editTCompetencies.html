@@ -54,10 +54,11 @@
 										</div>
 										<div class="col-sm-12 col-md-8">
 											<select class="form-select" id="tgoal_dropdown" name="tGoal"
-												th:field="*{tGoalId}" required>
+												th:field="*{tGoalId}" required disabled="disabled">
 <!-- 												<option th:each="tGoal : ${listTGoals}" -->
-<!-- 													th:value="${tGoal.tGoalId}" -->
-<!-- 													th:text="${tGoal.tGoalName}"></option> -->
+												<option th:each="tGoal : ${goalList}"
+													th:value="${tGoal.tGoalId}"
+													th:text="${tGoal.tGoalName}"></option>
 											</select>
 										</div>
 									</div>
@@ -84,6 +85,11 @@
 											<button type="submit" class="btn btn-success">Save</button>
 										</div>
 									</div>
+									<div class="row mb-3 text-center">
+										<div class="col-sm-12 col-md-12" id="debug">
+	
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -97,21 +103,21 @@
 								<table id="competencies" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
 								<thead class="thead-dark">
 									<tr>
-										<!-- 										<th class="text-center">ID</th> -->
-										<th>ID</th>
-										<th>Goal Name</th>
-										<th>Name</th>
-										<th>Description</th>
+<!-- 																				<th class="text-center">ID</th> -->
+<!-- 										<th>ID</th> -->
+										<th>Goal</th>
+										<th>Competency</th>
+										<th>Competency Description</th>
 										<th class="text-center">Update</th>
 										<th class="text-center">Enable/Disable</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="TCompetency : ${listTCompetencies}">
-										<td th:text="${TCompetency.tCompetencyId}">ID</td>
-										<td th:text="${TCompetency.tGoalId.tGoalName}">Goal Name</td>
-										<td th:text="${TCompetency.tCompetencyName}">Name</td>
-										<td th:text="${TCompetency.tCompetencyDescription}">Description</td>
+<!-- 										<td th:text="${TCompetency.tCompetencyId}">ID</td> -->
+										<td th:text="${TCompetency.tGoalId.mGoalId.mGoalCode} + ' ' + ${TCompetency.tGoalId.tGoalName}">Goal</td>
+										<td th:text="${TCompetency.tCompetencyName}">Competency</td>
+										<td th:text="${TCompetency.tCompetencyDescription}">Competency Description</td>
 										<td class="text-center"><a th:href="@{'/editor/teacherEducator/tGoal/edit/' + ${TCompetency.tCompetencyId}}">
 											<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
 											</a></td>
@@ -141,40 +147,49 @@
 		});
 
 		//END OF DATATABLES
-	  	// Handle change event on ClassSubject dropdown
-	  	$('#class_subject_dropdown').change(function() {
-	    	const selectedMapCSId = $(this).val();
-	    	loadTGoalOptions(selectedMapCSId); // Load options for TGoal based on ClassSubject selection
+	  	//INIT
+        $("#class_subject_dropdown").append('<option id="cs_blank" selected="selected" value=""></option>').prop("disabled", false);
+        $("#tgoal_dropdown").empty().append('<option id="goal_blank" selected="selected" disabled="disabled" value="">-- Select a Class and Subject first --</option>').prop("disabled", true);
+
+		// Handle change event on ClassSubject dropdown
+	  	$('body').on('change', '#class_subject_dropdown', function() {
+			$('#cs_blank').prop('disabled', true);
+	    	const selectedMapCSId = $('#class_subject_dropdown').val();
+			console.log("mapCSid: " + selectedMapCSId);
+			loadTGoalOptions(selectedMapCSId); // Load options for TGoal based on ClassSubject selection
 	  	});
 	});
 	
 	function loadTGoalOptions(selectedMapCSId) {
+		
 	  	$.ajax({
-	    	url: `/goalsList/${selectedMapCSId}`,
+	    	url: '/goalsList',
 	    	type: "GET",
-		    dataType: 'json',
-// 		    data: { selectedMapCSId: selectedMapCSId },
-		    success: function(data) {
-		      	const $dropdown = $('#tgoal_dropdown');
-		      		$dropdown.empty(); // Clear existing options
-		      	if (data.length > 0) {
-		        	$dropdown.prop('disabled', false); // Enable dropdown if options are available
-		      	} else {
-			        $dropdown.prop('disabled', true); // Disable dropdown if no options
-    			}
-		      	$.each(data, function(index, tGoal) {
-					alert(tGoal + " " + tGoal.isActive + " " + tGoal.tGoalName);
-// 					alert(tGoal.tGoalId);
-// 					alert(tGoal.isActive);
-// 					alert(tGoal.tGoalName);
-// 					alert(tGoal.mGoalId);
-		        	$dropdown.append($('<option></option>').val(tGoal.tGoalId).text(tgoal.tgoalname));
-		      	});
+		    data: 'subjectId=' + selectedMapCSId ,
+		    success: function(response) {
+// 				console.log(response);
+
+				$('#tgoal_dropdown').html('');
+				$('#tgoal_dropdown').prop('disabled', false);
+				var content = '';
+
+				if(response.length > 0) {
+					for(var a=0;a<response.length;a++) {
+						content +='<option value="'+ response[a].tGoalId +'">'+ response[a].tgoalName +'</option>';
+					}
+// 					$('#tgoal_dropdown').html(content);
+				} else {
+					content +='<option selected="selected" disabled="disabled" value="">-- No Goals for this class and subject  --</option>';
+					$('#tgoal_dropdown').prop('disabled', true);
+
+				}
+				$('#tgoal_dropdown').html(content);
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {
 		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
 		    }
 	  	});
+
 	}
 </script>
 </html>

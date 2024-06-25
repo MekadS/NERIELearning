@@ -5,6 +5,11 @@
 <meta charset="UTF-8" />
 <title>NERIE Learning</title>
 </head>
+<style>
+	.goalDesc {
+		cursor: pointer;
+	}
+</style>
 
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
@@ -24,7 +29,7 @@
 							<th>Stage</th>
 							<th>Class</th>
 							<th>Subject</th>
-							<th>Goal</th>
+							<th>Goal (Click on goal to view details)</th>
 							<th>Competency</th>
 <!-- 							<th>Learning Outcome</th> -->
 <!-- 							<th>Suggestive Activity</th> -->
@@ -35,7 +40,8 @@
 							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}">Stage</td>
 							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mClassName}">Class</td>
 							<td th:text="${Competency.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}">Subject</td>
-							<td th:text="${Competency.tGoalId.tGoalName}">Goal</td>
+							<td th:text="${Competency.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${Competency.tGoalId.tGoalDescription}">
+							</td>
 							<td th:text="${Competency.tCompetencyName}">Competency</td>
 <!-- 							<td th:text="${Competency.Class.mStageId.mStageName}">Stage</td> -->
 <!-- 							<td th:text="${Class.mClassName}" class="text-center">Stage Name</td> -->
@@ -58,6 +64,12 @@
 					buttons : ['pdf', 'print'],
 				}
 			},
+		});
+		
+		$('.goalDesc').on('click', function() {
+// 			console.log('YO');
+			var cc = $(this).data('desc');
+			alert(cc);
 		});
 	});
 </script>
