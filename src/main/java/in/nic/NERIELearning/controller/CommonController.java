@@ -61,26 +61,4 @@ public class CommonController{
 	public String testPage() {
 		return "/testPage"; 
 	}
-	
-//	START: PUBLIC Mappings
-	@GetMapping("/public/schoolEducation")
-	public String schoolEducation() {
-		return "public/schoolEducation"; 
-	}
-
-	@GetMapping("/public/NAS")
-	public String NAS() {
-		return "public/NAS"; 
-	}
-	
-	@GetMapping("/public/learningOutcomes")
-	public String learningOutcomes() {
-		return "public/learningOutcomes"; 
-	}
-
-	@GetMapping("/public/contact")
-	public String contact() {
-		return "public/contact"; 
-	}
-//	END: PUBLIC Mappings
 }

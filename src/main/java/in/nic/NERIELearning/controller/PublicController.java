@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import in.nic.NERIELearning.model.TCompetency;
 import in.nic.NERIELearning.service.MClassService;
+import in.nic.NERIELearning.service.MContentService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
@@ -29,7 +30,24 @@ public class PublicController{
 	TGoalService tGoalService;
 	@Autowired
 	TCompetencyService tCompetencyService;
+	@Autowired
+	MContentService mContentService;
 
+	//	START: PUBLIC Mappings
+	@GetMapping("/public/schoolEducation")
+	public String schoolEducation() {
+		return "public/schoolEducation"; 
+	}
+	
+	@GetMapping("/public/learningOutcomes")
+	public String learningOutcomes() {
+		return "public/learningOutcomes"; 
+	}
+
+	@GetMapping("/public/contact")
+	public String contact() {
+		return "public/contact"; 
+	}
 	@GetMapping("/public/viewLearningOutcomes")
 	public String viewLearningOutcomes(Model mClass) {
 		List<TCompetency> listCompetency = tCompetencyService.findAll();
@@ -37,6 +55,11 @@ public class PublicController{
 		System.out.println(listCompetency);    
 		return "public/viewLearningOutcomes";
 	}
-	//	END: ViewFullLoSas
-	//	END: HEAD-TEACHER MapClassSubject Methods
+	
+	@GetMapping("/public/NAS")
+	public String NAS(Model mContent) {
+		mContent.addAttribute("listContent", mContentService.findAll());
+		return "public/NAS"; 
+	}
+	//	END: PUBLIC Mappings
 }
