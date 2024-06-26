@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import in.nic.NERIELearning.helper.AuthenticationHelper;
 import in.nic.NERIELearning.helper.CaptchaHelper;
 import in.nic.NERIELearning.model.Userlogin;
-import in.nic.NERIELearning.service.UserLoginDetailsService;
 import in.nic.NERIELearning.service.UserLoginService;
 
 @Controller
@@ -19,9 +18,9 @@ public class CommonController{
 	UserLoginService userLoginService;
 	
 	@GetMapping("/")
-	public String home() {
-		System.out.println("/ to Home");
-		return "home"; 
+	public String homepage() {
+		System.out.println("/ to Homepage");
+		return "homepage"; 
 	}
 	
 	@GetMapping("/accessDenied")

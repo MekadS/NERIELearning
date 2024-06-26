@@ -16,15 +16,15 @@
 
 	<main>
 		<div class="container text-center">
-			<div class="row my-3 mx-auto justify-content-around align-items-center">
+			<div class="row mt-5 mx-auto justify-content-around align-items-center">
 				<div class="col-md-5 p-4">
 					<div class="my-2 p-3 border border-3 border-success-subtle rounded-4">
 						<div class="mb-3"> <a href="https://ncert.nic.in/"
 							onclick="return confirm('You are being redirected to an external website. Please note that East Khasi Hills cannot be held responsible for external websites content &amp; privacy policies.');"
 							aria-label="https://ncert.nic.in/ - External site that opens in a new window"
 							title="https://ncert.nic.in/ - External site that opens in a new window"
-							target="_blank" rel="noopener noreferrer"> <img width="200em"
-								style="background-color: white; width: 20rem; height: 20rem;" 
+							target="_blank" rel="noopener noreferrer"> <img width="100em"
+								style="background-color: white; width: 15rem; height: 15rem;" 
 								class="py-2 px-2"
 								src="/assets/img/NERIE/NCERT_Logo_dark.png"
 								alt="National Informatics Centre opens a new window"></a>
@@ -40,19 +40,19 @@
 						<p class="h2 text-light">NERIE</p>
 						<p class="h2 text-light">Learning</p>
 					</div>
-					<div
-						class="card mt-1 mb-1 p-3 border border-3 border-success-subtle rounded-4">
-						<div class="card-title h2 my-3">LOGIN</div>
+					<div class="card mt-1 mb-1 p-3 border border-3 border-success-subtle rounded-4">
+						<div class="card-title h2 my-3 pe-3">
+							<a th:href="@{/}"><i class="fa-solid fa-house text-success pe-2"></i></a>
+							LOGIN
+						</div>
 						<div class="card-body">
 
 
 							<form action="#" th:action="@{/login}" method="post"
 								th:object="${loginObj}">
 
-								<div th:if="${param.error}" class="alert alert-danger">Incorrect
-									username or password</div>
-								<div th:if="${param.logout}" class="alert alert-warning">You
-									have successfully logged out</div>
+								<div th:if="${param.error}" class="alert alert-danger">Incorrect username or password</div>
+								<div th:if="${param.logout}" class="alert alert-warning">You have successfully logged out</div>
 
 								<input class="form-control mb-3" type="text"
 									placeholder="Username" th:field="*{username}"> <input
@@ -62,14 +62,11 @@
 								<div class="row">
 									<div class="col my-3">
 										<div class="">
-											<img alt="Captcha" id="realCaptcha"
-												th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+											<img alt="Captcha" id="realCaptcha" th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
 										</div>
 									</div>
 									<div class="col py-4">
-										<a href="#" class="text-decoration-none text-info"
-											onclick="reloadCaptcha()"> <i
-											class="fa-solid fa-arrow-rotate-right fa-2x"></i>
+										<a href="#" class="text-decoration-none text-info" onclick="reloadCaptcha()"> <i class="fa-solid fa-arrow-rotate-right fa-2x"></i>
 										</a>
 									</div>
 								</div>

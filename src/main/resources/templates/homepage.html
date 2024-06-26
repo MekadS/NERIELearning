@@ -4,6 +4,11 @@
 <head>
 <meta charset="UTF-8" />
 <title>NERIE Learning</title>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		AOS.init();
+	});
+</script>
 </head>
 
 <body>
@@ -16,7 +21,7 @@
 		<!-- ======= Hero Section ======= -->
 		<section id="hero"
 			class="div_below_navbar d-flex justify-content-center align-items-center">
-			<div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+			<div class="container position-relative" data-aos="zoom-in" data-aos-delay="500">
 				<div class="h1 text-light">Let's learn with NERIE</div>
 				<div class="h2 text-light fw-normal">Enhancing education in Meghalaya</div>
 				<a th:href="@{/public/schoolEducation}" class="btn-get-started">School Education</a>
@@ -26,12 +31,11 @@
 
 		<!-- ======= About Section ======= -->
 		<div id="about" class="about">
-<!-- 			<div class="text-center"> -->
-		<div>
+			<div class="text-center">
+<!-- 		<div> -->
 				<!-- Mission 1 -->
 				<div class="row mission_row_1 g-0 nerie_bg_indigo align-items-center" data-aos="fade-up">
-					<div class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
-						data-aos="fade-left" data-aos-delay="100">
+					<div class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2" data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_1.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-1 order-lg-1 content">
@@ -43,7 +47,7 @@
 				<!-- Mission 2 -->
 				<div class="row mission_row_2 g-0 nerie_bg_yellow align-items-center" data-aos="fade-up">
 					<div class="col-sm-12 col-md-6 order-2 order-md-1 order-lg-1"
-						data-aos="fade-left" data-aos-delay="100">
+						data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_2.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-2 order-lg-2 content">
@@ -55,7 +59,7 @@
 				<!-- Mission 3 -->
 				<div class="row mission_row_3 g-0 nerie_bg_indigo align-items-center" data-aos="fade-up">
 					<div class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
-						data-aos="fade-left" data-aos-delay="100">
+						data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_3.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-1 order-lg-1 content">
@@ -67,7 +71,7 @@
 				<!-- Mission 4 -->
 				<div class="row mission_row_1 g-0 nerie_bg_yellow align-items-center" data-aos="fade-up">
 					<div class="col-sm-12 col-md-6  order-2 order-md-1 order-lg-1"
-						data-aos="fade-left" data-aos-delay="100">
+						data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_4.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-2 order-lg-2 content">
@@ -79,7 +83,7 @@
 				<!-- Mission 5 -->
 				<div class="row mission_row_2 g-0 nerie_bg_indigo align-items-center" data-aos="fade-up">
 					<div class="col-sm-12 col-md-6 order-2 order-md-2 order-lg-2"
-						data-aos="fade-left" data-aos-delay="100">
+						data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_5.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-1 order-lg-1 content">
@@ -91,7 +95,7 @@
 				<!-- Mission 6 -->
 				<div class="row mission_row_3 g-0 nerie_bg_yellow align-items-center" data-aos="fade-up">
 					<div class="col-sm-12 col-md-6  order-2 order-md-1 order-lg-1"
-						data-aos="fade-left" data-aos-delay="100">
+						data-aos="fade-left" data-aos-delay="500">
 						<img th:src="@{/assets/img/mission/mission_6.jpg}" class="img-fluid" alt="">
 					</div>
 					<div class="col-sm-12 col-md-6 py-sm-5 px-sm-1 px-md-2 order-1 order-md-2 order-lg-2 content">
