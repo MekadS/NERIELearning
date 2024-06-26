@@ -10,8 +10,7 @@
 	<div th:insert="~{utils/keyImports :: head}"></div>
 	<div th:insert="~{utils/navbar :: header}"></div>
 	
-	<script type="text/javascript" th:src="@{/js/d3min.min.js}"
-		defer></script>
+	<script type="text/javascript" th:src="@{/js/d3min.min.js}" defer></script>
 	<script type="text/javascript" th:src="@{/js/d3.js}" defer></script>
 	<script>
 		window.onload = function() {
@@ -20,17 +19,21 @@
 
 			// Set the width of the SVG element to 850
 			svg.setAttribute('width', '850');
+			svg.setAttribute('height', '700');
 		};
 	</script>
 
 <!-- 	<aside></aside> -->
 
 	<main>
-		<div align="center" class="card">
-			<div class="card-body">
-				<div class="col-sm-10">
-					<h3 class="card-title pt-2 pb-2">Curricular & Pedagogical Structure of School Education</h3>
-					<div class="center" style="margin-top: -2em">
+		<div align="center">
+			<div class="card col-sm-12 col-md-10 my-5">
+				<div class="card-title mt-3 px-2 h2">Curricular & Pedagogical Structure of School Education</div>
+				<div class="card-body m-0 p-0">
+					<div class="text-info fw-bold fst-italic mb-3">
+						Subjects are assigned only to the classes that will be participating in NAS for that subject.
+					</div>
+					<div class="col-sm-10">
 						<div id="d3Hierarchy"></div>
 					</div>
 				</div>

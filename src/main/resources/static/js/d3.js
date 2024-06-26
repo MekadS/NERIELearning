@@ -34,15 +34,19 @@ var data = [{
                                 "name": "Class 3",
                                 "img": "/assets/img/icons/classroom_1.png",
                                 "children": [{
-                                    "name": "Language 1",
+                                    "name": "English",
                                 	"img": "/assets/img/icons/subject_language.png",
                                 	"url": "sub3eng",
                                     }, {
-									"name": "Language 2",
-                            		"img": "/assets/img/icons/subject_language.png",
-                                	"url": "sub3alty",
+									"name": "EVS",
+                            		"img": "/assets/img/icons/subject_evs.png",
+                                	"url": "sub3evs",
                                     },{
-                                    "name": "Mathematics",
+                                    "name": "Hindi",
+                            		"img": "/assets/img/icons/subject_hindi.png",
+                                	"url": "sub3hindi",
+                                    },{
+                                    "name": "Maths",
                             		"img": "/assets/img/icons/subject_maths.png",
                                 	"url": "sub3maths",
                                   }]
@@ -53,14 +57,19 @@ var data = [{
                                 "name": "Class 5",
                                 "img": "/assets/img/icons/classroom_1.png",
                                 "children": [{
-                                    "name": "Language 1",
-                            		"img": "/assets/img/icons/subject_language.png",
-                                	"url": "sub5english",
-                                    }, {"name": "Language 2",
-                            		"img": "/assets/img/icons/subject_language.png",
-                                	"url": "sub5alty",
+                                    "name": "English",
+                                	"img": "/assets/img/icons/subject_language.png",
+                                	"url": "sub5eng",
+                                    }, {
+									"name": "EVS",
+                            		"img": "/assets/img/icons/subject_evs.png",
+                                	"url": "sub5evs",
                                     },{
-                                        "name": "Mathematics",
+                                    "name": "Hindi",
+                            		"img": "/assets/img/icons/subject_hindi.png",
+                                	"url": "sub5hindi",
+                                    },{
+                                    "name": "Maths",
                             		"img": "/assets/img/icons/subject_maths.png",
                                 	"url": "sub5maths",
                                   }]
@@ -78,17 +87,26 @@ var data = [{
                                 "name": "Class 8",
                                 "img": "/assets/img/icons/classroom_1.png",
                                 "children": [{
-	                                "name": "Language 1",
-                            		"img": "/assets/img/icons/subject_language.png",
-                                	"url": "sub8english",
-	                                }, {"name": "Language 2",
-                            		"img": "/assets/img/icons/subject_language.png",
-                                	"url": "sub8alty",
-	                                },{
-                                    "name": "Mathematics",
+                                    "name": "English",
+                                	"img": "/assets/img/icons/subject_language.png",
+                                	"url": "sub8eng",
+                                    }, {
+                                    "name": "Hindi",
+                            		"img": "/assets/img/icons/subject_hindi.png",
+                                	"url": "sub8hindi",
+                                    },{
+                                    "name": "Maths",
                             		"img": "/assets/img/icons/subject_maths.png",
                                 	"url": "sub8maths",
-                              }]
+                                    },{
+                                    "name": "Science",
+                            		"img": "/assets/img/icons/subject_science.png",
+                                	"url": "sub8science",
+                                    },{
+                                    "name": "Social Science",
+                            		"img": "/assets/img/icons/subject_social_science.png",
+                                	"url": "sub8socialscience",
+                                  }]
                             }]
                 }, {
                     "name": "Secondary",
