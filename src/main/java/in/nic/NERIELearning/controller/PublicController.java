@@ -44,6 +44,11 @@ public class PublicController{
 		return "public/learningOutcomes"; 
 	}
 
+	@GetMapping("/public/test")
+	public String publicTest() {
+		return "public/test"; 
+	}
+
 	@GetMapping("/public/contact")
 	public String contact() {
 		return "public/contact"; 
