@@ -29,6 +29,8 @@ public class UserLoginUserDetails implements UserDetails{
 				userLogin.getRole().getRoleName().split(","))
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
+		System.out.println("ULUD Role of current user: " + authorities);
+		System.out.println("Landing Page of current user: " + userLogin.getRole().getLandingPage());
 	}
 
 	@Override

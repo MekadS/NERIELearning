@@ -44,7 +44,8 @@ public class SecurityConfig {
                         (login) -> login
                                 .loginPage("/index")
                                 .loginProcessingUrl("/login")
-                                .successHandler(authenticationSuccessHandler())
+                                .defaultSuccessUrl("/home")
+//                                .successHandler(authenticationSuccessHandler())
                                 .failureUrl("/index?error=Authentication Error")
                                 .permitAll())
                 .logout(

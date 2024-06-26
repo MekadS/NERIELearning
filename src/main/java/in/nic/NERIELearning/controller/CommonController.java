@@ -1,5 +1,8 @@
 package in.nic.NERIELearning.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import in.nic.NERIELearning.helper.AuthenticationHelper;
 import in.nic.NERIELearning.helper.CaptchaHelper;
 import in.nic.NERIELearning.model.Userlogin;
+import in.nic.NERIELearning.service.UserLoginDetailsService;
+import in.nic.NERIELearning.service.UserLoginService;
 
 @Controller
 public class CommonController{
+	@Autowired
+	UserLoginService userLoginService;
+	
 	@GetMapping("/")
 	public String home() {
+		System.out.println("/ to Home");
 		return "home"; 
 	}
 	
@@ -37,20 +46,22 @@ public class CommonController{
 		}
 	}
 	
-//	@GetMapping("/home")
-//	public String getHome(Model model) {
-//		try {
-//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//			String username = auth.getName();
-//
-//			Userlogin userlogin = UserLoginDetailsService.getUserByUsername(username);
+	@GetMapping("/home")
+	public String getHome(Model model) {
+		System.out.println("HOME MEH");
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String username = auth.getName();
+
+			Userlogin userlogin = userLoginService.getUserLoginByUserName(username);
 //			model.addAttribute("username", username);
-//			
-//			return "redirect:"+userlogin.role.getLandingPage();
-//		} catch (Exception e) {
-//			return "redirect:/?exc=Something";
-//		}
-//	}
+			
+			System.out.println("LP:" + userlogin.role.getLandingPage());
+			return "redirect:"+userlogin.role.getLandingPage();
+		} catch (Exception e) {
+			return "redirect:/?exc=Something";
+		}
+	}
 	
 	@GetMapping("/editor/dashboard")
 	public String editorDashboard() {

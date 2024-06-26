@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +48,15 @@ public class AdminController{
 	MapClassSubjectService mapClassSubjectService;
 
 	//	START: ADMIN Mappings
+	@GetMapping("/home")
+    public String getHomePage(Model model){
+		System.out.println("ADMIN HOME");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("username", auth.getName());
+
+        return "admin/dashboard";
+    }
+	
 	@GetMapping("dashboard")
 	public String adminDashboard() {
 		return "admin/dashboard";
