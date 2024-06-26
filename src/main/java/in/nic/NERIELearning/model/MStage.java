@@ -28,14 +28,14 @@ public class MStage{
 	@SequenceGenerator(name = "m_stage_id_seq", sequenceName = "M_STAGE_SEQ", allocationSize = 50, initialValue = 100)
 	private Long mStageId;
 
-	@NotBlank
-	@NotEmpty
+	@NotBlank(message = "Serial Number cannot be blank")
+	@NotEmpty(message = "Serial Number cannot be empty")
 	@Pattern(regexp = ConstantUtils.REGEXP_NUMBERS_ONLY, message = "Invalid Serial Number")
 	@Column(name = "mStageSerialNo", nullable = false, unique = true)
 	private String mStageSerialNo;
 
-	@NotBlank
-	@NotEmpty
+	@NotBlank(message = "Stage Name cannot be blank")
+	@NotEmpty(message = "Stage Name cannot be empty")
 	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_NUMBER_DASH_ONLY_NOT_NULL, message = "Invalid Stage Name")
 	@Column(name = "mStageName", length = 50, nullable = false, unique = true)
 	private String mStageName;

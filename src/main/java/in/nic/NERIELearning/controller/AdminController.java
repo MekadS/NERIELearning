@@ -73,8 +73,12 @@ public class AdminController{
 	}
 	
 	@RequestMapping(value = "saveMStage", method = RequestMethod.POST)
-	public String saveMStage(@ModelAttribute("MStage") MStage mStage) {
-		mStageService.save(mStage);
+	public String saveMStage(@ModelAttribute("MStage") @Valid MStage mStage, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "/admin/editMStages";
+		} else {
+			mStageService.save(mStage);
+		}
 		return "redirect:/admin/editMStages";
 	}
 
