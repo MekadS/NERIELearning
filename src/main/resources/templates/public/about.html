@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>NERIE Learning App</title>
+</head>
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: header}"></div>
+	
+	<div class="row">
+		<div align="center">
+			<div id="carouselExampleIndicators" class="carousel slide" data-bs-touch="true" data-bs-ride="carousel">
+				<div class="carousel-indicators">
+				  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				</div>
+				<div class="carousel-inner">
+				  <div class="carousel-item active" data-bs-interval="7000">
+						<div class="card border-3 border-info col-sm-12 col-md-10 my-5 py-3">
+							<div class="card-title h2">
+								<div>About NERIE</div>
+								<div class="mt-2 h4 fw-normal">North Eastern Regional Institute of Education</div>
+							</div>
+							<div class="card-body">
+								<div class="px-3 text-start">
+									The North East Regional Institute of Education (NERIE) stands amidst the natural grandeur in Umiam village, 
+									which is about 20 kms away from Shillong city. Like other constituent units of the National Council of 
+									Educational Research and Training (NCERT), New Delhi, this Regional Institute of Education too, caters to 
+									the educational needs of the eight states of the North East- Assam, Arunachal Pradesh, Manipur, Meghalaya, 
+									Mizoram, Nagaland, Sikkim and Tripura. Its history dates back to the year 1992, when the 'Task force' of the 
+									NCERT headed by Madhuri Shah recommended for the setting up a Regional College for the NCERT in the North East. 
+									The first step taken in this regard, was in the year 1995, when the then Field Units of the NCERT at Guwahati 
+									and Shillong were amalgamated into one to form the North East Regional Institute of Education at Shillong. 
+									At that time, Prof C.L Anand, the then Vice Chancellor of Arunachal University, was instrumental in preparing 
+									the blue print to set up the Institute. The NERIE continued to function as a Field Office for about ten years. 
+									However, in the year 2005, the post of Principal along with 24 posts for the faculty were advertised and filled 
+									up by the NCERT, New Delhi. The increase in the faculty strength led to an increase in the number of administerial 
+									staff in the Institute. As the Institute's human power was growing, the Institute in May 2012 had to be shifted 
+									from Shillong to its permanent campus in Nongsder village, Umiam.
+								</div>
+							</div>
+						</div>
+				  </div>
+				  <div class="carousel-item" data-bs-interval="10000">
+					<div class="card border-3 border-info col-sm-12 col-md-10 my-5 py-3">
+						<div class="card-title h2">
+							<div>About NAS</div>
+							<div class="mt-2 h4 fw-normal">National Achievement Survey</div>
+						</div>
+						<div class="card-body">
+							<div class="px-3 text-start">
+								The National Achievement Survey (NAS) is a large-scale assessment conducted throughout India to evaluate the learning 
+								outcomes of students in Grades 3, 5, 8, and 10. It's implemented by the Ministry of Education (MoE) under the guidance 
+								of the National Council of Educational Research and Training (NCERT). NAS isn't designed to provide individual student 
+								or school scores. Instead, it acts as a national representative survey, offering a system-level reflection on the 
+								effectiveness of school education across various regions, demographics, and school types (government, government-aided, 
+								private). The findings from NAS are crucial for informing and guiding education policy, planning, and implementation at 
+								national, state, district, and even classroom levels. This ultimately helps to identify areas where improvement is needed 
+								and ensure children across the country are receiving a quality education.
+							</div>
+						</div>
+					</div>
+				  </div>
+				  <div class="carousel-item" data-bs-interval="7000">
+					<div class="card border-3 border-info col-sm-12 col-md-10 my-5 py-3">
+						<div class="card-title h2">
+							<div>About NCERT</div>
+							<div class="mt-2 h4 fw-normal">National Council of Educational Research and Training</div>
+						</div>
+						<div class="card-body">
+							<div class="px-3 text-start">
+								The National Council of Educational Research and Training (NCERT) is a key organization in shaping India's educational 
+								landscape. Established in 1961, NCERT acts as the apex body for research, development, and dissemination of quality 
+								school education in India. It plays a vital role in formulating curriculum, syllabus, and textbooks for schools affiliated 
+								to the Central Board of Secondary Education (CBSE) and many state boards. NCERT textbooks are known for their balanced 
+								approach, covering essential knowledge and skills while fostering critical thinking and a well-rounded education for students.
+							</div>
+						</div>
+					</div>
+				  </div>
+				</div>
+				<button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				  <span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				  <span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+	</div>
+		
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+</html>

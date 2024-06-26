@@ -228,8 +228,8 @@ public class LoSaEditorController{
 		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("tLoSa", new TLoSa());
 		
-		List<TGoal> listTGoals = tGoalService.findAll();
-		System.out.println("TGoals: " + listTGoals);
+		System.out.println("TGoals: " + tGoalService.findAll());
+		System.out.println("TLoSas: " + tLoSaService.findAll());
 		return "editor/teacherEducator/editTLoSas";
 	}
 	

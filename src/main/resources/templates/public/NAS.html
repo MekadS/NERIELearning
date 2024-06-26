@@ -83,7 +83,7 @@
 													</tr>
 												</thead>
 		<!-- 										<p th:text=${listContent}></p> -->
-												<tbody>
+												<tbody class="col-sm-12 col-md-10">
 													<tr th:each="MContent : ${listContent}">
 														<td th:text="${MContent.mapClassSubjectId.mClassId.mClassName} + ' ' + ${MContent.mapClassSubjectId.mSubjectId.mSubjectName}">ClassSubject</td>
 														<td th:text="${MContent.mContentName}">Content Name</td>

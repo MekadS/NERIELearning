@@ -59,6 +59,12 @@ public class PublicController{
 	public String contact() {
 		return "public/contact"; 
 	}
+	
+	@GetMapping("/public/about")
+	public String about() {
+		return "public/about"; 
+	}
+	
 	@GetMapping("/public/viewLearningOutcomes")
 	public String viewLearningOutcomes(Model mClass) {
 		List<TCompetency> listCompetency = tCompetencyService.findAll();
