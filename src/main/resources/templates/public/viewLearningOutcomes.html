@@ -9,6 +9,9 @@
 	.goalDesc {
 		cursor: pointer;
 	}
+	.competencyDesc {
+		cursor: pointer;
+	}
 </style>
 
 <body>
@@ -26,25 +29,24 @@
 					class="display table table-striped lg-10 table-bordered">
 					<thead class="bg-grey">
 						<tr>
-							<th>Stage</th>
+<!-- 							<th>Stage</th> -->
 							<th>Class</th>
 							<th>Subject</th>
 							<th>Goal (Click on goal to view details)</th>
-							<th>Competency</th>
-<!-- 							<th>Learning Outcome</th> -->
-<!-- 							<th>Suggestive Activity</th> -->
+							<th>Competency (Click on competency to view details)</th>
+							<th>Learning Outcome</th>
+							<th>Suggestive Activity</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="Competency : ${listCompetency}">
-							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}">Stage</td>
-							<td th:text="${Competency.tGoalId.mapClassSubjectId.mClassId.mClassName}">Class</td>
-							<td th:text="${Competency.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}">Subject</td>
-							<td th:text="${Competency.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${Competency.tGoalId.tGoalDescription}">
-							</td>
-							<td th:text="${Competency.tCompetencyName}">Competency</td>
-<!-- 							<td th:text="${Competency.Class.mStageId.mStageName}">Stage</td> -->
-<!-- 							<td th:text="${Class.mClassName}" class="text-center">Stage Name</td> -->
+						<tr th:each="TLoSa : ${listLoSa}">
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+							<td th:text="${TLoSa.learningOutcome}"></td>
+							<td th:text="${TLoSa.suggestiveActivity}"></td>
 						</tr>
 					</tbody>
 					<tfoot></tfoot>
@@ -67,9 +69,12 @@
 		});
 		
 		$('.goalDesc').on('click', function() {
-// 			console.log('YO');
-			var cc = $(this).data('desc');
-			alert(cc);
+			var gd = $(this).data('desc');
+			alert(gd);
+		});
+		$('.competencyDesc').on('click', function() {
+			var cd = $(this).data('desc');
+			alert(cd);
 		});
 	});
 </script>

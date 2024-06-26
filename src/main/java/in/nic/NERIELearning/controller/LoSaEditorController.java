@@ -171,9 +171,7 @@ public class LoSaEditorController{
 	@ResponseBody
 	public ResponseEntity<List<TGoal>> getGoalList(@RequestParam("subjectId") Long mapClassSubjectId) {
 		try {
-			System.out.println("subjectId: " + mapClassSubjectId);
 			List<TGoal> goalList = tGoalService.getGoalsByMapCS(mapClassSubjectId);
-			System.out.println("DD-Goals " + goalList);
 			return new ResponseEntity<>(goalList, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println("Error fetching classes by mapClassSubjectId: " + e.getMessage());
@@ -223,14 +221,29 @@ public class LoSaEditorController{
 	//	START: TEACHER-EDUCATOR TLoSa Methods
 	@GetMapping("/editor/teacherEducator/editTLoSas")
 	public String teacherEducatorEditLoSas(Model model) {
+		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		model.addAttribute("listTGoals", tGoalService.findAll());
 		model.addAttribute("listTCompetencies", tCompetencyService.findAll());
 		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("tLoSa", new TLoSa());
 		
-		System.out.println("TGoals: " + tGoalService.findAll());
-		System.out.println("TLoSas: " + tLoSaService.findAll());
+//		System.out.println("TGoals: " + tGoalService.findAll());
+//		System.out.println("TLoSas: " + tLoSaService.findAll());
 		return "editor/teacherEducator/editTLoSas";
+	}
+	
+	@GetMapping("/competenciesList")
+	@ResponseBody
+	public ResponseEntity<List<TCompetency>> getCompetencyList(@RequestParam("goalId") Long tGoalId) {
+		try {
+			System.out.println("goalId: " + tGoalId);
+			List<TCompetency> competencyList = tCompetencyService.getCompetenciesByGoal(tGoalId);
+			System.out.println("DD-Competencies " + competencyList);
+			return new ResponseEntity<>(competencyList, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println("Error fetching classes by mapClassSubjectId: " + e.getMessage());
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@RequestMapping(value = "/editor/teacherEducator/saveTLoSa", method = RequestMethod.POST)

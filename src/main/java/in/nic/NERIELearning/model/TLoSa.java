@@ -30,12 +30,12 @@ public class TLoSa{
 	
 	@NotBlank
 	@NotEmpty
-	@Column(name = "learningOutcome", length = 1000, nullable = false, unique = true)
+	@Column(name = "learningOutcome", length = 1000, nullable = false, unique = false)
 	private String learningOutcome;
 
 	@NotBlank
 	@NotEmpty
-	@Column(name = "suggestiveActivity", length = 1000, nullable = false, unique = true)
+	@Column(name = "suggestiveActivity", length = 1000, nullable = false, unique = false)
 	private String suggestiveActivity;
 	
 	@Builder.Default

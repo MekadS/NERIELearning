@@ -24,4 +24,8 @@ public class TCompetencyService {
 	public TCompetency get(Long t_competency_id) {
 		return tCompetencyRepo.findById(t_competency_id).get();
 	}
+	
+	public List<TCompetency> getCompetenciesByGoal(Long tGoalCode) {
+		return tCompetencyRepo.findBytGoalId_tGoalId(tGoalCode);		
+	}
 }

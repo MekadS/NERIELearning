@@ -17,7 +17,7 @@
 			<div align="center">
 				<div class="card col-sm-12 col-md-12 col-lg-10">
 					<div class="card-title my-3 text-center h2">
-						Competencies
+						Learning Outcome & Suggestive Activity
 					</div>
 					<div class="card-body">
 						<div class="row mb-3">
@@ -31,71 +31,62 @@
 							<div class="accordion-item">
 							  	<h2 class="accordion-header">
       								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-							      		Create a new Competency
+							      		Create a new Learning Outcome and Suggestive Activity
 							    	</button>
 							  	</h2>
-    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewCompetency">
+    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewTLoSa">
 							    	<div class="accordion-body">
 										<form action="#" th:action="@{/editor/teacherEducator/saveTLoSa}" th:object="${tLoSa}" method="post">
 											<div class="card">
 												<div class="card-body">
-				<!-- 									<div class="row mb-3"> -->
-				<!-- 										<div class="col-sm-12 col-md-12 h4 text-start"> -->
-				<!-- 											Create a new Competency -->
-				<!-- 										</div> -->
-				<!-- 									</div> -->
 													<div class="row mb-3">
 														<div class="text-start col-sm-12 col-md-4">
 															<label for="ClassSubject">Class and Subject</label>
 														</div>
 														<div class="col-sm-12 col-md-8">
 															<input type="hidden" th:field="*{tLoSaId}" /> 
-															<select class="form-select" id="class_subject_dropdown" name="mapClassSubject">
+															<select class="form-select" id="class_subject_dropdown" name="mapClassSubject" required>
 															<option th:each="mapCS : ${listMapClassSubjects}"
 																th:value="${mapCS.mapClassSubjectId}"
 																th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
 														</select>
 														</div>
 													</div>
-<!-- 													<div class="row mb-3"> -->
-<!-- 														<div class="text-start col-sm-12 col-md-4"> -->
-<!-- 															<label for="TGoal">Select a Curriculum Goal</label> -->
-<!-- 														</div> -->
-<!-- 														<div class="col-sm-12 col-md-8"> -->
-<!-- 															<select class="form-select" id="tgoal_dropdown" name="tGoal" -->
-<!-- 																th:field="*{tGoalId}" required disabled="disabled"> -->
-<!-- 															</select> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
-<!-- 													<div class="row mb-3"> -->
-<!-- 														<div class="text-start col-sm-12 col-md-4"> -->
-<!-- 															<label for="TLoSaCode">Select the Competency Code</label> -->
-<!-- 														</div> -->
-<!-- 														<div class="col-sm-12 col-md-8"> -->
-<!-- 															<select class="form-select" id="m_competency_dropdown" name="mLoSaCode" -->
-<!-- 																th:field="*{mLoSaId}" required> -->
-<!-- 																<option th:each="mLoSa : ${listTLoSas}" -->
-<!-- 																	th:value="${mLoSa.mLoSaId}" -->
-<!-- 																	th:text="${mLoSa.mLoSaCode}"></option> -->
-<!-- 															</select> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
 													<div class="row mb-3">
 														<div class="text-start col-sm-12 col-md-4">
-															<label for="TLoSaName">Enter the Competency</label>
+															<label for="TGoal">Select a Curriculum Goal</label>
 														</div>
 														<div class="col-sm-12 col-md-8">
-															<input type="text" th:field="*{tCompetencyName}"
-																class="form-control" placeholder="Competency Name" />
+															<select class="form-select" id="tgoal_dropdown" name="tGoal" required disabled="disabled">
+<!-- 																th:field="*{tGoalId}"  -->
+															</select>
 														</div>
 													</div>
 													<div class="row mb-3">
 														<div class="text-start col-sm-12 col-md-4">
-															<label for="TLoSaDescription">Enter the description for the Competency</label>
+															<label for="TLoSaCode">Select the Competency</label>
 														</div>
 														<div class="col-sm-12 col-md-8">
-															<input type="text" th:field="*{tCompetencyDescription}"
-																class="form-control" placeholder="Competency Description" />
+															<select class="form-select" id="tcompetency_dropdown" name="tCompetency" th:field="*{tCompetencyId}" required>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="learningOutcome">Enter the Learning Outcome</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+<!-- 															<input type="text" th:field="*{learningOutcome}" class="form-control" placeholder="Learning Outcome" /> -->
+															<textarea th:field="*{learningOutcome}" class="form-control" placeholder="Learning Outcome"></textarea>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="suggestiveActivity">Enter the Suggestive Activity</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+<!-- 															<input type="text" th:field="*{suggestiveActivity}" class="form-control" placeholder="Suggestive Activity" /> -->
+															<textarea th:field="*{suggestiveActivity}" class="form-control" placeholder="Suggestive Activity"></textarea>
 														</div>
 													</div>
 													<div class="row mb-3 text-center">
@@ -128,24 +119,31 @@
 										<tr class="text-center">
 <!-- 											<th class="text-center">ID</th> -->
 	<!-- 										<th>ID</th> -->
+											<th>Class-Subject</th>
 											<th>Goal</th>
 											<th>Competency</th>
-											<th>Competency Description</th>
+											<th>Learning Outcome</th>
+											<th>Suggestive Activity</th>
 											<th>Update</th>
 											<th>Enable/Disable</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="TLoSa : ${listTCompetencies}">
+										<tr th:each="TLoSa : ${listTLoSas}">
 	<!-- 										<td th:text="${TLoSa.tCompetencyId}">ID</td> -->
 											<td>
-												<span class="fw-bold" th:text="${TLoSa.tGoalId.mGoalId.mGoalCode} + ' '"></span>
-												<span th:text="${TLoSa.tGoalId.tGoalName}"></span> Goal</td>
+												<span th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName} + ${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></span></td>
 											<td>
-												<span class="fw-bold" th:text="${TLoSa.mLoSaId.mLoSaCode} + ' '"></span>
-												<span th:text="${TLoSa.tCompetencyName}"></span></td>
+												<span class="fw-bold" th:text="${TLoSa.tCompetencyId.tGoalId.mGoalId.mGoalCode} + ' '"></span>
+												<span th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}"></span></td>
 											<td>
-												<span th:text="${TLoSa.tCompetencyDescription}"></span></td>
+												<span class="fw-bold" th:text="${TLoSa.tCompetencyId.mCompetencyId.mCompetencyCode} + ' '"></span>
+												<span th:text="${TLoSa.tCompetencyId.tCompetencyName}"></span></td>
+											<td>
+												<span th:text="${TLoSa.learningOutcome}"></span></td>
+											<td>
+												<span th:text="${TLoSa.suggestiveActivity}"></span></td>
+												
 											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tCompetency/edit/' + ${TLoSa.tCompetencyId}}">
 												<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
 												</a></td>
@@ -179,18 +177,25 @@
 	  	//INIT
         $("#class_subject_dropdown").append('<option id="cs_blank" selected="selected" value=""></option>').prop("disabled", false);
         $("#tgoal_dropdown").empty().append('<option id="goal_blank" selected="selected" disabled="disabled" value="">-- Select a Class and Subject first --</option>').prop("disabled", true);
+        $("#tcompetency_dropdown").empty().append('<option id="competency_blank" selected="selected" disabled="disabled" value="">-- Select a Curriculum Goal first --</option>').prop("disabled", true);
 
 		// Handle change event on ClassSubject dropdown
 	  	$('body').on('change', '#class_subject_dropdown', function() {
 			$('#cs_blank').prop('disabled', true);
 	    	const selectedMapCSId = $('#class_subject_dropdown').val();
-// 			console.log("mapCSid: " + selectedMapCSId);
+			console.log("mapCSid: " + selectedMapCSId);
 			loadTGoalOptions(selectedMapCSId); // Load options for TGoal based on ClassSubject selection
+	  	});
+		// Handle change event on TGoal dropdown
+	  	$('body').on('change', '#tgoal_dropdown', function() {
+			$('#competency_blank').prop('disabled', true);
+	    	const selectedTGoalId = $('#tgoal_dropdown').val();
+			console.log("tGoalid: " + selectedTGoalId);
+			loadTCompetencyOptions(selectedTGoalId); // Load options for TCOmpetency based on TGoal selection
 	  	});
 	});
 	
 	function loadTGoalOptions(selectedMapCSId) {
-		
 	  	$.ajax({
 	    	url: '/goalsList',
 	    	type: "GET",
@@ -212,6 +217,37 @@
 
 				}
 				$('#tgoal_dropdown').html(content);
+				console.log(response);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+		    }
+	  	});
+
+	}
+	
+	function loadTCompetencyOptions(selectedTGoalId) {
+	  	$.ajax({
+	    	url: '/competenciesList',
+	    	type: "GET",
+		    data: 'goalId=' + selectedTGoalId ,
+		    success: function(response) {
+// 				console.log(response);
+
+				$('#tcompetency_dropdown').html('');
+				$('#tcompetency_dropdown').prop('disabled', false);
+				var content = '';
+
+				if(response.length > 0) {
+					for(var a=0;a<response.length;a++) {
+						content +='<option value="'+ response[a].tcompetencyId +'">'+ response[a].tcompetencyName +'</option>';
+					}
+				} else {
+					content +='<option selected="selected" disabled="disabled" value="">-- No Competency for this curriculum goal  --</option>';
+					$('#tcompetency_dropdown').prop('disabled', true);
+
+				}
+				$('#tcompetency_dropdown').html(content);
 				console.log(response);
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {

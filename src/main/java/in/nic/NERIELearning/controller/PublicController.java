@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import in.nic.NERIELearning.model.MContent;
-import in.nic.NERIELearning.model.TCompetency;
+import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
@@ -20,6 +20,7 @@ import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
 import in.nic.NERIELearning.service.TCompetencyService;
 import in.nic.NERIELearning.service.TGoalService;
+import in.nic.NERIELearning.service.TLoSaService;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
@@ -38,6 +39,8 @@ public class PublicController{
 	TCompetencyService tCompetencyService;
 	@Autowired
 	MContentService mContentService;
+	@Autowired
+	TLoSaService tLoSaService;
 
 	//	START: PUBLIC Mappings
 	@GetMapping("/public/schoolEducation")
@@ -67,8 +70,11 @@ public class PublicController{
 	
 	@GetMapping("/public/viewLearningOutcomes")
 	public String viewLearningOutcomes(Model mClass) {
-		List<TCompetency> listCompetency = tCompetencyService.findAll();
-		mClass.addAttribute("listCompetency", listCompetency);
+//		List<TCompetency> listCompetency = tCompetencyService.findAll();
+//		mClass.addAttribute("listCompetency", listCompetency);
+		List<TLoSa> listLoSa = tLoSaService.findAll();
+		mClass.addAttribute("listLoSa", listLoSa);
+		System.out.println(listLoSa);
 		return "public/viewLearningOutcomes";
 	}
 	
