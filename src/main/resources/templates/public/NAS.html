@@ -45,28 +45,28 @@
 							<div class="tab-content" id="tab-content">
 <!-- 								CONTENT TAB 1 -->
 							    <div class="tab-pane show active fade" id="nas-yt-tab" role="tabpanel" aria-labelledby="nas-yt-tab" tabindex="0">
-									<div class="card p-4">
-										<div class="pb-4">OMR Capacity Building NAS-2021 Video Module (English):</div>
-										<div>
-											<iframe class="embed-responsive-item" width="100%" height="500rem" src="https://www.youtube.com/embed/KMDXN4NY8WY"
-												title="OMR Capacity Building Video Module (English)"
-												frameborder="0" allow="accelerometer; autoplay; clipboard-write;
-									  	 		encrypted-media; gyroscope; picture-in-picture; web-share"
-												allowfullscreen>
-											</iframe>
+									<div class="card p-2">
+										<div class="card-title pb-2">OMR Capacity Building NAS-2021 Video Module (English):</div>
+											<div class="card-body">
+												<iframe class="embed-responsive-item" width="100%" height="500rem" src="https://www.youtube.com/embed/KMDXN4NY8WY"
+													title="OMR Capacity Building Video Module (English)"
+													frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+										  	 		encrypted-media; gyroscope; picture-in-picture; web-share"
+													allowfullscreen>
+												</iframe>
 										</div>
 									</div>
-									<div class="card p-4">
-										<div class="pb-4">PQ, SQ, TQ Capacity Building NAS-2021 Video Module (English):</div>
-										<div>
-											<iframe class="embed-responsive-item" width="100%" height="500rem" src="https://www.youtube.com/embed/N0PH5z8WuBg"
-												title="PQ,SQ TQ Capacity Building Video Module"
-												frameborder="0" allow="accelerometer; autoplay; clipboard-write;
-												encrypted-media; gyroscope; picture-in-picture; web-share"
-												allowfullscreen>
-											</iframe>
+									<div class="card p-2">
+										<div class="card-title pb-2">PQ, SQ, TQ Capacity Building NAS-2021 Video Module (English):</div>
+											<div class="card-body">
+												<iframe class="embed-responsive-item" width="100%" height="500rem" src="https://www.youtube.com/embed/N0PH5z8WuBg"
+													title="PQ,SQ TQ Capacity Building Video Module"
+													frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+													encrypted-media; gyroscope; picture-in-picture; web-share"
+													allowfullscreen>
+												</iframe>
+											</div>
 										</div>
-									</div>	
 						    	</div>
 <!-- 								CONTENT TAB 1: END -->
 <!-- 								CONTENT TAB 2 -->
@@ -85,10 +85,10 @@
 		<!-- 										<p th:text=${listContent}></p> -->
 												<tbody>
 													<tr th:each="MContent : ${listContent}">
-														<td th:text="${MContent.mapClassSubjectId.mClassId.mClassName} + '-' + ${MContent.mapClassSubjectId.mSubjectId.mSubjectName}">ClassSubject</td>
+														<td th:text="${MContent.mapClassSubjectId.mClassId.mClassName} + ' ' + ${MContent.mapClassSubjectId.mSubjectId.mSubjectName}">ClassSubject</td>
 														<td th:text="${MContent.mContentName}">Content Name</td>
 														<td class="text-center">
-															<a th:href="@{'/admin/mContent/getDocument/' + ${MContent.mContentId}}" target="_blank" class="btn btn-info text-light">View Attachment</a>
+															<a th:href="@{'/public/mContent/getDocument/' + ${MContent.mContentId}}" target="_blank" class="btn btn-info text-light">View Attachment</a>
 														</td>											
 													</tr>
 												</tbody>

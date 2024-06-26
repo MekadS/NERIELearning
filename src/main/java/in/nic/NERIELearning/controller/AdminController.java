@@ -123,7 +123,6 @@ public class AdminController{
 		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
 			// Set error message for the view
 //			model.addAttribute("message", "Error");
-//			System.out.println(model);
 			return "redirect:/admin/editMClasses";
 		}
 	}
@@ -145,8 +144,6 @@ public class AdminController{
 		mav.addObject("mClass", mClass);
 		mav.addObject("listMStages", listMStages);
 
-		System.out.println("mClass: " + mClass);
-		System.out.println("mStagesList: " + listMStages);
 		return mav;
 	}
 
@@ -210,13 +207,11 @@ public class AdminController{
 		model.addAttribute("listMContent", listMContent);
 		model.addAttribute("mContent", new MContent());
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
-		System.out.println(listMContent);
 		return "admin/editMContent";
 	}
 	
 	@RequestMapping(value = "saveMContent", method = RequestMethod.POST)
 	public String saveMContent(@ModelAttribute("MContent") @Valid MContent mContent,@RequestParam(name = "file", required = true) MultipartFile file, BindingResult result, Model model) throws IOException {
-		System.out.println(mContent.toString() + "\n\n" + file.getSize());
 		
 		if(result.hasErrors()) {
 			List<MContent> listMContent = mContentService.findAll();
