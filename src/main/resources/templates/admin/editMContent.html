@@ -15,86 +15,112 @@
 	<main>
 		<div class="row my-5">
 			<div align="center">
-				<div class="card mb-3 col-sm-12 col-md-12 col-lg-10">
-					<div class="card-title my-3 h2">
-						NERIE Content
+				<div class="card py-3 border-3 col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3 text-center h2">
+						Content
 					</div>
 					<div class="card-body">
-						<div class="d-flex justify justify-content-between">
-							<a th:href="@{/admin/dashboard}"><button
-									class="btn btn-primary">Admin Dashboard</button></a>
+						<div class="row mb-3">
+							<div class="text-start col-sm-12 col-md-12">
+								<a th:href="@{/admin/dashboard}">
+									<button class="btn btn-primary">Admin Dashboard</button>
+								</a>											
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="card mb-3 col-sm-12 col-md-12 col-lg-10">
-					<div class="card-body">
-						<div>
-							<form action="#" th:action="@{/admin/saveMContent}"
-								th:object="${mContent}" method="post"
-								enctype="multipart/form-data">
-								<table class="table">
-									<tbody>
-										<tr>
-											<td><label class="form-label">Create New Content</label></td>
-											<td class="w-90"><input type="hidden"
-												th:field="*{mContentId}" /> <select class="form-select"
-												id="selectClass" name="mapClassSubject"
-												th:field="*{mapClassSubjectId}" required>
-													<option th:each="mapCS : ${listMapClassSubjects}"
-														th:value="${mapCS.mapClassSubjectId}"
-														th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
-											</select></td>
-											<td><input type="text" th:field="*{mContentName}"
-												class="form-control" placeholder="Content Name" /></td>
+						<div class="accordion" id="createNewContent">
+							<div class="accordion-item">
+							  	<h2 class="accordion-header">
+      								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							      		Create a new Content
+							    	</button>
+							  	</h2>
+    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewContent">
+							    	<div class="accordion-body">
+										<form action="#" th:action="@{/admin/saveMContent}" th:object="${mContent}" method="post"
+											enctype="multipart/form-data">
+											<div class="row mb-3">
+												<div class="col-sm-12 col-md-4 mb-3 text-start">
+													<label class="form-label">Class & Subject</label>
+												</div>
+												<div class="col-sm-12 col-md-8">
+													<input type="hidden" th:field="*{mContentId}" /> 
+														<select class="form-select"
+														id="selectClass" name="mapClassSubject"
+														th:field="*{mapClassSubjectId}" required>
+															<option th:each="mapCS : ${listMapClassSubjects}"
+																th:value="${mapCS.mapClassSubjectId}"
+																th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col-sm-12 col-md-4 mb-3 text-start">
+													<label class="form-label">Content Name</label>
+												</div>
+												<div class="col-sm-12 col-md-8">
+													<input type="text" th:field="*{mContentName}" class="form-control" placeholder="Content Name" />
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col-sm-12 col-md-4 mb-3 text-start">
+													<label class="form-label">Upload a file</label>
+												</div>
+												<div class="col-sm-12 col-md-8">
+													<input type="file" name="file" />
+												</div>
+											</div>
+											<div class="row test-center mb-3">
+												<div class="col-sm-12 col-md-12 mb-3">
+													<button type="submit" class="btn btn-success">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card mt-3">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-12 h4 text-start">
+										List of Stages
+									</div>
+								</div>
+								<table id="content" class="table table-bordered table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+									<thead class="thead-dark">
+										<tr class="">
+		<!-- 									<th>ID</th> -->
+											<th>Class-Subject</th>
+											<th>Content</th>
+											<th>Status</th>
+											<th class="text-center">File</th>
+											<th class="text-center">Update</th>
+											<th class="text-center">Enable/Disable</th>
 										</tr>
-										<tr>
-											<td>File to upload:</td>
-											<td><input type="file" name="file" /></td>
-
-											<td>
-												<button type="submit" class="btn btn-success">Save</button>
+									</thead>
+									<tbody>
+										<tr th:each="MContent : ${listMContent}">
+		<!-- 									<td th:text="${MContent.mContentId}">ID</td> -->
+											<td th:text="${MContent.mapClassSubjectId.mClassId.mClassName} + ' ' + ${MContent.mapClassSubjectId.mSubjectId.mSubjectName}">Class and Subject</td>
+											<td th:text="${MContent.mContentName}">Content Name</td>
+											<td th:text="${MContent.isActive ? 'Active' : 'Inactive'}">Status</td>
+											<td class="text-center">
+												<a th:href="@{'/admin/mContent/getDocument/' + ${MContent.mContentId}}" target="_blank" class="btn btn-info text-light">View Attachment</a>
 											</td>
+											<td class="text-center"><a th:href="@{'/admin/mContent/edit/' + ${MContent.mContentId}}"><i class="fa-solid fa-2xl fa-pen-to-square text-info"></i></a></td>
+											<td class="text-center"><a th:href="@{'/admin/mContent/toggleStatus/' + ${MContent.mContentId}}">
+												<i th:class="${MContent.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i></a></td>
+												
 										</tr>
 									</tbody>
 								</table>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="card mb-3 col-sm-12 col-md-12 col-lg-10">
-					<div class="card-body">
-						<table id="content" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
-							<thead class="thead-dark">
-								<tr class="">
-<!-- 									<th>ID</th> -->
-									<th>Class-Subject</th>
-									<th>Content</th>
-									<th>Status</th>
-									<th class="text-center">File</th>
-									<th class="text-center">Update</th>
-									<th class="text-center">Enable/Disable</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="MContent : ${listMContent}">
-<!-- 									<td th:text="${MContent.mContentId}">ID</td> -->
-									<td th:text="${MContent.mapClassSubjectId.mClassId.mClassName} + ' ' + ${MContent.mapClassSubjectId.mSubjectId.mSubjectName}">Class and Subject</td>
-									<td th:text="${MContent.mContentName}">Content Name</td>
-									<td th:text="${MContent.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td class="text-center">
-										<a th:href="@{'/admin/mContent/getDocument/' + ${MContent.mContentId}}" target="_blank" class="btn btn-info text-light">View Attachment</a>
-									</td>
-									<td class="text-center"><a th:href="@{'/admin/mContent/edit/' + ${MContent.mContentId}}"><i class="fa-solid fa-2xl fa-pen-to-square text-info"></i></a></td>
-									<td class="text-center"><a th:href="@{'/admin/mContent/toggleStatus/' + ${MContent.mContentId}}">
-										<i th:class="${MContent.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i></a></td>
-										
-								</tr>
-							</tbody>
-						</table>
-						<div>
-							<ul>
-								<li th:each="file : ${files}"><a th:href="${file}" th:text="${file}" /></li>
-							</ul>
+								<div>
+									<ul>
+										<li th:each="file : ${files}"><a th:href="${file}" th:text="${file}" /></li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
