@@ -23,8 +23,6 @@
 						<div class="d-flex justify justify-content-between">
 							<a th:href="@{/admin/dashboard}"><button
 									class="btn btn-primary">Admin Dashboard</button></a>
-							<!-- 							<a th:href="@{/admin/createMContent}"><button -->
-							<!-- 									class="btn btn-outline-success">Add New</button></a> -->
 						</div>
 					</div>
 				</div>
@@ -95,8 +93,7 @@
 						</table>
 						<div>
 							<ul>
-								<li th:each="file : ${files}"><a th:href="${file}"
-									th:text="${file}" /></li>
+								<li th:each="file : ${files}"><a th:href="${file}" th:text="${file}" /></li>
 							</ul>
 						</div>
 					</div>

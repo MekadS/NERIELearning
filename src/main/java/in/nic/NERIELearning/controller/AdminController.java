@@ -23,7 +23,6 @@ import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MContent;
 import in.nic.NERIELearning.model.MStage;
 import in.nic.NERIELearning.model.MSubject;
-import in.nic.NERIELearning.model.MapClassSubject;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
@@ -65,8 +64,7 @@ public class AdminController{
 	//	START: ADMIN MStage Methods
 	@GetMapping("editMStages")
 	public String adminEditStages(Model model) {
-		List<MStage> listMStage = mStageService.findAll();
-		model.addAttribute("listMStages", listMStage);
+		model.addAttribute("listMStages", mStageService.findAll());
 		model.addAttribute("mStage", new MStage());
 
 		return "admin/editMStages";
@@ -82,20 +80,13 @@ public class AdminController{
 		return "redirect:/admin/editMStages";
 	}
 
-	@GetMapping("createMStage")
-	public String addMStage(Model model) {
-		model.addAttribute("mStage", new MStage());
-
-		return "admin/createMStage";
-	}
-
 	@RequestMapping("mStage/edit/{m_stage_id}")
 	public ModelAndView editMStage(@PathVariable(name = "m_stage_id") Long id) {
-		ModelAndView mav = new ModelAndView("/admin/createMStage");
-
-		MStage mStage = mStageService.get(id);
-		mav.addObject("mStage", mStage);
-
+		ModelAndView mav = new ModelAndView("/admin/editMStages");
+		
+		mav.addObject("mStage", mStageService.get(id));
+		mav.addObject("listMStages", mStageService.findAll());
+		
 		return mav;
 	}
 
@@ -131,22 +122,13 @@ public class AdminController{
 		}
 	}
 
-	@GetMapping("createMClass")
-	public String addMClass(Model model) {
-		model.addAttribute("listMStages", mStageService.findAll());
-
-		return "admin/createMClass";
-	}
-
 	@RequestMapping("mClass/edit/{m_class_id}")
 	public ModelAndView editMClass(@PathVariable(name = "m_class_id") Long id) {
-		ModelAndView mav = new ModelAndView("/admin/createMClass");
-		
-		MClass mClass = mClassService.get(id);
-		List<MStage> listMStages = mStageService.findAll();
+		ModelAndView mav = new ModelAndView("/admin/editMClasses");
 
-		mav.addObject("mClass", mClass);
-		mav.addObject("listMStages", listMStages);
+		mav.addObject("listMStages", mStageService.findAll());
+		mav.addObject("listMClasses", mClassService.findAll());
+		mav.addObject("mClass", mClassService.get(id));
 
 		return mav;
 	}
@@ -164,8 +146,7 @@ public class AdminController{
 	//	START: ADMIN MSubject Methods
 	@GetMapping("editMSubjects")
 	public String adminEditMSubjects(Model model) {
-		List<MSubject> listMSubject = mSubjectService.findAll();
-		model.addAttribute("listMSubjects", listMSubject);
+		model.addAttribute("listMSubjects", mSubjectService.findAll());
 		model.addAttribute("mSubject", new MSubject());
 
 		return "admin/editMSubjects";
@@ -177,19 +158,12 @@ public class AdminController{
 		return "redirect:/admin/editMSubjects";
 	}
 
-	@GetMapping("/admin/createMSubject")
-	public String addMSubject(Model model) {
-		model.addAttribute("mSubject", new MSubject());
-
-		return "admin/createMSubject";
-	}
-
 	@RequestMapping("mSubject/edit/{m_subject_id}")
 	public ModelAndView editMSubject(@PathVariable(name = "m_subject_id") Long id) {
-		ModelAndView mav = new ModelAndView("/admin/createMSubject");
+		ModelAndView mav = new ModelAndView("/admin/editMSubjects");
 
-		MSubject mSubject = mSubjectService.get(id);
-		mav.addObject("mSubject", mSubject);
+		mav.addObject("mSubject", mSubjectService.get(id));
+		mav.addObject("listMSubjects", mSubjectService.findAll());
 
 		return mav;
 	}
@@ -218,9 +192,8 @@ public class AdminController{
 	public String saveMContent(@ModelAttribute("MContent") @Valid MContent mContent,@RequestParam(name = "file", required = true) MultipartFile file, BindingResult result, Model model) throws IOException {
 		
 		if(result.hasErrors()) {
-			List<MContent> listMContent = mContentService.findAll();
-			model.addAttribute("listMContent", listMContent);
 			model.addAttribute("mContent", mContent);
+			model.addAttribute("listMContent", mContentService.findAll());
 			model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 			return "redirect:/admin/editMContent";
 		}
@@ -240,12 +213,10 @@ public class AdminController{
 	
 	@RequestMapping("mContent/edit/{m_content_id}")
 	public ModelAndView editMContent(@PathVariable(name = "m_content_id") Long id) {
-		ModelAndView mav = new ModelAndView("/admin/createMContent");
-		List<MapClassSubject> listMapClassSubjects = mapClassSubjectService.findAll();
+		ModelAndView mav = new ModelAndView("/admin/editMContent");
 		
-		MContent mContent = mContentService.get(id);
-		mav.addObject("mContent", mContent);
-		mav.addObject("listMapClassSubjects", listMapClassSubjects);
+		mav.addObject("mContent", mContentService.get(id));
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
 
 		return mav;
 	}
