@@ -15,58 +15,84 @@
 	<main>
 		<div class="row my-5">
 			<div align="center">
-				<div class="card col-sm-12 col-md-12 col-lg-10">
-					<div class="card-title my-3">
-						<h3>School Subjects</h3>
+				<div class="card border-3 col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3 text-center h2">
+						Subjects
 					</div>
 					<div class="card-body">
-						<div class="d-flex justify justify-content-between">
-							<a th:href="@{/admin/dashboard}">
-								<button class="btn btn-primary">Admin Dashboard</button></a> 
+						<div class="row mb-3">
+							<div class="text-start col-sm-12 col-md-12">
+								<a th:href="@{/admin/dashboard}">
+									<button class="btn btn-primary">Admin Dashboard</button>
+								</a>											
+							</div>
 						</div>
-						<div>
-							<form action="#" th:action="@{/admin/saveMSubject}"
-								th:object="${mSubject}" method="post">
-								<table class="table">
-									<tbody>
+						<div class="accordion" id="createNewSubject">
+							<div class="accordion-item">
+							  	<h2 class="accordion-header">
+      								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							      		Create a new Subject
+							    	</button>
+							  	</h2>
+    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewSubject">
+							    	<div class="accordion-body">
+										<form action="#" th:action="@{/admin/saveMSubject}"
+											th:object="${mSubject}" method="post">
+											<div class="row mb-3">
+												<div class="col-sm-12 col-md-4 mb-3 text-start">
+													<label class="form-label">Subject Name</label>
+												</div>
+												<div class="col-sm-12 col-md-8">
+													<input type="hidden" th:field="*{mSubjectId}" /> 
+													<input type="text" th:field="*{mSubjectName}" class="form-control"
+														placeholder="School Subject Name" />
+												</div>
+											</div>
+											<div class="row text-center mb-3">
+												<div class="col-sm-12 col-md-12 mb-3">
+													<button type="submit" class="btn btn-success">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="card mt-3">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-12 h4 text-start">
+										List of Subjects
+									</div>
+								</div>
+								<table id="subjects" class="table table-bordered table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+									<thead class="thead-dark">
 										<tr>
-											<td><label class="form-label">Create New Subject</label></td>
-											<td class="w-90"><input type="hidden" th:field="*{mSubjectId}" /> <input
-												type="text" th:field="*{mSubjectName}" class="form-control"
-												placeholder="School Subject Name" /></td>
-											<td>
-												<button type="submit" class="btn btn-success">Save</button>
-											</td>
+		<!-- 									<th>ID</th> -->
+											<th>Subject</th>
+											<th>Status</th>
+											<th class="text-center">Update</th>
+											<th class="text-center">Enable/Disable</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="MSubject : ${listMSubjects}">
+		<!-- 									<td th:text="${MSubject.mSubjectId}">ID</td> -->
+											<td th:text="${MSubject.mSubjectName}">Subject</td>
+											<td th:text="${MSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
+											<td class="text-center">
+												<a th:href="@{'/admin/mSubject/edit/' + ${MSubject.mSubjectId}}">
+												<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+												</a></td>
+											<td class="text-center"><a th:href="@{'/admin/mSubject/toggleStatus/' + ${MSubject.mSubjectId}}">
+												<i th:class="${MSubject.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+												</a></td>
 										</tr>
 									</tbody>
 								</table>
-							</form>
+							</div>
 						</div>
-						<table id="subjects" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
-							<thead class="thead-dark">
-								<tr>
-<!-- 									<th>ID</th> -->
-									<th>Subject</th>
-									<th>Status</th>
-									<th class="text-center">Update</th>
-									<th class="text-center">Enable/Disable</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="MSubject : ${listMSubjects}">
-<!-- 									<td th:text="${MSubject.mSubjectId}">ID</td> -->
-									<td th:text="${MSubject.mSubjectName}">Subject</td>
-									<td th:text="${MSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td class="text-center">
-										<a th:href="@{'/admin/mSubject/edit/' + ${MSubject.mSubjectId}}">
-										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
-										</a></td>
-									<td class="text-center"><a th:href="@{'/admin/mSubject/toggleStatus/' + ${MSubject.mSubjectId}}">
-										<i th:class="${MSubject.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
-										</a></td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</div>
