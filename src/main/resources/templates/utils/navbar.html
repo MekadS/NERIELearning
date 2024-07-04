@@ -1,11 +1,12 @@
 <header id="header">
 <!-- class="fixed-top"> -->
 	<nav class="navbar navbar-expand-lg bg-body-tertiary nerie_bg_green py-3">
-		<form id="logout-form" th:action="@{/logout}" method="POST">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		</form>
 		<div class="container-fluid z-3">
-			<a class="nerie-nav-logo" th:href="@{/}">NERIE Learning</a>
+			<form id="logout-form" th:action="@{/logout}" method="POST">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			</form>
+			<a class="nerie-nav-logo ms-5" th:href="@{/}">NERIE Learning</a>
+			
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -14,7 +15,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-5 mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link nerie-nav-link"
+					<li class="nav-item"><a class="nav-link active nerie-nav-link"
 						aria-current="page" th:href="@{/}">Home</a></li>
 					<li class="nav-item"><a class="nav-link nerie-nav-link"
 						th:href="@{/public/schoolEducation}">School Education</a></li>
@@ -29,13 +30,7 @@
 					<li class="nav-item ms-3">
 						<a class="nav-link nerie-nav-link btn btn-outline-danger text-light" onclick="document.getElementById('logout-form').submit();">Logout</a></li>
 				</ul>
-<!-- 				<form class="d-flex " role="search"> -->
-<!-- 					<input class="form-control me-2" type="search" placeholder="Search" -->
-<!-- 						aria-label="Search"> -->
-<!-- 					<button class="btn btn-outline-success" type="submit">Search</button> -->
-<!-- 				</form> -->
 			</div>
-<!-- 				<a class="btn btn-danger text-light" onclick="document.getElementById('logout-form').submit();">Logout</a> -->
 		</div>
 	</nav>
 </header>
