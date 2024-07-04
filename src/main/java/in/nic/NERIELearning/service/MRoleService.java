@@ -21,7 +21,7 @@ public class MRoleService {
         mRoleRepo.save(mRole);
     }
      
-    public MRole get(Long m_role_id) {
-        return mRoleRepo.findById(m_role_id).get();
+    public MRole get(Long id) {
+        return mRoleRepo.findById(id).get();
     }
 }

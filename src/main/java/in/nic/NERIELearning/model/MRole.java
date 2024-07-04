@@ -1,18 +1,18 @@
 package in.nic.NERIELearning.model;
 
-import in.nic.NERIELearning.config.ConstantUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Entity
 @Data
@@ -22,12 +22,13 @@ import lombok.NoArgsConstructor;
 @Table(name = "m_role")
 public class MRole {
 	@Id
-	@Column(length = 20, nullable = false)
-	private String roleId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "m_role_id_seq")
+	@SequenceGenerator(name = "m_role_id_seq", sequenceName = "M_ROLE_SEQ", allocationSize = 500, initialValue = 2000)
+	private Long mRoleId;
 
 	@NotBlank
 	@NotEmpty
-	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_ONLY_WITH_SPACE_AND_UNDERSCORE, message = "Invalid Role Name")
+//	@Pattern(regexp = ConstantUtils.REGEXP_ALPHABET_ONLY_WITH_SPACE_AND_UNDERSCORE, message = "Invalid Role Name")
 	@Column(length = 30, nullable = false)
 	private String roleName;
 

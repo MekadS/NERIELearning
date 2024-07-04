@@ -1,8 +1,11 @@
 package in.nic.NERIELearning.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import in.nic.NERIELearning.model.Userlogin;
@@ -19,6 +22,12 @@ public class UserLoginService{
 	}
 	
 	public void save(Userlogin mUserlogin) {
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		System.out.println("PT: " + mUserlogin.getPassword());
+		mUserlogin.setPassword(passwordEncoder.encode(mUserlogin.getPassword()));
+		System.out.println("CT: " + mUserlogin.getPassword());
+
+//		mUserlogin.setEntrydate(new Date());
 		mUserloginRepo.save(mUserlogin);
 	}
 	

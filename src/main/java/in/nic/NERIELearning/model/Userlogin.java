@@ -19,6 +19,7 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -45,13 +46,14 @@ public class Userlogin {
 	@JoinColumn(name = "roleId")
 	public MRole role;
 
+	@Builder.Default
 	@Column(length = 1, nullable = false)
-	private Boolean isActive;
+	private Boolean isActive=true;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "entrydate", nullable = false)
-	private Date entrydate;
+	private Date entrydate = new Date();
 
 	@Transient
 	private String captcha;

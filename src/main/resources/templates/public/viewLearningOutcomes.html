@@ -22,7 +22,7 @@
 	<aside></aside>
 
 	<main>
-		<div class="card my-5 mx-3 text-center">
+		<div class="card border-3 my-5 mx-3 text-center">
 			<div class="card-title mt-4 h1">Learning Outcomes</div>
 			<div class="card-body row mb-4 justify-content-around">
 				<table id="learningOutcomes"
@@ -63,8 +63,12 @@
 			responsive: true,
 			layout : {
 				top1End : {
-					buttons : ['pdf', 'print'],
-				}
+					buttons : [{
+						extend: 'pdf',
+						className: 'bg-danger border-white'},{
+						extend: 'print',
+						className: 'bg-info border-white'}
+				]}
 			},
 		});
 		
