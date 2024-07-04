@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/keyImportsLoginPage :: head}"></div>
 	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
 
 	<aside></aside>
@@ -54,9 +54,8 @@
 								<div th:if="${param.error}" class="alert alert-danger">Incorrect username or password</div>
 								<div th:if="${param.logout}" class="alert alert-warning">You have successfully logged out</div>
 
-								<input class="form-control mb-3" type="text"
-									placeholder="Username" th:field="*{username}"> <input
-									class="form-control" type="password" placeholder="Password"
+								<input class="form-control mb-3" type="text" placeholder="Username" th:field="*{username}" autofocus> 
+								<input class="form-control" type="password" placeholder="Password"
 									th:field="*{password}">
 
 								<div class="row">
@@ -73,8 +72,8 @@
 
 								<div class="row">
 									<div class="col mb-3">
-										<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}"
-											type="hidden" /> <input class="form-control" id="captcha"
+										<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}" type="hidden" /> 
+										<input class="form-control" id="captcha"
 											onchange="checkCaptcha()" placeholder="Enter Captcha"
 											required th:field="*{captcha}" type="text" />
 									</div>

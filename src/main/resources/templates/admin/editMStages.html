@@ -44,9 +44,9 @@
 															<label for="serialNumber">Stage Serial Number</label>
 														</div>
 														<div class="col-sm-12 col-md-8">
-															<input type="hidden" th:field="*{mStageId}" /> 
+															<input type="hidden" th:field="*{mStageId}"/> 
 															<input type="number" th:field="*{mStageSerialNo}" class="form-control"
-															placeholder="School Stage Serial Number" name="serialNumber" id="serialNumber"/>
+															placeholder="School Stage Serial Number" name="serialNumber" id="serialNumber"  required/>
 						<!-- 									    <small class="text-danger" th:if="${#fields.hasErrors('serialNumber')}" th:text="${#fields.getFieldError('serialNumber').defaultMessage}">Serial Number is mandatory</small> -->
 														</div>
 													</div>
@@ -55,7 +55,7 @@
 															<label class="form-label">Stage Name</label>
 														</div>
 														<div class="col-sm-12 col-md-8">
-															<input type="text" th:field="*{mStageName}" class="form-control" placeholder="School Stage Name" />
+															<input type="text" th:field="*{mStageName}" class="form-control" placeholder="School Stage Name" required/>
 														</div>
 													</div>
 													<div class="row mb-3">

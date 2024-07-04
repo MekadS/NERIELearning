@@ -1,7 +1,6 @@
 package in.nic.NERIELearning.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -181,8 +180,7 @@ public class AdminController{
 	//	START: ADMIN MContent Methods
 	@GetMapping("editMContent")
 	public String adminEditMContent(Model model) throws IOException{
-		List<MContent> listMContent = mContentService.findAll();
-		model.addAttribute("listMContent", listMContent);
+		model.addAttribute("listMContent", mContentService.findAll());
 		model.addAttribute("mContent", new MContent());
 		model.addAttribute("listMapClassSubjects", mapClassSubjectService.findAll());
 		return "admin/editMContent";
@@ -216,6 +214,7 @@ public class AdminController{
 		ModelAndView mav = new ModelAndView("/admin/editMContent");
 		
 		mav.addObject("mContent", mContentService.get(id));
+		mav.addObject("listMContent", mContentService.findAll());
 		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
 
 		return mav;

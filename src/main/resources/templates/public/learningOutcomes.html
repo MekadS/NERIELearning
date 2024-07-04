@@ -14,25 +14,29 @@
 	<aside></aside>
 
 	<main>
-		<div class="card my-5 mx-3 text-center">
-			<div class="card-title mt-4 h1">Learning Outcomes</div>
-			<div class="card-body row mb-4 justify-content-around">
-				<div class="card col-6 my-5 py-5 by-5">
-					<p>
-						<span class="fw-semibold">Learning outcomes</span> describe the
-						measurable skills, abilities, knowledge or values that students
-						should be able to demonstrate as a result of a completing a
-						course.<br> They are <span class="fw-semibold">student-centered</span>
-						rather than teacher-centered, in that they describe what the
-						students will do, not what the instructor will teach.
-					</p>
-				</div>
-				<div class="card d-flex align-items-center col-4 my-5 py-5 by-5">
-				<p>Learning Outcomes &amp; Suggestive Activities</p>
-					<p class="d-inline-flex gap-1 align-middle text-center justify-content-around">
-						<a th:href="@{/public/viewLearningOutcomes}" class="mx-auto btn btn-info text-light">View</a>
-						<a th:href="@{/editor/dashboard}"
-							class="mx-auto btn btn-outline-info">Manage</a>
+		<div class="row">
+			<div align="center">
+				<div class="card border border-3 col-sm-12 col-md-8 my-5 mx-3 text-center">
+					<div class="card-title my-4 h1">Learning Outcomes</div>
+					<div class="card-body row mb-4 justify-content-around">
+						<div class="card col-6 mb-5 py-5 by-5 align-items-center">
+							<p class="px-2">
+								<span class="fw-semibold">Learning outcomes</span> describe the
+								measurable skills, abilities, knowledge or values that students
+								should be able to demonstrate as a result of a completing a
+								course.<br><br> They are <span class="fw-semibold">student-centered</span>
+								rather than teacher-centered, in that they describe what the
+								students will do, not what the instructor will teach.
+							</p>
+						</div>
+						<div class="card d-flex align-items-center col-4 mb-5 py-5 by-5">
+							<p>Learning Outcomes &amp; Suggestive Activities</p>
+							<p class="d-inline-flex gap-1 align-middle text-center justify-content-around">
+								<a th:href="@{/public/viewLearningOutcomes}" class="mx-auto btn btn-info text-light">View</a>
+								<a th:href="@{/editor/dashboard}" class="mx-auto btn btn-outline-info">Manage</a>
+							</p>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -58,7 +58,7 @@
 													<label class="form-label">Content Name</label>
 												</div>
 												<div class="col-sm-12 col-md-8">
-													<input type="text" th:field="*{mContentName}" class="form-control" placeholder="Content Name" />
+													<input type="text" th:field="*{mContentName}" class="form-control" placeholder="Content Name" required/>
 												</div>
 											</div>
 											<div class="row mb-3">
@@ -66,7 +66,7 @@
 													<label class="form-label">Upload a file</label>
 												</div>
 												<div class="col-sm-12 col-md-8">
-													<input type="file" name="file" />
+													<input type="file" name="file" required/>
 												</div>
 											</div>
 											<div class="row test-center mb-3">
@@ -84,7 +84,7 @@
 							<div class="card-body">
 								<div class="row mb-3">
 									<div class="col-sm-12 col-md-12 h4 text-start">
-										List of Stages
+										List of Content
 									</div>
 								</div>
 								<table id="content" class="table table-bordered table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
