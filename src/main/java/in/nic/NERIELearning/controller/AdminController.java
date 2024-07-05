@@ -25,15 +25,21 @@ import in.nic.NERIELearning.model.MSubject;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
+import in.nic.NERIELearning.service.MRoleService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
+import in.nic.NERIELearning.service.UserLoginService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController{
+	@Autowired
+	UserLoginService userLoginService;
+	@Autowired
+	MRoleService mRoleService;
 	@Autowired
 	MStageService mStageService;
 	@Autowired
@@ -56,7 +62,13 @@ public class AdminController{
     }
 	
 	@GetMapping("dashboard")
-	public String adminDashboard() {
+	public String adminDashboard(Model model) {
+		model.addAttribute("countUsers", userLoginService.getUserLoginByIsActiveTrue().size());
+		model.addAttribute("countRoles", mRoleService.getMRoleByIsActiveTrue().size());
+		model.addAttribute("countStages", mStageService.getMStageByIsActiveTrue().size());
+		model.addAttribute("countClasses", mClassService.getMClassByIsActiveTrue().size());
+		model.addAttribute("countSubjects", mSubjectService.getMSubjectByIsActiveTrue().size());
+		model.addAttribute("countContent", mContentService.getMContentByIsActiveTrue().size());
 		return "admin/dashboard";
 	}
 

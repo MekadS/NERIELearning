@@ -24,4 +24,8 @@ public class MSubjectService {
     public MSubject get(Long m_subject_id) {
         return mSubjectRepo.findById(m_subject_id).get();
     }
+
+	public List<MSubject> getMSubjectByIsActiveTrue () {
+		return mSubjectRepo.findByIsActive(true);
+	}
 }

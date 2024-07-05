@@ -24,4 +24,8 @@ public class MClassService {
     public MClass get(Long m_stage_id) {
         return mClassRepo.findById(m_stage_id).get();
     }
+
+	public List<MClass> getMClassByIsActiveTrue () {
+		return mClassRepo.findByIsActive(true);
+	}
 }

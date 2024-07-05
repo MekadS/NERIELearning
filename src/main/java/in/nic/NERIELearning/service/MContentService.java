@@ -24,4 +24,8 @@ public class MContentService {
 	public MContent get(Long m_content_id) {
 		return mContentRepo.findById(m_content_id).get();
 	}
+
+	public List<MContent> getMContentByIsActiveTrue () {
+		return mContentRepo.findByIsActive(true);
+	}
 }

@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 .defaultSuccessUrl("/home")
 //                                .successHandler(authenticationSuccessHandler())
 //                                .failureUrl("/index?error")
-                                .failureUrl("/index?error")
+                                .failureUrl("/index?error=Authentication Error")
                                 .permitAll())
                 .logout(
                         (logout) -> logout

@@ -24,4 +24,8 @@ public class MRoleService {
     public MRole get(Long id) {
         return mRoleRepo.findById(id).get();
     }
+
+	public List<MRole> getMRoleByIsActiveTrue () {
+		return mRoleRepo.findByIsActive(true);
+	}
 }

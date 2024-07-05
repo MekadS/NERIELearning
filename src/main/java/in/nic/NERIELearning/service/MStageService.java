@@ -24,4 +24,8 @@ public class MStageService {
     public MStage get(Long m_stage_id) {
         return mStageRepo.findById(m_stage_id).get();
     }
+
+	public List<MStage> getMStageByIsActiveTrue () {
+		return mStageRepo.findByIsActive(true);
+	}
 }

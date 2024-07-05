@@ -1,6 +1,5 @@
 package in.nic.NERIELearning.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ public class UserLoginService{
 		mUserlogin.setPassword(passwordEncoder.encode(mUserlogin.getPassword()));
 		System.out.println("CT: " + mUserlogin.getPassword());
 
-//		mUserlogin.setEntrydate(new Date());
 		mUserloginRepo.save(mUserlogin);
 	}
 	
@@ -37,5 +35,9 @@ public class UserLoginService{
 
 	public Userlogin getUserLoginByUserName (String username) {
 		return mUserloginRepo.findByUsername(username).get();
+	}
+
+	public List<Userlogin> getUserLoginByIsActiveTrue () {
+		return mUserloginRepo.findByIsActive(true);
 	}
 }

@@ -20,6 +20,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String hiddenCaptcha = request.getParameter("hiddenCaptcha");
 
         if(captcha.equals(hiddenCaptcha)) {
+//        	System.out.println("LSH: correct Captcha");
             response.sendRedirect("/");
         }else {
             response.sendRedirect("/?invalidCaptcha");
