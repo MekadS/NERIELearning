@@ -62,12 +62,16 @@
 
 .nerie-nav-logo{
   color: #ffffff !important;
-  font-size: 30px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 35px !important;
+  font-weight: 500;
 }
 
 .nerie-nav-link{
   color: #ffffff !important;
+  font-family: "Poppins", sans-serif !important;
   font-size: 20px !important;
+  font-weight: 400;
 }
 
 .nerie-nav-link:hover{

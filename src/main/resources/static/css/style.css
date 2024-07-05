@@ -1085,7 +1085,7 @@ section {
   padding-left: 50px;
 }
 
-.testimonials .testimonials-old-carousel,
+.testimonials .testimonials-carousel,
 .testimonials .testimonials-slider {
   overflow: hidden;
 }
@@ -1167,7 +1167,7 @@ section {
     padding-left: 0;
   }
 
-  .testimonials .testimonials-old-carousel,
+  .testimonials .testimonials-carousel,
   .testimonials .testimonials-slider {
     overflow: hidden;
   }
