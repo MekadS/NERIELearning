@@ -60,6 +60,37 @@
 	background-color:#eeeeee !important;       /* 	grey: Payne's Grey */
 }
 
+.nerie_border_green{
+	border-color:#01cb5c !important;       /* 	Dark Pastle green */
+}
+.nerie_border_dark_green{
+	border-color:#084C61 !important;       /* 	Midnight green */
+}
+.nerie_border_yellow{
+	border-color:#FFBE33 !important;       /*  Selective Yellow */
+}
+.nerie_border_indigo{
+	border-color:#7D83FF !important;       /*  Tropical Indigo */
+}
+.nerie_border_red{
+	border-color:#F02D3A !important;       /*  Imperial Red */
+}
+.nerie_border_white{
+	border-color:#FBFBF2 !important;       /* 	white: Floral White */
+}
+.nerie_border_black{
+	border-color:#000411 !important;       /* 	black: Rich Black */
+}
+.nerie_border_grey{
+	border-color:#aaaaaa !important;       /* 	grey: Payne's Grey */
+}
+.nerie_border_dark_grey{
+	border-color:#596475 !important;       /* 	grey: Payne's Grey */
+}
+.nerie_border_light_grey{
+	border-color:#eeeeee !important;       /* 	grey: Payne's Grey */
+}
+
 .nerie-nav-logo{
   color: #ffffff !important;
   font-family: "Poppins", sans-serif !important;

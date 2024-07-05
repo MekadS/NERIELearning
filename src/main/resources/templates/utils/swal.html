@@ -15,7 +15,7 @@
 	<div th:if="not ${#strings.isEmpty(param.error)}">
 		<script type="text/javascript" th:inline="javascript">
 			const errorMsg = /*[[${param.error}]]*/
-
+			alert("Empty Captcha");
 			Swal.fire({
 				icon : 'error',
 				title : 'Error!',
@@ -40,6 +40,7 @@
 
 	<div th:if="${param.invalidCaptcha}">
 		<script type="text/javascript" th:inline="javascript">
+			alert("Incorrect Captcha");
 
 			Swal.fire({
 				icon : 'error',

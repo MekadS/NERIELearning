@@ -12,45 +12,35 @@
 	<div th:insert="~{utils/editorNavbar :: aside}"></div>
 
 	<main>
-		<div class="row my-5">
-			<div align="center">
-<!-- 				<div class="col col-sm-11 col-md-10"> -->
-					<div class="row">
-						<div class="col col-sm-12 col-md-8">
-							<div class="card">
-								<div class="card-title h2 my-2">
-									Web Admin
+		<div class="container">
+			<div class="row">
+				<div align="center">
+					<div class="card row bg-info text-light">
+<!-- 						<div class="card bg-primary mt-3"> -->
+							<div class="card-body d-flex row justify-content-evenly">
+								<div class="col-3 bg-primary py-5 ">
+									A
 								</div>
-								<div class="card-body mt-3">
-									<div class="h4">Super Entities</div>
-									<div class="row align-items-center justify-items-around">
-										<div class="card col-sm-12 col-md-5">
-											<div class="card-body">
-												<a th:href="@{/admin/editMStages}" class="text-info">
-													<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
-												</a>
-											</div>
-										</div>
-										<div class="card col-sm-12 col-md-5">
-											<div class="card-body">
-												B
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="card-body mt-3">
-									<div class="h4">Entities</div>
+								<div class="col-3 bg-primary py-5">
+									B
 								</div>
 							</div>
-						</div>
+<!-- 						</div> -->
+<!-- 						<div class="card row bg-info mt-3"> -->
+<!-- 							<div class="card-body col-4 bg-primary"> -->
+<!-- 								A -->
+<!-- 							</div> -->
+<!-- 							<div class="card-body col-4 bg-primary"> -->
+<!-- 								B -->
+<!-- 							</div> -->
+<!-- 							<div class="card-body col-4 bg-primary"> -->
+<!-- 								C -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
-<!-- 					<div class="card h3 m-2 p-5 text-bg-info text-light"> -->
-<!-- 						Content will be displayed here. -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+				</div>
 			</div>
 		</div>
-		<!-- End Hero -->
 	</main>
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>

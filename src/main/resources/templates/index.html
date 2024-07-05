@@ -12,7 +12,7 @@
 <!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
 <!-- 	<div th:insert="~{utils/keyImportsLoginPage :: head}"></div> -->
 	<div th:insert="~{utils/keyImports :: head}"></div>
-	<div th:insert="~{utils/swal}"></div>
+	<div th:insert="~{utils/swal :: body}"></div>
 	
 
 	<aside></aside>
@@ -21,13 +21,14 @@
 		<div class="container text-center">
 			<div class="row mt-5 mx-auto justify-content-around align-items-center">
 				<div class="col-md-5 p-4">
-					<div class="my-2 p-3 border border-3 border-success-subtle rounded-4">
+					<div class="my-2 p-3 border border-3 nerie_border_green rounded-4 shadow">
 						<div class="mb-3"> <a href="https://ncert.nic.in/"
 							onclick="return confirm('You are being redirected to an external website. Please note that East Khasi Hills cannot be held responsible for external websites content &amp; privacy policies.');"
 							aria-label="https://ncert.nic.in/ - External site that opens in a new window"
 							title="https://ncert.nic.in/ - External site that opens in a new window"
-							target="_blank" rel="noopener noreferrer"> <img width="100em"
-								style="background-color: white; width: 15rem; height: 15rem;" 
+							target="_blank" rel="noopener noreferrer">
+							<img width="200em" height="auto"
+								style="background-color: white;" 
 								class="py-2 px-2"
 								src="/assets/img/NERIE/NCERT_Logo_dark.png"
 								alt="National Informatics Centre opens a new window"></a>
@@ -39,14 +40,15 @@
 					</div>
 				</div>
 				<div class="col-md-5">
-					<div class="mt-3 p-3 bg-success rounded-4">
+					<div class="mt-3 mb-3 p-3 nerie_bg_green rounded-4 shadow">
 						<p class="h2 text-light">NERIE</p>
 						<p class="h2 text-light">Learning</p>
 					</div>
-					<div class="card mt-1 mb-1 p-3 border border-3 border-success-subtle rounded-4">
-						<div class="card-title h2 my-3 pe-3">
-							<a th:href="@{/}"><i class="fa-solid fa-house text-success pe-2"></i></a>
-							LOGIN
+					<div class="card mt-1 mb-1 p-3 border border-3 nerie_border_green rounded-4 shadow">
+						<div class="card-title h2 my-3 px-3 row justify-content-between">
+							<span class="col-3 text-start"><a th:href="@{/}"><i class="fa-solid fa-house nerie_green pe-2"></i></a></span>
+							<span class="col-6 text-center">LOGIN</span>
+							<span class="col-3 text-start"></span>
 						</div>
 						<div class="card-body">
 
@@ -61,14 +63,16 @@
 								<input class="form-control" type="password" placeholder="Password"
 									th:field="*{password}">
 
-								<div class="row">
-									<div class="col my-3">
+								<div class="row my-3 justify-content-around">
+									<div class="col-8">
 										<div class="">
-											<img alt="Captcha" id="realCaptcha" th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
+											<img width="150em" height="auto"
+												alt="Captcha" id="realCaptcha" th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}" />
 										</div>
 									</div>
-									<div class="col py-4">
-										<a href="#" class="text-decoration-none text-info" onclick="reloadCaptcha()"> <i class="fa-solid fa-arrow-rotate-right fa-2x"></i>
+									<div class="col-4 mt-1">
+										<a href="#" class="text-decoration-none nerie_green ms-xs-2 ms-md-3 ms-lg-0 me-5" onclick="reloadCaptcha()">
+											<i class="fa-solid fa-arrow-rotate-right fa-2x"></i>
 										</a>
 									</div>
 								</div>
@@ -78,11 +82,11 @@
 										<input id="hiddenCaptcha" th:field="*{hiddenCaptcha}" type="hidden" /> 
 										<input class="form-control" id="captcha"
 											onchange="checkCaptcha()" placeholder="Enter Captcha"
-											required th:field="*{captcha}" type="text" />
+											th:field="*{captcha}" type="text" />
 										<div th:if="${param.errorCaptcha}" class="alert alert-warning">Incorrect Captcha</div>
 									</div>
 								</div>
-								<input type="submit" class="btn btn-primary mt-3" value="Login" />
+								<input type="submit" class="btn nerie_bg_green text-light mt-3" value="Login" />
 							</form>
 						</div>
 					</div>
