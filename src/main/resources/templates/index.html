@@ -5,12 +5,15 @@
 <meta charset="UTF-8" />
 <title>NERIE Learning</title>
 
-<!-- <script type="text/javascript" th:src="@{/js/index.js}"></script> -->
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
 </head>
 
 <body>
-	<div th:insert="~{utils/keyImportsLoginPage :: head}"></div>
-	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
+<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
+<!-- 	<div th:insert="~{utils/keyImportsLoginPage :: head}"></div> -->
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/swal}"></div>
+	
 
 	<aside></aside>
 
@@ -76,6 +79,7 @@
 										<input class="form-control" id="captcha"
 											onchange="checkCaptcha()" placeholder="Enter Captcha"
 											required th:field="*{captcha}" type="text" />
+										<div th:if="${param.errorCaptcha}" class="alert alert-warning">Incorrect Captcha</div>
 									</div>
 								</div>
 								<input type="submit" class="btn btn-primary mt-3" value="Login" />

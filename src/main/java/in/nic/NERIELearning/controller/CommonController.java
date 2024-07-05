@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import in.nic.NERIELearning.helper.AuthenticationHelper;
 import in.nic.NERIELearning.helper.CaptchaHelper;
@@ -28,6 +29,15 @@ public class CommonController{
 		return "accessDenied"; 
 	}
 
+	@ResponseBody
+	@GetMapping("/refresh-captcha")
+	public Userlogin refreshCaptcha() {
+		Userlogin userlogin = new Userlogin();
+		CaptchaHelper.getCaptcha(userlogin);
+		return userlogin;
+
+	}
+	
 	@GetMapping("/index")
 	public String loginIndex(Model model) {
 		try {

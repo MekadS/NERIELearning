@@ -14,23 +14,23 @@ const checkCaptcha = () => {
 	}
 };
 
-$(document).ready(function() {
-	reloadCaptcha = () => {
-		alert("INDEX JS");
-		const realCaptcha = document.getElementById("realCaptcha");
-		const hiddenCaptcha = document.getElementById("hiddenCaptcha");
+const reloadCaptcha = () => {
+	const realCaptcha = document.getElementById("realCaptcha");
+	const hiddenCaptcha = document.getElementById("hiddenCaptcha");
 
-		$.ajax({
-			url: "/refresh-captcha",
-			method: "GET",
+	$.ajax({
+		url: "/refresh-captcha",
+		method: "GET",
+	})
+		.done(function(response) {
+			hiddenCaptcha.value = response.hiddenCaptcha;
+			realCaptcha.src =
+				"data:realCaptcha/jpg;base64," + response.realCaptcha;
 		})
-			.done(function(response) {
-				hiddenCaptcha.value = response.hiddenCaptcha;
-				realCaptcha.src =
-					"data:realCaptcha/jpg;base64," + response.realCaptcha;
-			})
-			.fail(function() {
-				self.setContent("Something went wrong.");
-			});
-	};
+		.fail(function() {
+			self.setContent("Something went wrong.");
+		});
+};
+
+$(document).ready(function() {
 });

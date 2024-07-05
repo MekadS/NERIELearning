@@ -1,4 +1,4 @@
-package in.nic.NERIELearning.config;
+ package in.nic.NERIELearning.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,6 +46,7 @@ public class SecurityConfig {
                                 .loginProcessingUrl("/login")
                                 .defaultSuccessUrl("/home")
 //                                .successHandler(authenticationSuccessHandler())
+//                                .failureUrl("/index?error")
                                 .failureUrl("/index?error")
                                 .permitAll())
                 .logout(
