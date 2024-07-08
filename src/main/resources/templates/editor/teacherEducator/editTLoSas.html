@@ -23,7 +23,7 @@
 						<div class="row mb-3">
 							<div class="text-start col-sm-12 col-md-12">
 								<a th:href="@{/editor/dashboard}">
-									<button class="btn btn-primary">Editor Dashboard</button>
+									<button class="btn btn-primary">Teachers' Dashboard</button>
 								</a>											
 							</div>
 						</div>
@@ -111,7 +111,7 @@
 							<div class="card-body">
 								<div class="row mb-3">
 									<div class="col-sm-12 col-md-12 h4 text-start">
-										List of Competencies
+										List of Learning Outcomes and Suggestive Activities
 									</div>
 								</div>
 								<table id="competencies" class="table table-striped table-bordered mt-2 col-sm-12 col-md-12 col-lg-12">
@@ -132,7 +132,7 @@
 										<tr th:each="TLoSa : ${listTLoSas}">
 	<!-- 										<td th:text="${TLoSa.tCompetencyId}">ID</td> -->
 											<td>
-												<span th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName} + ${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></span></td>
+												<span th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName} + ' ' + ${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></span></td>
 											<td>
 												<span class="fw-bold" th:text="${TLoSa.tCompetencyId.tGoalId.mGoalId.mGoalCode} + ' '"></span>
 												<span th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}"></span></td>

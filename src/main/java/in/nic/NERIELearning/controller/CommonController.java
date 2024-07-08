@@ -75,11 +75,6 @@ public class CommonController{
 			return "redirect:/?exc=Something";
 		}
 	}
-	
-	@GetMapping("/editor/dashboard")
-	public String editorDashboard() {
-		return "editor/dashboard"; 
-	}
 
 	@GetMapping("/testPage")
 	public String testPage() {

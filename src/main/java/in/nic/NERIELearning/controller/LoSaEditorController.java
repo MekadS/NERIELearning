@@ -26,6 +26,7 @@ import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MCompetencyService;
 import in.nic.NERIELearning.service.MGoalService;
+import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
 import in.nic.NERIELearning.service.TCompetencyService;
@@ -34,6 +35,12 @@ import in.nic.NERIELearning.service.TLoSaService;
 
 @Controller
 public class LoSaEditorController{
+	@Autowired
+	MStageService mStageService;
+	@Autowired
+	MClassService mClassService;
+	@Autowired
+	MSubjectService mSubjectService;
 	@Autowired
 	MapClassSubjectService mapClassSubjectService;
 	@Autowired
@@ -46,10 +53,18 @@ public class LoSaEditorController{
 	TCompetencyService tCompetencyService;
 	@Autowired
 	TLoSaService tLoSaService;
-	@Autowired
-	MClassService mClassService;
-	@Autowired
-	MSubjectService mSubjectService;
+	
+
+	@GetMapping("/editor/dashboard")
+	public String editorDashboard(Model model) {
+		model.addAttribute("countStages", mStageService.getMStageByIsActiveTrue().size());
+		model.addAttribute("countClasses", mClassService.getMClassByIsActiveTrue().size());
+		model.addAttribute("countSubjects", mSubjectService.getMSubjectByIsActiveTrue().size());
+		model.addAttribute("countGoals", tGoalService.findAll().size());
+		model.addAttribute("countCompetencies", tCompetencyService.findAll().size());
+		model.addAttribute("countLoSas", tLoSaService.findAll().size());
+		return "editor/dashboard"; 
+	}
 	
 	//	START: HEAD-TEACHER MapClassSubject Methods
 	@GetMapping("/editor/headTeacher/editMapClassSubjects")
@@ -64,9 +79,11 @@ public class LoSaEditorController{
 	@RequestMapping(value = "/editor/headTeacher/saveMapClassSubject", method = RequestMethod.POST)
 	public String saveMapClassSubject(@ModelAttribute("MapClassSubject") MapClassSubject mapClassSubject, Model model) {
 		try{
+			System.out.println("Saving MapCS");
 			mapClassSubjectService.save(mapClassSubject);
 			return "redirect:/editor/headTeacher/editMapClassSubjects";
 		} catch (DataIntegrityViolationException e) { // Catch data integrity violation (duplicate key)
+			System.out.println("Cannot save MapCS");
 			return "redirect:/editor/headTeacher/editMapClassSubjects";
 		}
 	}

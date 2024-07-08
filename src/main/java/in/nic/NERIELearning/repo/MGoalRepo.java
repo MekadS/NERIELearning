@@ -6,5 +6,5 @@ import in.nic.NERIELearning.model.MGoal;
 
 @Repository
 public interface MGoalRepo extends JpaRepository<MGoal, Long>{
-	
+
 }

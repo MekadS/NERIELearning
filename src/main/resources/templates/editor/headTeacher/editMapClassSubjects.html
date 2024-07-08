@@ -11,86 +11,110 @@
 	<div th:insert="~{utils/navbar :: nav}"></div>
 
 	<aside></aside>
-
+	
 	<main>
 		<div class="row my-5">
 			<div align="center">
-				<div class="card col-sm-12 col-md-12 col-lg-10">
-					<div class="card-title my-3">
-						<h3>School Classes & Subjects</h3>
+				<div class="card py-3 border-3 col-sm-12 col-md-12 col-lg-10">
+					<div class="card-title my-3 text-center h2">
+						Classes and their Subjects
 					</div>
 					<div class="card-body">
-						<div class="d-flex justify justify-content-between">
-							<a th:href="@{/editor/dashboard}"><button
-									class="btn btn-primary">Editor Dashboard</button></a>
+						<div class="row mb-3">
+							<div class="text-start col-sm-12 col-md-12">
+								<a th:href="@{/editor/dashboard}">
+									<button class="btn btn-primary">Teachers' Dashboard</button>
+								</a>											
+							</div>
 						</div>
-						<div>
-							<form action="#" th:action="@{editor/headTeacher/saveMapClassSubject}"
-								th:object="${mapClassSubject}" method="post">
-								<table class="table">
-									<tbody>
+						<div class="accordion" id="createNewMapCS">
+							<div class="accordion-item">
+							  	<h2 class="accordion-header">
+      								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+							      		Assign a new subject to a class
+							    	</button>
+							  	</h2>
+    							<div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#createNewMapCS">
+							    	<div class="accordion-body">
+										<form action="#" th:action="@{saveMapClassSubject}" th:object="${mapClassSubject}" method="post">
+											<div class="card">
+												<div class="card-body">
+													<div class="row mb-3">
+														<div class="text-start col-sm-12 col-md-4">
+															<label for="class">Select a class</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<input type="hidden" th:field="*{mapClassSubjectId}" />
+															<select class="form-select" id="selectClass" name="stage"
+																th:field="*{mClassId}" required>
+																<option th:each="mClass : ${listMClasses}"
+																	th:value="${mClass.mClassId}"
+																	th:text="${mClass.mClassName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-sm-12 col-md-4 mb-3 text-start">
+															<label class="form-label">Select a subject</label>
+														</div>
+														<div class="col-sm-12 col-md-8">
+															<select class="form-select" id="selectSubject"
+																name="stage" th:field="*{mSubjectId}" required>
+																	<option th:each="mSubject : ${listMSubjects}"
+																		th:value="${mSubject.mSubjectId}"
+																		th:text="${mSubject.mSubjectName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-sm-12 col-md-12 mb-3">
+															<button type="submit" class="btn btn-success">Save</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card mt-3">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-12 col-md-12 h4 text-start">
+										List of classes and their subjects
+									</div>
+								</div>
+								<table id="classsubjectmapper" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
+									<thead class="thead-dark">
 										<tr>
-											<td><label class="form-label">Assign a new subject to a class</label></td>
-											<td><input type="hidden" th:field="*{mapClassSubjectId}" />
-												<select class="form-select" id="selectClass" name="stage"
-												th:field="*{mClassId}" required>
-													<option th:each="mClass : ${listMClasses}"
-														th:value="${mClass.mClassId}"
-														th:text="${mClass.mClassName}"></option>
-											</select></td>
-											<td><select class="form-select" id="selectSubject"
-												name="stage" th:field="*{mSubjectId}" required>
-													<option th:each="mSubject : ${listMSubjects}"
-														th:value="${mSubject.mSubjectId}"
-														th:text="${mSubject.mSubjectName}"></option>
-											</select></td>
-											<td>
-												<button type="submit" class="btn btn-success">Save</button>
-											</td>
+		<!-- 									<th>ID</th> -->
+											<th>Class</th>
+											<th>Stage</th>
+											<th>Status</th>
+											<th class="text-center">Update</th>
+											<th class="text-center">Enable/Disable</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="MapClassSubject : ${listMapClassSubjects}">
+		<!-- 									<td th:text="${MapClassSubject.mapClassSubjectId}">ID</td> -->
+											<td th:text="${MapClassSubject.mClassId.mClassName}">Class</td>
+											<td th:text="${MapClassSubject.mSubjectId.mSubjectName}">Subject</td>
+											<td
+												th:text="${MapClassSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
+											<td class="text-center"><a th:href="@{'/editor/headTeacher/mapClassSubject/edit/' + ${MapClassSubject.mapClassSubjectId}}">
+												<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
+												</a></td>
+											<td class="text-center"><a
+												th:href="@{'/editor/headTeacher/mapClassSubject/toggleStatus/' + ${MapClassSubject.mapClassSubjectId}}">
+												<i th:class="${MapClassSubject.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
+												</a></td>
 										</tr>
 									</tbody>
 								</table>
-							</form>
+							</div>
 						</div>
-						<span th:text="${message}"></span>
-						<div th:if="${message == 'Error'}">
-							<span
-								th:text="The Class ${mapClassSubjectName} already exists or is not valid."
-								class="text-danger">Message not set</span>
-						</div>
-						<div th:if="${message == 'Success'}">
-							<span
-								th:text="The Class ${mapClassSubjectName} had been created/updated."
-								class="text-success">Message not set</span>
-						</div>
-						<table id="classsubjectmapper" class="table table-striped mt-2 col-sm-12 col-md-12 col-lg-12">
-							<thead class="thead-dark">
-								<tr>
-<!-- 									<th>ID</th> -->
-									<th>Class</th>
-									<th>Stage</th>
-									<th>Status</th>
-									<th class="text-center">Update</th>
-									<th class="text-center">Enable/Disable</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="MapClassSubject : ${listMapClassSubjects}">
-<!-- 									<td th:text="${MapClassSubject.mapClassSubjectId}">ID</td> -->
-									<td th:text="${MapClassSubject.mClassId.mClassName}">Class</td>
-									<td th:text="${MapClassSubject.mSubjectId.mSubjectName}">Subject</td>
-									<td
-										th:text="${MapClassSubject.isActive ? 'Active' : 'Inactive'}">Status</td>
-									<td class="text-center"><a th:href="@{'/editor/headTeacher/mapClassSubject/edit/' + ${MapClassSubject.mapClassSubjectId}}">
-										<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
-										</a></td>
-									<td class="text-center"><a
-										th:href="@{'/editor/headTeacher/mapClassSubject/toggleStatus/' + ${MapClassSubject.mapClassSubjectId}}">
-										<i th:class="${MapClassSubject.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
-										</a></td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 			</div>
