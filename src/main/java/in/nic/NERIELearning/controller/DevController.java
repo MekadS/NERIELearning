@@ -1,15 +1,24 @@
 package in.nic.NERIELearning.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import in.nic.NERIELearning.model.MClass;
+import in.nic.NERIELearning.model.MapClassSubject;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
 import in.nic.NERIELearning.service.MRoleService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
+import in.nic.NERIELearning.service.MapClassSubjectService;
 import in.nic.NERIELearning.service.UserLoginService;
 
 @Controller
@@ -26,6 +35,8 @@ public class DevController{
 	MSubjectService mSubjectService;
 	@Autowired
 	MContentService mContentService;
+	@Autowired
+	MapClassSubjectService mapClassSubjectService;
 	
 	@GetMapping("/dev/devIndex")
 	public String DevIndex() {
@@ -34,13 +45,22 @@ public class DevController{
 
 	@GetMapping("/dev/dashboardSidebar")
 	public String editorDashboardSidebar(Model model) {
-		model.addAttribute("countUsers", userLoginService.getUserLoginByIsActiveTrue().size());
-		model.addAttribute("countRoles", mRoleService.getMRoleByIsActiveTrue().size());
-		model.addAttribute("countStages", mStageService.getMStageByIsActiveTrue().size());
-		model.addAttribute("countClasses", mClassService.getMClassByIsActiveTrue().size());
-		model.addAttribute("countSubjects", mSubjectService.getMSubjectByIsActiveTrue().size());
-		model.addAttribute("countContent", mContentService.getMContentByIsActiveTrue().size());
+		model.addAttribute("listClasses", mClassService.findAll());
+		
 		return "dev/dashboardSidebar"; 
+	}
+	
+	@GetMapping("/subjectListByClass")
+	@ResponseBody
+	public ResponseEntity<List<MapClassSubject>> getSubjectList(@RequestParam("classId") MClass classId) {
+		try {
+			List<MapClassSubject> mapClassSubjectList = mapClassSubjectService.getSubjectsByClass(classId);
+			System.out.println("Subjects for Class: " + mapClassSubjectList);
+			return new ResponseEntity<>(mapClassSubjectList, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 //	END: PUBLIC Mappings
 }

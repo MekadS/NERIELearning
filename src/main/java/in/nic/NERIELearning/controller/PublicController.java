@@ -1,7 +1,6 @@
 package in.nic.NERIELearning.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import in.nic.NERIELearning.model.MContent;
-import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
@@ -70,11 +68,8 @@ public class PublicController{
 	
 	@GetMapping("/public/viewLearningOutcomes")
 	public String viewLearningOutcomes(Model mClass) {
-//		List<TCompetency> listCompetency = tCompetencyService.findAll();
-//		mClass.addAttribute("listCompetency", listCompetency);
-		List<TLoSa> listLoSa = tLoSaService.findAll();
-		mClass.addAttribute("listLoSa", listLoSa);
-		System.out.println(listLoSa);
+		mClass.addAttribute("listLoSa", tLoSaService.findAll());
+		System.out.println(tLoSaService.findAll());
 		return "public/viewLearningOutcomes";
 	}
 	

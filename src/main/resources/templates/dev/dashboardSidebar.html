@@ -13,21 +13,161 @@
 <!-- 	<div th:insert="~{utils/editorNavbar :: aside}"></div> -->
 
 	<main>
-		<div class="container">
-			<div class="row my-5">
-				<div align="center">
-					<div class="card col-10 m-5 p-5 b-5 nerie_bg_yellow text-light h1 fw-bold">
-						<div class="d-flex align-items-center">
-							<div class="col">
-								CONTENT WILL BE DISPLAYED HERE
-							</div>
-						</div>
+		<div class="card border-3 my-5 mx-3 text-center">
+			<div class="card-title mt-4 h1">Learning Outcomes</div>
+			<div class="card-body row mb-4 justify-content-around">
+				<div class="row mb-3">
+				<div class="text-start col-sm-12 col-md-4">
+					<label for="Class">Select a Class</label>
+				</div>
+					<div class="col-sm-12 col-md-8">
+						<select class="form-select" id="class_dropdown" name="class">
+						<option th:each="mClass : ${listClasses}"
+							th:value="${mClass.mClassId}"
+							th:text="${mClass.mClassName}"></option>
+					</select>
+					</div>
+				<div class="row mb-3">
+				</div>
+					<div class="text-start col-sm-12 col-md-4">
+						<label for="Class">Select a Subject</label>
+					</div>
+					<div class="col-sm-12 col-md-8">
+						<select class="form-select" id="subject_dropdown" name="subject">
+					</select>
 					</div>
 				</div>
+				<table id="LoSas" class="display table table-striped lg-10 table-bordered">
+					<thead class="bg-grey">
+						<tr>
+<!-- 							<th>Stage</th> -->
+<!-- 							<th>Class</th> -->
+<!-- 							<th>Subject</th> -->
+							<th>Goal (Click on goal to view details)</th>
+							<th>Competency (Click on competency to view details)</th>
+							<th>Learning Outcome</th>
+							<th>Suggestive Activity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="TLoSa : ${listLoSa}" id="tLoSaRow">
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td> -->
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td> -->
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+							<td th:text="${TLoSa.learningOutcome}"></td>
+							<td th:text="${TLoSa.suggestiveActivity}"></td>
+						</tr>
+					</tbody>
+					<tfoot></tfoot>
+				</table>
 			</div>
 		</div>
 	</main>
 
 	<footer th:insert="~{utils/footer :: footer}"></footer>
 </body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#LoSas', {
+			responsive: true,
+			ordering: true,
+			order: [
+		        [0, 'asc']
+		    ]
+		});
+
+		//END OF DATATABLES
+	  	//INIT
+        $("#subject_dropdown").append('<option id="subject_blank" selected="selected" value=""></option>').prop("disabled", true);
+
+		// Handle change event on dropdowns
+	  	$('body').on('change', '#class_dropdown', function() {
+			$('#subject_blank').prop('disabled', true);
+	    	const classId = $('#class_dropdown').val();
+// 			console.log("classId: " + classId);
+			loadSubjectOptions(classId); // Load options for Subjects based on Class selection
+	  	});
+	  	$('body').on('change', '#subject_dropdown', function() {
+// 			$('#sub_blank').prop('disabled', true);
+	    	const subjectId = $('#subject_dropdown').val();
+// 			console.log("subjectId: " + subjectId);
+			loadLoSas(subjectId); // Load options for Subjects based on Class selection
+	  	});
+	});
+	
+	function loadSubjectOptions(selectedClassId) {
+	  	$.ajax({
+	    	url: '/subjectListByClass',
+	    	type: "GET",
+		    data: 'classId=' + selectedClassId ,
+		    success: function(response) {
+// 				console.log(response);
+
+				$('#subject_dropdown').html('');
+				$('#subject_dropdown').prop('disabled', false);
+				var content = '';
+
+				if(response.length > 0) {
+					for(var a=0;a<response.length;a++) {
+// 						console.log("RESPONSE: " + response[a]);
+// 						console.log(response[a]);
+// 						console.log("CHECK: " + response[a].mapClassSubjectId.msubjectId.isActive);
+						content +='<option value="'+ response[a].mapClassSubjectId.mSubjectId +'">'+ response[a].mapClassSubjectId.msubjectId +'</option>';
+					}
+				} else {
+					content +='<option selected="selected" disabled="disabled" value="">-- No subject for this class  --</option>';
+					$('#subject_dropdown').prop('disabled', true);
+
+				}
+				$('#subject_dropdown').html(content);
+// 				console.log(response);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+		    }
+	  	});
+	}
+	
+	function loadLoSas(selectedSubjectId) {
+		console.log("SubjectId: " + selectedSubjectId);
+	}
+// 	  	$.ajax({
+// 	    	url: '/LoSaByCS',
+// 	    	type: "GET",
+// 		    data: 'subjectId=' + selectedSubjectId ,
+// 		    success: function(response) {
+// // 				console.log(response);
+
+// // 				$('#subject_dropdown').html('');
+// // 				$('#subject_dropdown').prop('disabled', false);
+// 				var content = '';
+
+// 				if(response.length > 0) {
+// 					for(var a=0;a<response.length;a++) {
+// 						console.log(response[a]);
+// 						console.log(response[a].mapClassSubjectId);
+// 						content +='<option value="'+ response[a].mSubjectId +'">'+ response[a].mapClassSubjectId.mSubjectId +'</option>';
+						
+// 						content +='<td th:text="' + response[a].tCompetencyId.tGoalId.tGoalName} + '" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
+// 						content +='<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+// 						content +='<td th:text="${TLoSa.learningOutcome}"></td>
+// 						content +='<td th:text="${TLoSa.suggestiveActivity}"></td>
+// 					}
+// 				} else {
+			
+// 					content +='<option selected="selected" disabled="disabled" value="">-- No subject for this class  --</option>';
+// 					$('#subject_dropdown').prop('disabled', true);
+
+// 				}
+// 				$('#tLoSaRow').html(content);
+// // 				console.log(response);
+// 		    },
+// 		    error: function(jqXHR, textStatus, errorThrown) {
+// 		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+// 		    }
+// 	  	});
+// 	}
+</script>
 </html>
