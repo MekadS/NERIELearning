@@ -60,6 +60,47 @@
 	background-color:#eeeeee !important;       /* 	grey: Payne's Grey */
 }
 
+.nerie_bg_gradient_green {
+  background: linear-gradient(#01cb5c, #7bed91); /* Dark Pastel Green to Forest Green */
+}
+
+.nerie_bg_gradient_dark_green {
+  background: linear-gradient(#084C61, #287b7e); /* Midnight Green to Teal Blue */
+}
+
+.nerie_bg_gradient_yellow {
+  background: linear-gradient(#FFBE33, #ffc96b); /* Selective Yellow to Golden Yellow */
+}
+
+.nerie_bg_gradient_indigo {
+  background: linear-gradient(#7D83FF, #9fa8da); /* Tropical Indigo to Light Periwinkle */
+}
+
+.nerie_bg_gradient_red {
+  background: linear-gradient(#F02D3A, #e3425b); /* Imperial Red to Cherry Red */
+}
+
+.nerie_bg_gradient_white {
+  background: linear-gradient(#FBFBF2, #cccccc); /* Floral White to Light Grey */
+}
+
+.nerie_bg_gradient_black {
+  background: linear-gradient(#000411, #6c757d); /* Rich Black to Medium Grey */
+}
+
+.nerie_bg_gradient_grey {
+  background: linear-gradient(#aaaaaa, #d9d9d9); /* Payne's Grey to Light Grey */
+}
+
+.nerie_bg_gradient_dark_grey {
+  background: linear-gradient(#596475, #333333); /* Payne's Grey to Dark Grey */
+}
+
+.nerie_bg_gradient_light_grey {
+  background: linear-gradient(#eeeeee, #9e9e9e); /* Light Grey to Medium Grey */
+}
+
+
 .nerie_border_green{
 	border-color:#01cb5c !important;       /* 	Dark Pastle green */
 }

@@ -29,6 +29,11 @@ public class CommonController{
 		return "accessDenied"; 
 	}
 
+	@GetMapping("/error")
+	public String errorPage() {
+		return "redirect:home"; 
+	}
+
 	@ResponseBody
 	@GetMapping("/refresh-captcha")
 	public Userlogin refreshCaptcha() {
@@ -57,7 +62,6 @@ public class CommonController{
 	
 	@GetMapping("/home")
 	public String getHome(Model model) {
-		System.out.println("HOME MEH");
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String username = auth.getName();

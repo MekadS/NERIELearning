@@ -8,45 +8,55 @@
 
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
-	<div th:insert="~{utils/editorNavbar :: nav}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
 
 	<main>
 		<div class="container">
 			<div class="row mt-5">
 				<div align="center">
 					<div class="h2 mb-5">Web Admin Dashboard</div>
-					<div class="card col-sm-11 col-md-8 text-light mb-3 border-3 nerie_border_green">
-						<div class="card-title h2 mt-3 nerie_green">Super Entities</div>
-						<div class="card-body d-flex row g-4 justify-content-evenly fw-bold mb-3">
-							<a th:href="@{/admin/editTUserLogins}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_yellow text-light py-5 rounded-4">
-								<span>USERS</span><br>
-								<span th:text="${countUsers}"></span>
-							</a>
-							<a th:href="@{/admin/editMRoles}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_yellow text-light py-5 rounded-4">
-								<span>ROLES</span><br>
-								<span th:text="${countRoles}"></span>
-							</a>
+					<div class="row justify-content-evenly">
+						<div class="card col-sm-11 col-md-5 text-light mb-3 border-3 nerie_border_green">
+							<div class="card-title h2 mt-4 nerie_green">Super Entities</div>
+							<div class="card-body d-flex row g-4 justify-content-evenly fw-bold mb-3">
+								<a th:href="@{/admin/editTUserLogins}" class="col-sm-10 col-md-5 h-50 f-1 nerie_bg_gradient_yellow text-light py-5 rounded-4">
+									<span><i class="fa-regular fa-xl fa-user mb-3"></i></span><br>
+									<span>USERS</span><br>
+									<span th:text="${countUsers}"></span>
+								</a>
+								<a th:href="@{/admin/editMRoles}" class="col-sm-10 col-md-5 h-50 f-1 nerie_bg_gradient_yellow text-light py-5 rounded-4">
+									<span><i class="fa-solid fa-xl fa-users-gear mb-2"></i></span><br>
+									<span>ROLES</span><br>
+									<span th:text="${countRoles}"></span>
+								</a>
+							</div>
 						</div>
-					</div>
-					<div class="card col-sm-11 col-md-8 text-light mb-3 border-3 nerie_border_green">
-						<div class="card-title h2 mt-3 nerie_green">NERIE Entities</div>
-						<div class="card-body d-flex row g-4 justify-content-evenly fw-bold mb-3">
-							<a th:href="@{/admin/editMStages}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_indigo text-light py-5 rounded-4">
-								<span>STAGES</span><br>
-								<span th:text="${countStages}"></span>
-							</a>
-							<a th:href="@{/admin/editMClasses}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_indigo text-light py-5 rounded-4">
-								<span>CLASSES</span><br>
-								<span th:text="${countClasses}"></span>
-							</a>
-							<a th:href="@{/admin/editMSubjects}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_indigo text-light py-5 rounded-4">
-								<span>SUBJECTS</span><br>
-								<span th:text="${countSubjects}"></span>
-							</a>
-							<a th:href="@{/admin/editMContent}" class="col-sm-8 col-md-6 col-lg-3 h-100 f-1 nerie_bg_indigo text-light py-5 rounded-4">
-								<span>CONTENT</span><br>
-								<span th:text="${countContent}"></span>
-							</a>
+						<div class="card col-sm-11 col-md-5 text-light mb-3 border-3 nerie_border_green">
+							<div class="card-title h2 mt-4 nerie_green">NERIE Entities</div>
+							<div class="card-body d-flex row g-4 justify-content-evenly fw-bold mb-3">
+								<a th:href="@{/admin/editMStages}" class="col-sm-10 col-md-5 h-100 f-1 nerie_bg_gradient_indigo text-light py-5 rounded-4">
+									<span><i class="fa-solid fa-xl fa-cubes mb-2"></i></span><br>
+									<span>STAGES</span><br>
+									<span th:text="${countStages}"></span>
+								</a>
+								<a th:href="@{/admin/editMClasses}" class="col-sm-10 col-md-5 h-100 f-1 nerie_bg_gradient_indigo text-light py-5 rounded-4">
+									<span><i class="fa-solid fa-xl fa-chalkboard-user mb-2"></i></span><br>
+									<span>CLASSES</span><br>
+									<span th:text="${countClasses}"></span>
+								</a>
+							</div>
+							<div class="card-body d-flex row g-4 justify-content-evenly fw-bold mb-5">
+								<a th:href="@{/admin/editMSubjects}" class="col-sm-10 col-md-5 h-100 f-1 nerie_bg_gradient_indigo text-light py-5 rounded-4">
+									<span><i class="fa-solid fa-xl fa-book-bookmark mb-2"></i></span><br>
+									<span>SUBJECTS</span><br>
+									<span th:text="${countSubjects}"></span>
+								</a>
+								<a th:href="@{/admin/editMContent}" class="col-sm-10 col-md-5 h-100 f-1 nerie_bg_gradient_indigo text-light py-5 rounded-4">
+									<span><i class="fa-solid fa-xl fa-file-pdf mb-2"></i></span><br>
+									<span>CONTENT</span><br>
+									<span th:text="${countContent}"></span>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
