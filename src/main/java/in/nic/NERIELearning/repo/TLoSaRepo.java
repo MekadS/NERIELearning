@@ -17,7 +17,8 @@ public interface TLoSaRepo extends JpaRepository<TLoSa, Long> {
          "JOIN TGoal g ON c.tGoalId = g " +              
          "JOIN MapClassSubject mapCS ON g.mapClassSubjectId = mapCS " +
          "JOIN MClass cl ON mapCS.mClassId = cl " +
-         "JOIN MSubject s ON mapCS.mSubjectId = s ")
+         "JOIN MSubject s ON mapCS.mSubjectId = s " +
+		 "WHERE cl.id = :classId AND s.id = :subjectId")
      List<TLoSa> findTLoSaByClassAndSubject(Long classId, Long subjectId);
-//         "WHERE cl.id = :classId AND s.id = :subjectId")
+//		  "WHERE mapCS.mClass.id = :classId AND mapCS.mSubject.id = :subjectId")
 }
