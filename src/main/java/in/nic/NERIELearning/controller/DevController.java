@@ -24,6 +24,7 @@ import in.nic.NERIELearning.service.TLoSaService;
 import in.nic.NERIELearning.service.UserLoginService;
 
 @Controller
+
 public class DevController{
 	@Autowired
 	UserLoginService userLoginService;
@@ -66,7 +67,6 @@ public class DevController{
 	public ResponseEntity<List<MapClassSubject>> getSubjectList(@RequestParam("classId") MClass classId) {
 		try {
 			List<MapClassSubject> mapClassSubjectList = mapClassSubjectService.getSubjectsByClass(classId);
-			System.out.println("Subjects for Class: " + mapClassSubjectList);
 			return new ResponseEntity<>(mapClassSubjectList, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
@@ -74,17 +74,21 @@ public class DevController{
 		}
 	}
 	
-//	@GetMapping("/losaByMapCS")
-//	@ResponseBody
-//	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("mapClassSubjectId") MapClassSubject mapClassSubjectId) {
-//		try {
-//			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(mapClassSubjectId);
-//			System.out.println("LoSas for Class-Subject: " + loSaList);
-//			return new ResponseEntity<>(loSaList, HttpStatus.OK);
-//		} catch (Exception e) {
-//			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
-//			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//		}
-//	}
-//	END: PUBLIC Mappings
+	@GetMapping("/losaByMapCSToo")
+	@ResponseBody
+	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("selectedClassId") Long classId, @RequestParam("selectedSubjectId") Long subjectId) {
+		System.out.println("In meh: losaByMapCS");
+		try {
+			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(classId, subjectId);
+			System.out.println("Class: " + classId);
+			System.out.println("Subject: " + subjectId);
+			System.out.println("LoSas for Class-Subject: " + loSaList);
+			return new ResponseEntity<>(loSaList, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
+			
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	//	END: PUBLIC Mappings
 }

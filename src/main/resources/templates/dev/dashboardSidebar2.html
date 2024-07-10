@@ -86,14 +86,12 @@
 	  	$('body').on('change', '#class_dropdown', function() {
 			$('#subject_blank').prop('disabled', true);
 	    	const classId = $('#class_dropdown').val();
-// 			console.log("classId: " + classId);
 			loadSubjectOptions(classId); // Load options for Subjects based on Class selection
 	  	});
 	  	$('body').on('change', '#subject_dropdown', function() {
-// 			$('#sub_blank').prop('disabled', true);
+	    	const classId = $('#class_dropdown').val();
 	    	const subjectId = $('#subject_dropdown').val();
-// 			console.log("subjectId: " + subjectId);
-			loadLoSas(subjectId); // Load options for Subjects based on Class selection
+			loadLoSas(classId, subjectId); // Load options for Subjects based on Class selection
 	  	});
 	});
 	
@@ -109,6 +107,7 @@
 				var content = '';
 
 				if(response.length > 0) {
+						content +='<option value="0">-- SELECT SUBJECT --</option>';					
 					for(var a=0;a<response.length;a++) {
 						content +='<option value="'+ response[a].msubjectId.msubjectId +'">'+ response[a].msubjectId.msubjectName +'</option>';
 					}
@@ -125,30 +124,36 @@
 	  	});
 	}
 	
-	function loadLoSas(selectedSubjectId) {
-		console.log("SubjectId: " + selectedSubjectId);
-	}
-// 	  	$.ajax({
-// 	    	url: '/LoSaByCS',
-// 	    	type: "GET",
-// 		    data: 'subjectId=' + selectedSubjectId ,
-// 		    success: function(response) {
-// // 				console.log(response);
+// 	{
+// 	  	'classId=': selectedClassId,
+// 	  	'subjectId=': selectedSubjectId
+// 	}
+	
+	function loadLoSas(selectedClassId, selectedSubjectId) {
+// 		console.log("TT ClassId: " + selectedClassId);
+// 		console.log("TT SubjectId: " + selectedSubjectId);
+	  	$.ajax({
+	    	url: '/losaByMapCSToo',
+	    	type: "GET",
+		    data: {
+				'selectedClassId': selectedClassId,
+				'selectedSubjectId': selectedSubjectId,
+		    },
+ 		    success: function(response) {
+				console.log(response);
 
-// // 				$('#subject_dropdown').html('');
-// // 				$('#subject_dropdown').prop('disabled', false);
+// 				$('#subject_dropdown').html('');
+// 				$('#subject_dropdown').prop('disabled', false);
 // 				var content = '';
 
 // 				if(response.length > 0) {
 // 					for(var a=0;a<response.length;a++) {
 // 						console.log(response[a]);
 // 						console.log(response[a].mapClassSubjectId);
-// 						content +='<option value="'+ response[a].mSubjectId +'">'+ response[a].mapClassSubjectId.mSubjectId +'</option>';
-						
-// 						content +='<td th:text="' + response[a].tCompetencyId.tGoalId.tGoalName} + '" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
-// 						content +='<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
-// 						content +='<td th:text="${TLoSa.learningOutcome}"></td>
-// 						content +='<td th:text="${TLoSa.suggestiveActivity}"></td>
+// // 						content +='<td th:text="' + response[a].tCompetencyId.tGoalId.tGoalName} + '" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>';
+// // 						content +='<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>';
+// // 						content +='<td th:text="${TLoSa.learningOutcome}"></td>';
+// // 						content +='<td th:text="${TLoSa.suggestiveActivity}"></td>';
 // 					}
 // 				} else {
 			
@@ -157,12 +162,12 @@
 
 // 				}
 // 				$('#tLoSaRow').html(content);
-// // 				console.log(response);
-// 		    },
-// 		    error: function(jqXHR, textStatus, errorThrown) {
-// 		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
-// 		    }
-// 	  	});
-// 	}
+// 				console.log(response);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+		    }
+	  	});
+	}
 </script>
 </html>

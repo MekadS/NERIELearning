@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import in.nic.NERIELearning.model.MClass;
-import in.nic.NERIELearning.model.MapClassSubject;
 import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.repo.TLoSaRepo;
 
@@ -26,8 +24,8 @@ public class TLoSaService {
 	public TLoSa get(Long t_lo_sa_id) {
 		return tLoSaRepo.findById(t_lo_sa_id).get();
 	}
-    
-//    public List<TLoSa> getLoSaByClassSubject(MapClassSubject map_class_subject_id){
-//    	return tLoSaRepo.findBymapClassSubjectId(map_class_subject_id);
-//    }
+	
+    public List<TLoSa> getLoSaByClassSubject(Long class_id, Long subject_id){
+    	return tLoSaRepo.findTLoSaByClassAndSubject(class_id, subject_id);
+    }
 }
