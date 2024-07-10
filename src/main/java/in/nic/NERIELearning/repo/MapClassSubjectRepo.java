@@ -12,4 +12,5 @@ import in.nic.NERIELearning.model.MapClassSubject;
 public interface MapClassSubjectRepo extends JpaRepository<MapClassSubject, Long> {
 
 	List<MapClassSubject> findBymClassId(MClass class_id);
+//	List<MapClassSubject> findBymClassIdAndMsubjectid(MClass m_class_id, MSubject m_subject_id);
 }

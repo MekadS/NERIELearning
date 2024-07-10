@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MapClassSubject;
+import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
 import in.nic.NERIELearning.service.MRoleService;
 import in.nic.NERIELearning.service.MStageService;
 import in.nic.NERIELearning.service.MSubjectService;
 import in.nic.NERIELearning.service.MapClassSubjectService;
+import in.nic.NERIELearning.service.TLoSaService;
 import in.nic.NERIELearning.service.UserLoginService;
 
 @Controller
@@ -37,6 +39,8 @@ public class DevController{
 	MContentService mContentService;
 	@Autowired
 	MapClassSubjectService mapClassSubjectService;
+	@Autowired
+	TLoSaService tLoSaService;
 	
 	@GetMapping("/dev/devIndex")
 	public String DevIndex() {
@@ -48,6 +52,13 @@ public class DevController{
 		model.addAttribute("listClasses", mClassService.findAll());
 		
 		return "dev/dashboardSidebar"; 
+	}
+	
+	@GetMapping("/dev/dashboardSidebar2")
+	public String editorDashboardSidebar2(Model model) {
+		model.addAttribute("listClasses", mClassService.findAll());
+		
+		return "dev/dashboardSidebar2"; 
 	}
 	
 	@GetMapping("/subjectListByClass")
@@ -62,5 +73,18 @@ public class DevController{
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+//	@GetMapping("/losaByMapCS")
+//	@ResponseBody
+//	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("mapClassSubjectId") MapClassSubject mapClassSubjectId) {
+//		try {
+//			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(mapClassSubjectId);
+//			System.out.println("LoSas for Class-Subject: " + loSaList);
+//			return new ResponseEntity<>(loSaList, HttpStatus.OK);
+//		} catch (Exception e) {
+//			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
+//			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//	}
 //	END: PUBLIC Mappings
 }
