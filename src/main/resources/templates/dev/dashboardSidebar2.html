@@ -66,13 +66,14 @@
 </body>
 <script>
 	$(document).ready(function() {
-		let table = new DataTable('#LoSas', {
-			responsive: true,
-			ordering: true,
-			order: [
-		        [0, 'asc']
-		    ]
-		});
+		var table = new DataTable('#LoSas');
+// 		let table = new DataTable('#LoSas', {
+// 			responsive: true,
+// 			ordering: true,
+// 			order: [
+// 		        [0, 'asc']
+// 		    ]
+// 		});
 
 		//END OF DATATABLES
 	  	//INIT
@@ -88,19 +89,17 @@
 	    	const classId = $('#class_dropdown').val();
 	    	const subjectId = $('#subject_dropdown').val();
 			loadLoSas(table, classId, subjectId); // Load options for Subjects based on Class selection
+			
+		    $.getJSON('newTable', null, function (json) {
+		        table.destroy();
+// 		        $('#LoSas').empty(); // empty in case the columns change
+		 
+		        table = $('#LoSas').DataTable({
+		            columns: json.columns,
+		            data: json.rows
+		        });
+		    });
 	  	});
-	  	
-
-		$('.goalDesc').on('click', function() {
-			var gd = $(this).data('desc');
-			alert(gd);
-		});
-		$('.competencyDesc').on('click', function() {
-			var cd = $(this).data('desc');
-			alert(cd);
-		});
-		
-		
 	});
 	
 	function loadSubjectOptions(selectedClassId) {
@@ -141,9 +140,8 @@
 				'selectedSubjectId': selectedSubjectId,
 		    },
  		    success: function(response) {
-// 				table.destroy();
-
 				console.log(response);
+
 				var content = '';
 				if(response.length > 0) {
 					
@@ -163,22 +161,23 @@
 						content += '<td>'+ response[a].suggestiveActivity +'</td>';
 						content += '</tr>';
 					}
+
+					$('.goalDesc').on('click', function() {
+						var gd = $(this).data('desc');
+						alert(gd);
+					});
+					$('.competencyDesc').on('click', function() {
+						var cd = $(this).data('desc');
+						alert(cd);
+					});
 					
 // 					content += ' </tbody><tfoot></tfoot>';
 				} else {
-					content += '<tr><td colspan="4"> -- No Learning outcome for this class and subject -- </td></tr>';
+					content += '<tr><td colspan="4"> -- No Learning Outcomes and Suggestive Activities for this class and subject -- </td></tr>';
 				}
 				
 // 				$('#LoSas').html(content);
 				$('#tLoSaTableBody').html(content);
-				
-// 				table = $('#LoSas', {
-// 					responsive: true,
-// 					ordering: true,
-// 					order: [
-// 				        [0, 'asc']
-// 				    ]
-// 				});
 		    },
 		    error: function(jqXHR, textStatus, errorThrown) {
 		      	console.error("Error loading TGoal options:", textStatus, errorThrown);

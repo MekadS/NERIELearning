@@ -1,15 +1,23 @@
 package in.nic.NERIELearning.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import in.nic.NERIELearning.model.MClass;
 import in.nic.NERIELearning.model.MContent;
+import in.nic.NERIELearning.model.MapClassSubject;
+import in.nic.NERIELearning.model.TLoSa;
 import in.nic.NERIELearning.service.CommonService;
 import in.nic.NERIELearning.service.MClassService;
 import in.nic.NERIELearning.service.MContentService;
@@ -41,14 +49,14 @@ public class PublicController{
 	TLoSaService tLoSaService;
 
 	//	START: PUBLIC Mappings
-	@GetMapping("/public/schoolEducation")
-	public String schoolEducation() {
-		return "public/schoolEducation"; 
-	}
-	
 	@GetMapping("/public/learningOutcomes")
 	public String learningOutcomes() {
 		return "public/learningOutcomes"; 
+	}
+	
+	@GetMapping("/public/schoolEducation")
+	public String schoolEducation() {
+		return "public/schoolEducation"; 
 	}
 
 	@GetMapping("/public/test")
@@ -67,10 +75,34 @@ public class PublicController{
 	}
 	
 	@GetMapping("/public/viewLearningOutcomes")
-	public String viewLearningOutcomes(Model mClass) {
-		mClass.addAttribute("listLoSa", tLoSaService.findAll());
-		System.out.println(tLoSaService.findAll());
+	public String viewLearningOutcomes(Model model) {
+		model.addAttribute("listClasses", mClassService.findAll());
+		model.addAttribute("listSubjects", mapClassSubjectService.findAll());
+		
 		return "public/viewLearningOutcomes";
+	}
+	
+	@GetMapping("/public/subjectListByClass")
+	@ResponseBody
+	public ResponseEntity<List<MapClassSubject>> getSubjectList(@RequestParam("classId") MClass classId) {
+		try {
+			List<MapClassSubject> mapClassSubjectList = mapClassSubjectService.getSubjectsByClass(classId);
+			return new ResponseEntity<>(mapClassSubjectList, HttpStatus.OK);
+		} catch (Exception e) {
+			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/public/losaByMapCS")
+	@ResponseBody
+	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("selectedClassId") Long selectedClassId, @RequestParam("selectedSubjectId") Long selectedSubjectId) {
+		try {
+			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(selectedClassId, selectedSubjectId);
+			return new ResponseEntity<>(loSaList, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping("/public/NAS")
@@ -78,7 +110,6 @@ public class PublicController{
 		mContent.addAttribute("listContent", mContentService.findAll());
 		return "public/NAS"; 
 	}
-	
 
 	@RequestMapping("/public/mContent/getDocument/{m_content_id}")
 	public void getDocument(HttpServletResponse response, @PathVariable(name = "m_content_id") Long id) throws IOException {

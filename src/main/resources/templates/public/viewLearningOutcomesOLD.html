@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8" />
+<title>NERIE Learning</title>
+</head>
+<style>
+	.goalDesc {
+		cursor: pointer;
+	}
+	.competencyDesc {
+		cursor: pointer;
+	}
+</style>
+
+<body>
+	<div th:insert="~{utils/keyImports :: head}"></div>
+	<div th:insert="~{utils/navbar :: nav}"></div>
+	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
+
+	<aside></aside>
+
+	<main>
+		<div class="card border-3 my-5 mx-3 text-center">
+			<div class="card-title mt-4 h1">Learning Outcomes</div>
+			<div class="card-body row mb-4 justify-content-around">
+				<table id="learningOutcomes"
+					class="display table table-striped lg-10 table-bordered">
+					<thead class="bg-grey">
+						<tr>
+<!-- 							<th>Stage</th> -->
+							<th>Class</th>
+							<th>Subject</th>
+							<th>Goal (Click on goal to view details)</th>
+							<th>Competency (Click on competency to view details)</th>
+							<th>Learning Outcome</th>
+							<th>Suggestive Activity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="TLoSa : ${listLoSa}">
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+							<td th:text="${TLoSa.learningOutcome}"></td>
+							<td th:text="${TLoSa.suggestiveActivity}"></td>
+						</tr>
+					</tbody>
+					<tfoot></tfoot>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:insert="~{utils/footer :: footer}"></footer>
+</body>
+<script>
+	$(document).ready(function() {
+		let table = new DataTable('#learningOutcomes', {
+			responsive: true,
+			layout : {
+				top1End : {
+					buttons : [{
+						extend: 'pdf',
+						className: 'bg-danger border-white'},{
+						extend: 'print',
+						className: 'bg-info border-white'}
+				]}
+			},
+		});
+		
+		$('.goalDesc').on('click', function() {
+			var gd = $(this).data('desc');
+			alert(gd);
+		});
+		$('.competencyDesc').on('click', function() {
+			var cd = $(this).data('desc');
+			alert(cd);
+		});
+	});
+</script>
+</html>

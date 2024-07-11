@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>NERIE Learning</title>
-</head>
+
 <style>
 	.goalDesc {
 		cursor: pointer;
@@ -13,42 +13,47 @@
 		cursor: pointer;
 	}
 </style>
+</head>
 
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
 	<div th:insert="~{utils/navbar :: nav}"></div>
-	<!-- 	<div th:insert="~{utils/navbar :: nav}"></div> -->
-
-	<aside></aside>
 
 	<main>
 		<div class="card border-3 my-5 mx-3 text-center">
 			<div class="card-title mt-4 h1">Learning Outcomes</div>
 			<div class="card-body row mb-4 justify-content-around">
-				<table id="learningOutcomes"
-					class="display table table-striped lg-10 table-bordered">
+				<div class="row mb-3">
+				<div class="text-start col-sm-12 col-md-4">
+					<label for="Class">Select a Class</label>
+				</div>
+					<div class="col-sm-12 col-md-8">
+						<select class="form-select" id="class_dropdown" name="class" autofocus>
+						<option th:each="mClass : ${listClasses}"
+							th:value="${mClass.mClassId}"
+							th:text="${mClass.mClassName}"></option>
+					</select>
+					</div>
+				<div class="row mb-3">
+				</div>
+					<div class="text-start col-sm-12 col-md-4">
+						<label for="Class">Select a Subject</label>
+					</div>
+					<div class="col-sm-12 col-md-8">
+						<select class="form-select" id="subject_dropdown" name="subject">
+					</select>
+					</div>
+				</div>
+				<table id="LoSas" class="display table table-striped lg-10 table-bordered">
 					<thead class="bg-grey">
 						<tr>
-<!-- 							<th>Stage</th> -->
-							<th>Class</th>
-							<th>Subject</th>
 							<th>Goal (Click on goal to view details)</th>
 							<th>Competency (Click on competency to view details)</th>
 							<th>Learning Outcome</th>
 							<th>Suggestive Activity</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr th:each="TLoSa : ${listLoSa}">
-<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
-							<td th:text="${TLoSa.learningOutcome}"></td>
-							<td th:text="${TLoSa.suggestiveActivity}"></td>
-						</tr>
-					</tbody>
+					<tbody id="tLoSaTableBody"> </tbody>
 					<tfoot></tfoot>
 				</table>
 			</div>
@@ -59,27 +64,124 @@
 </body>
 <script>
 	$(document).ready(function() {
-		let table = new DataTable('#learningOutcomes', {
+		var table = new DataTable('#LoSas', {
 			responsive: true,
-			layout : {
-				top1End : {
-					buttons : [{
-						extend: 'pdf',
-						className: 'bg-danger border-white'},{
-						extend: 'print',
-						className: 'bg-info border-white'}
-				]}
-			},
+			ordering: true,
+			order: [
+		        [0, 'asc']
+		    ]
 		});
 		
-		$('.goalDesc').on('click', function() {
-			var gd = $(this).data('desc');
-			alert(gd);
-		});
-		$('.competencyDesc').on('click', function() {
-			var cd = $(this).data('desc');
-			alert(cd);
-		});
+		//END OF DATATABLES
+
+		//INIT
+        $("#subject_dropdown").append('<option id="subject_blank" selected="selected" value=""></option>').prop("disabled", true);
+
+		// Handle change event on dropdowns
+	  	$('body').on('change', '#class_dropdown', function() {
+			$('#subject_blank').prop('disabled', true);
+	    	const classId = $('#class_dropdown').val();
+	    	
+			loadSubjectOptions(classId); // Load options for Subjects based on Class selection
+	  	});
+	  	$('body').on('change', '#subject_dropdown', function() {
+	    	const classId = $('#class_dropdown').val();
+	    	const subjectId = $('#subject_dropdown').val();
+			
+	    	table.clear();
+			loadLoSas(classId, subjectId); // Load options for Subjects based on Class selection
+	  	});
 	});
+	
+	function loadSubjectOptions(classId) {
+	  	$.ajax({
+	    	url: '/public/subjectListByClass',
+	    	type: "GET",
+		    data: 'classId=' + classId ,
+		    success: function(response) {
+				$('#subject_dropdown').html('');
+				$('#subject_dropdown').prop('disabled', false);
+				var content = '';
+				
+				if(response.length > 0) {
+						content +='<option value="0">-- SELECT SUBJECT --</option>';					
+					for(var a=0;a<response.length;a++) {
+						content +='<option value="'+ response[a].msubjectId.msubjectId +'">'+ response[a].msubjectId.msubjectName +'</option>';
+					}
+				} else {
+					content +='<option selected="selected" disabled="disabled" value="">-- No subject for this class  --</option>';
+					$('#subject_dropdown').prop('disabled', true);
+
+				}
+				$('#subject_dropdown').html(content);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+		    }
+	  	});
+	}
+	
+	function loadLoSas(selectedClassId, selectedSubjectId) {
+	  	$.ajax({
+	    	url: '/public/losaByMapCS',
+	    	type: "GET",
+		    data: {
+				'selectedClassId': selectedClassId,
+				'selectedSubjectId': selectedSubjectId,
+		    },
+ 		    success: function(response) {
+				var content = '';
+				if(response.length > 0) {
+					
+// 					content += '<thead class="bg-grey"> <tr>'; 
+// 					content += '<th>Goal (Click on goal to view details)</th>';
+// 					content += '<th>Competency (Click on competency to view details)</th>';
+// 					content += '<th>Learning Outcome</th>';
+// 					content += '<th>Suggestive Activity</th>';
+// 					content += '</tr> </thead>';
+// 					content += '<tbody id="tLoSaTableBody">';
+					
+					for(var a=0;a<response.length;a++) {
+						content += '<tr>';
+						content += '<td class="goalDesc" th:attr="data-desc=response[a].tCompetencyId.tGoalId.tGoalDescription">'+ response[a].tcompetencyId.tgoalId.tgoalName +'</td>';
+						content += '<td class="competencyDesc" th:attr="data-desc=${response[a].tCompetencyId.tCompetencyDescription">'+ response[a].tcompetencyId.tcompetencyName +'</td>';
+						content += '<td>'+ response[a].learningOutcome +'</td>';
+						content += '<td>'+ response[a].suggestiveActivity +'</td>';
+						content += '</tr>';
+					}
+
+					$('.goalDesc').on('click', function() {
+						var gd = $(this).data('desc');
+						alert(gd);
+					});
+					$('.competencyDesc').on('click', function() {
+						var cd = $(this).data('desc');
+						alert(cd);
+					});
+					
+// 					content += ' </tbody><tfoot></tfoot>';
+				} else {
+					content += '<tr><td colspan="4"> -- No Learning Outcomes and Suggestive Activities for this class and subject -- </td></tr>';
+				}
+				
+				$('.goalDesc').on('click', function() {
+					alert("Alert");
+					console.log("CLICKED");
+					var gd = $(this).data('desc');
+					alert(gd);
+				});
+				$('.competencyDesc').on('click', function() {
+					var cd = $(this).data('desc');
+					alert(cd);
+				});
+				
+// 				$('#LoSas').html(content);
+				$('#tLoSaTableBody').html(content);
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      	console.error("Error loading TGoal options:", textStatus, errorThrown);
+		    }
+	  	});
+	}
 </script>
 </html>
