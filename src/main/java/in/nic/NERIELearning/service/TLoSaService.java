@@ -25,7 +25,7 @@ public class TLoSaService {
 		return tLoSaRepo.findById(t_lo_sa_id).get();
 	}
 	
-    public List<TLoSa> getLoSaByClassSubject(Long class_id, Long subject_id){
-    	return tLoSaRepo.findTLoSaByClassAndSubject(class_id, subject_id);
+    public List<TLoSa> getLoSaByClassSubject(Long selectedClassId, Long selectedSubjectId){
+    	return tLoSaRepo.findTLoSaByClassAndSubject(selectedClassId, selectedSubjectId);
     }
 }

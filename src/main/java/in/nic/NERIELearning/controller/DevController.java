@@ -76,13 +76,12 @@ public class DevController{
 	
 	@GetMapping("/losaByMapCSToo")
 	@ResponseBody
-	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("selectedClassId") Long classId, @RequestParam("selectedSubjectId") Long subjectId) {
-		System.out.println("In meh: losaByMapCS");
+	public ResponseEntity<List<TLoSa>> getLoSaListByMapCS(@RequestParam("selectedClassId") Long selectedClassId, @RequestParam("selectedSubjectId") Long selectedSubjectId) {
 		try {
-			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(classId, subjectId);
-			System.out.println("Class: " + classId);
-			System.out.println("Subject: " + subjectId);
-			System.out.println("LoSas for Class-Subject: " + loSaList);
+			List<TLoSa> loSaList = tLoSaService.getLoSaByClassSubject(selectedClassId, selectedSubjectId);
+			System.out.println("DController Class: " + selectedClassId);
+			System.out.println("DController Subject: " + selectedSubjectId);
+			System.out.println("DController LoSas for Class-Subject: " + loSaList);
 			return new ResponseEntity<>(loSaList, HttpStatus.OK);
 		} catch (Exception e) {
 			System.err.println("Error fetching classes by subjectId: " + e.getMessage());
