@@ -11,7 +11,6 @@ import in.nic.NERIELearning.model.TLoSa;
 
 @Repository
 public interface TLoSaRepo extends JpaRepository<TLoSa, Long> {
-//  @Query("SELECT lo, mapCS.mClassId.mClassName, mapCS.mSubjectId.mSubjectName " +
   @Query("SELECT lo " +
          "FROM TLoSa lo " +
          "JOIN TCompetency c ON lo.tCompetencyId = c " +
