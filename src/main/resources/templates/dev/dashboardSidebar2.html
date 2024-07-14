@@ -18,8 +18,6 @@
 <body>
 	<div th:insert="~{utils/keyImports :: head}"></div>
 	<div th:insert="~{utils/navbar :: nav}"></div>
-<!-- 	<div th:insert="~{utils/editorNavbar :: nav}"></div> -->
-<!-- 	<div th:insert="~{utils/editorNavbar :: aside}"></div> -->
 
 	<main>
 		<div class="card border-3 my-5 mx-3 text-center">
@@ -46,7 +44,7 @@
 					</select>
 					</div>
 				</div>
-				<table id="LoSas" class="display table table-striped lg-10 table-bordered">
+				<table id="LoSas" class="display table table-striped lg-10 table-bordered text-start">
 					<thead class="bg-grey">
 						<tr>
 							<th>Goal (Click on goal to view details)</th>
@@ -58,6 +56,33 @@
 					<tbody id="tLoSaTableBody"> </tbody>
 					<tfoot></tfoot>
 				</table>
+				
+				<table id="learningOutcomes"
+					class="display table table-striped lg-10 table-bordered">
+					<thead class="bg-grey">
+						<tr>
+<!-- 							<th>Stage</th> -->
+							<th>Class</th>
+							<th>Subject</th>
+							<th>Goal (Click on goal to view details)</th>
+							<th>Competency (Click on competency to view details)</th>
+							<th>Learning Outcome</th>
+							<th>Suggestive Activity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="TLoSa : ${listTLoSas}">
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
+							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+							<td th:text="${TLoSa.learningOutcome}"></td>
+							<td th:text="${TLoSa.suggestiveActivity}"></td>
+						</tr>
+					</tbody>
+					<tfoot></tfoot>
+				</table>
 			</div>
 		</div>
 	</main>
@@ -66,53 +91,73 @@
 </body>
 <script>
 	$(document).ready(function() {
-		var table = new DataTable('#LoSas');
-// 		let table = new DataTable('#LoSas', {
-// 			responsive: true,
-// 			ordering: true,
-// 			order: [
-// 		        [0, 'asc']
-// 		    ]
-// 		});
+		var table = new DataTable('#LoSas', {
+			responsive: true,
+			ordering: true,
+			order: [
+		        [0, 'asc']
+		    ],
+			layout : {
+				top1End : {
+					buttons : [{
+						extend: 'pdf',
+						className: 'bg-danger border-white'},{
+						extend: 'print',
+						className: 'bg-info border-white'}
+				]}
+			},
+		});
 
+		var table2 = new DataTable('#learningOutcomes', {
+			responsive: true,
+			ordering: true,
+			order: [
+		        [0, 'asc']
+		    ],
+			layout : {
+				top1End : {
+					buttons : [{
+						extend: 'pdf',
+						className: 'bg-danger border-white'},{
+						extend: 'print',
+						className: 'bg-info border-white'}
+				]}
+			},
+		});
+		
 		//END OF DATATABLES
-	  	//INIT
-        $("#subject_dropdown").append('<option id="subject_blank" selected="selected" value=""></option>').prop("disabled", true);
+
+		//INIT
+        $("#class_dropdown").append('<option id="class_blank" selected="selected" value="">-- Select a class --</option>').prop("disabled", false);
+        $("#subject_dropdown").append('<option id="subject_blank" selected="selected" value="">-- Select a class first --</option>').prop("disabled", true);
 
 		// Handle change event on dropdowns
 	  	$('body').on('change', '#class_dropdown', function() {
+			$('#class_blank').prop('disabled', true);
 			$('#subject_blank').prop('disabled', true);
 	    	const classId = $('#class_dropdown').val();
+	    	
 			loadSubjectOptions(classId); // Load options for Subjects based on Class selection
 	  	});
 	  	$('body').on('change', '#subject_dropdown', function() {
 	    	const classId = $('#class_dropdown').val();
 	    	const subjectId = $('#subject_dropdown').val();
-			loadLoSas(table, classId, subjectId); // Load options for Subjects based on Class selection
 			
-		    $.getJSON('newTable', null, function (json) {
-		        table.destroy();
-// 		        $('#LoSas').empty(); // empty in case the columns change
-		 
-		        table = $('#LoSas').DataTable({
-		            columns: json.columns,
-		            data: json.rows
-		        });
-		    });
+// 	    	table.clear();
+			loadLoSas(table, classId, subjectId); // Load options for Subjects based on Class selection
 	  	});
 	});
 	
-	function loadSubjectOptions(selectedClassId) {
+	function loadSubjectOptions(classId) {
 	  	$.ajax({
 	    	url: '/subjectListByClass',
 	    	type: "GET",
-		    data: 'classId=' + selectedClassId ,
+		    data: 'classId=' + classId ,
 		    success: function(response) {
-
 				$('#subject_dropdown').html('');
 				$('#subject_dropdown').prop('disabled', false);
 				var content = '';
-
+				
 				if(response.length > 0) {
 						content +='<option value="0">-- SELECT SUBJECT --</option>';					
 					for(var a=0;a<response.length;a++) {
@@ -133,18 +178,26 @@
 	
 	function loadLoSas(table, selectedClassId, selectedSubjectId) {
 	  	$.ajax({
-	    	url: '/losaByMapCSToo',
+	    	url: '/losaByMapCS',
 	    	type: "GET",
 		    data: {
 				'selectedClassId': selectedClassId,
 				'selectedSubjectId': selectedSubjectId,
 		    },
  		    success: function(response) {
-				console.log(response);
-
+				if(response.length>0)
+				console.log("Response length: " + response.length);
+				
+				table.clear();
+				console.log("CLEARED ");
+				table.rows.add(response);
+				console.log("ROWS ADDED ");
+				
+				console.log("Response: " + response);
+				
 				var content = '';
 				if(response.length > 0) {
-					
+					console.log(response);
 // 					content += '<thead class="bg-grey"> <tr>'; 
 // 					content += '<th>Goal (Click on goal to view details)</th>';
 // 					content += '<th>Competency (Click on competency to view details)</th>';
@@ -155,11 +208,16 @@
 					
 					for(var a=0;a<response.length;a++) {
 						content += '<tr>';
-						content += '<td class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"">'+ response[a].tcompetencyId.tgoalId.tgoalName +'</td>';
-						content += '<td class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription">'+ response[a].tcompetencyId.tcompetencyName +'</td>';
+						content += '<td class="goalDesc" th:attr="data-desc=response[a].tcompetencyId.tgoalId.tGoalDescription">' +
+								   '<span class="fw-bold">' + response[a].tcompetencyId.tgoalId.mgoalId.mgoalCode + ' </span>' +
+									response[a].tcompetencyId.tgoalId.tgoalName +'</td>';
+						content += '<td class="competencyDesc" th:attr="data-desc=${response[a].tCompetencyId.tCompetencyDescription">'+
+								   '<span class="fw-bold">' + response[a].tcompetencyId.mcompetencyId.mcompetencyCode + ' </span>' +
+									response[a].tcompetencyId.tcompetencyName +'</td>';
 						content += '<td>'+ response[a].learningOutcome +'</td>';
 						content += '<td>'+ response[a].suggestiveActivity +'</td>';
 						content += '</tr>';
+						console.log("Row Content: " + response);
 					}
 
 					$('.goalDesc').on('click', function() {
@@ -173,8 +231,19 @@
 					
 // 					content += ' </tbody><tfoot></tfoot>';
 				} else {
-					content += '<tr><td colspan="4"> -- No Learning Outcomes and Suggestive Activities for this class and subject -- </td></tr>';
+					content += '<tr class="text-center"><td colspan="4"> -- No Learning Outcomes and Suggestive Activities for this class and subject -- </td></tr>';
 				}
+				
+				$('.goalDesc').on('click', function() {
+					alert("Alert");
+					console.log("CLICKED");
+					var gd = $(this).data('desc');
+					alert(gd);
+				});
+				$('.competencyDesc').on('click', function() {
+					var cd = $(this).data('desc');
+					alert(cd);
+				});
 				
 // 				$('#LoSas').html(content);
 				$('#tLoSaTableBody').html(content);
