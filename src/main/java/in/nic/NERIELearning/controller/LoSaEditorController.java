@@ -97,15 +97,12 @@ public class LoSaEditorController{
 
 	@RequestMapping("/editor/headTeacher/mapClassSubject/edit/{map_class_subject_id}")
 	public ModelAndView editMapClassSubject(@PathVariable(name = "map_class_subject_id") Long id) {
-		ModelAndView mav = new ModelAndView("/editor/headTeacher/createMapClassSubject");
+		ModelAndView mav = new ModelAndView("/editor/headTeacher/editMapClassSubjects");
 		
-		MapClassSubject mapClassSubject = mapClassSubjectService.get(id);
-		List<MClass> listMClasses = mClassService.findAll();
-		List<MSubject> listMSubjects = mSubjectService.findAll();
-
-		mav.addObject("mapClassSubject", mapClassSubject);
-		mav.addObject("listMClasses", listMClasses);
-		mav.addObject("listMSubjects", listMSubjects);
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
+		mav.addObject("listMClasses", mClassService.findAll());
+		mav.addObject("listMSubjects", mSubjectService.findAll());
+		mav.addObject("mapClassSubject", mapClassSubjectService.get(id));
 
 		return mav;
 	}
@@ -141,22 +138,15 @@ public class LoSaEditorController{
 		}
 	}
 	
-	@GetMapping("/editor/teacherEducator/createTGoal")
-	public String addTGoal(Model model) {
-		model.addAttribute("listMSubjects", mSubjectService.findAll());
-		
-		return "editor/teacherEducator/createTGoal";
-	}
-	
 	@RequestMapping("/editor/teacherEducator/tGoal/edit/{t_goal_id}")
 	public ModelAndView editTGoal(@PathVariable(name = "t_goal_id") Long id) {
-		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTGoal");
+		ModelAndView mav = new ModelAndView("/editor/teacherEducator/editTGoals");
 		
-		TGoal tGoal = tGoalService.get(id);
-		List<MapClassSubject> listMapClassSubjects = mapClassSubjectService.findAll();
-		
-		mav.addObject("tGoal", tGoal);
-		mav.addObject("listMapClassSubjects", listMapClassSubjects);
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
+		mav.addObject("listMGoals", mGoalService.findAll());
+		mav.addObject("listTGoals", tGoalService.findAll());
+		mav.addObject("tGoal", tGoalService.get(id));
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
 		
 		return mav;
 	}
@@ -215,13 +205,14 @@ public class LoSaEditorController{
 	
 	@RequestMapping("/editor/teacherEducator/tCompetency/edit/{t_competency_id}")
 	public ModelAndView editTCompetency(@PathVariable(name = "t_competency_id") Long id) {
-		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTCompetency");
+		ModelAndView mav = new ModelAndView("/editor/teacherEducator/editTCompetencies");
 		
-		TCompetency tCompetency = tCompetencyService.get(id);
-		List<TGoal> listTGoals = tGoalService.findAll();
-		
-		mav.addObject("tCompetency", tCompetency);
-		mav.addObject("listTGoals", listTGoals);
+		mav.addObject("tCompetency", tCompetencyService.get(id));
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
+		mav.addObject("listTCompetencies", tCompetencyService.findAll());
+		mav.addObject("listMCompetencies", mCompetencyService.findAll());
+		mav.addObject("listMGoals", mGoalService.findAll());
+		mav.addObject("listTGoals", tGoalService.findAll());
 		
 		return mav;
 	}
@@ -244,8 +235,6 @@ public class LoSaEditorController{
 		model.addAttribute("listTLoSas", tLoSaService.findAll());
 		model.addAttribute("tLoSa", new TLoSa());
 		
-//		System.out.println("TGoals: " + tGoalService.findAll());
-//		System.out.println("TLoSas: " + tLoSaService.findAll());
 		return "editor/teacherEducator/editTLoSas";
 	}
 	
@@ -282,13 +271,13 @@ public class LoSaEditorController{
 	
 	@RequestMapping("/editor/teacherEducator/tLoSa/edit/{t_lo_sa_id}")
 	public ModelAndView editTLoSa(@PathVariable(name = "t_lo_sa_id") Long id) {
-		ModelAndView mav = new ModelAndView("/editor/teacherEducator/createTLoSa");
+		ModelAndView mav = new ModelAndView("/editor/teacherEducator/editTLoSas");
 		
-		TLoSa tLoSa = tLoSaService.get(id);
-		List<TGoal> listTGoals = tGoalService.findAll();
-		
-		mav.addObject("tLoSa", tLoSa);
-		mav.addObject("listTGoals", listTGoals);
+		mav.addObject("tLoSa", tLoSaService.get(id));
+		mav.addObject("listMapClassSubjects", mapClassSubjectService.findAll());
+		mav.addObject("listTGoals", tGoalService.findAll());
+		mav.addObject("listTCompetencies", tCompetencyService.findAll());
+		mav.addObject("listTLoSas", tLoSaService.findAll());
 		 
 		return mav;
 	}

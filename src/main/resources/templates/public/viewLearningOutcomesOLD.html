@@ -30,8 +30,8 @@
 					<thead class="bg-grey">
 						<tr>
 <!-- 							<th>Stage</th> -->
-							<th>Class</th>
-							<th>Subject</th>
+<!-- 							<th>Class</th> -->
+<!-- 							<th>Subject</th> -->
 							<th>Goal (Click on goal to view details)</th>
 							<th>Competency (Click on competency to view details)</th>
 							<th>Learning Outcome</th>
@@ -41,10 +41,19 @@
 					<tbody>
 						<tr th:each="TLoSa : ${listLoSa}">
 <!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mStageId.mStageName}"></td> -->
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}"></td>
-							<td th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}"></td>
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mClassId.mClassName}"></td> -->
+<!-- 							<td th:text="${TLoSa.tCompetencyId.tGoalId.mapClassSubjectId.mSubjectId.mSubjectName}"></td> -->
+							<td>
+								<span class="fw-bold" th:text="${TLoSa.tCompetencyId.tGoalId.mGoalId.mGoalCode} + ' '"></span>
+								<span th:text="${TLoSa.tCompetencyId.tGoalId.tGoalName}" class="goalDesc" 
+										th:attr="data-desc=${TLoSa.tCompetencyId.tGoalId.tGoalDescription}
+										, data-code=${TLoSa.tCompetencyId.tGoalId.mGoalId.mGoalCode}"></span></td>
+							<td>
+								<span class="fw-bold" th:text="${TLoSa.tCompetencyId.mCompetencyId.mCompetencyCode} + ' '"></span>
+							 	<span th:text="${TLoSa.tCompetencyId.tCompetencyName}" class="competencyDesc" 
+							 			th:attr="data-desc=${TLoSa.tCompetencyId.tCompetencyDescription}
+							 			, data-code=${TLoSa.tCompetencyId.mCompetencyId.mCompetencyCode}
+							 			"></span></td>
 							<td th:text="${TLoSa.learningOutcome}"></td>
 							<td th:text="${TLoSa.suggestiveActivity}"></td>
 						</tr>
@@ -73,12 +82,22 @@
 		});
 		
 		$('.goalDesc').on('click', function() {
+			var gdcode = $(this).data('code');
 			var gd = $(this).data('desc');
-			alert(gd);
+			
+			Swal.fire({
+				title: 'Curriculum Goal (' + gdcode + ') ',
+				text: gd
+			})
 		});
 		$('.competencyDesc').on('click', function() {
+			var cdcode = $(this).data('code');
 			var cd = $(this).data('desc');
-			alert(cd);
+			
+			Swal.fire({
+				title: 'Competency (' + cdcode + ') ',
+				text: cd
+			})
 		});
 	});
 </script>

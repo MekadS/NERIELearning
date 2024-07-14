@@ -45,7 +45,8 @@
 														</div>
 														<div class="col-sm-12 col-md-8">
 															<input type="hidden" th:field="*{tLoSaId}" /> 
-															<select class="form-select" id="class_subject_dropdown" name="mapClassSubject" required>
+															<select class="form-select" id="class_subject_dropdown" 
+																name="mapClassSubject" required>
 															<option th:each="mapCS : ${listMapClassSubjects}"
 																th:value="${mapCS.mapClassSubjectId}"
 																th:text="${mapCS.mClassId.mClassName} + ' ' + ${mapCS.mSubjectId.mSubjectName}"></option>
@@ -144,10 +145,10 @@
 											<td>
 												<span th:text="${TLoSa.suggestiveActivity}"></span></td>
 												
-											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tCompetency/edit/' + ${TLoSa.tCompetencyId}}">
+											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tLoSa/edit/' + ${TLoSa.tLoSaId}}">
 												<i class="fa-solid fa-2xl fa-pen-to-square text-info"></i>
 												</a></td>
-											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tCompetency/toggleStatus/' + ${TLoSa.tCompetencyId}}">
+											<td class="text-center"><a th:href="@{'/editor/teacherEducator/tLoSa/toggleStatus/' + ${TLoSa.tLoSaId}}">
 												<i th:class="${TLoSa.isActive ? 'fa-solid fa-2xl fa-ban text-danger' : 'fa-solid fa-2xl fa-check text-success'}"></i>
 												</a></td>
 										</tr>

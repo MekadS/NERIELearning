@@ -47,8 +47,10 @@
 				<table id="LoSas" class="display table table-striped lg-10 table-bordered text-start">
 					<thead class="bg-grey">
 						<tr>
-							<th>Goal (Click on goal to view details)</th>
-							<th>Competency (Click on competency to view details)</th>
+							<th>Goal</th>
+							<th>Competency</th>
+<!-- 							<th>Goal (Click on goal to view details)</th> -->
+<!-- 							<th>Competency (Click on competency to view details)</th> -->
 							<th>Learning Outcome</th>
 							<th>Suggestive Activity</th>
 						</tr>
@@ -154,10 +156,10 @@
 					
 					for(var a=0;a<response.length;a++) {
 						content += '<tr>';
-						content += '<td class="goalDesc" th:attr="data-desc=response[a].tcompetencyId.tgoalId.tGoalDescription">' +
+						content += '<td class="goalDesc" id="goalDesc" th:attr="${data-desc=response[a].tcompetencyId.tgoalId.tGoalDescription}">' +
 								   '<span class="fw-bold">' + response[a].tcompetencyId.tgoalId.mgoalId.mgoalCode + ' </span>' +
 									response[a].tcompetencyId.tgoalId.tgoalName +'</td>';
-						content += '<td class="competencyDesc" th:attr="data-desc=${response[a].tCompetencyId.tCompetencyDescription">'+
+						content += '<td class="competencyDesc" id="competencyDesc" th:attr="data-desc=${response[a].tCompetencyId.tCompetencyDescription}">'+
 								   '<span class="fw-bold">' + response[a].tcompetencyId.mcompetencyId.mcompetencyCode + ' </span>' +
 									response[a].tcompetencyId.tcompetencyName +'</td>';
 						content += '<td>'+ response[a].learningOutcome +'</td>';
@@ -166,6 +168,7 @@
 					}
 
 					$('.goalDesc').on('click', function() {
+						alert("Goal description");
 						var gd = $(this).data('desc');
 						alert(gd);
 					});

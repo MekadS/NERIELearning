@@ -82,6 +82,13 @@ public class PublicController{
 		return "public/viewLearningOutcomes";
 	}
 	
+	@GetMapping("/public/viewLearningOutcomesOLD")
+	public String viewLearningOutcomesOLD(Model model) {
+		model.addAttribute("listLoSa", tLoSaService.findAll());
+		
+		return "public/viewLearningOutcomesOLD";
+	}
+	
 	@GetMapping("/public/subjectListByClass")
 	@ResponseBody
 	public ResponseEntity<List<MapClassSubject>> getSubjectList(@RequestParam("classId") MClass classId) {
